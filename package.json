@@ -1,0 +1,29 @@
+{
+  "name": "atreides_mentat",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ohgoditspotato/atreides_mentat.git"
+  },
+  "author": "rdt",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ohgoditspotato/atreides_mentat/issues"
+  },
+  "homepage": "https://github.com/ohgoditspotato/atreides_mentat#readme",
+  "devDependencies": {
+    "@types/react": "^16.9.17",
+    "@types/react-dom": "^16.9.4",
+    "typescript": "^3.7.4"
+  },
+  "dependencies": {
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0"
+  }
+}

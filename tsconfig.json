@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "strictNullChecks": true,
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "jsx": "react",
+    "module": "es6",
+    "outDir": "./js",
+    "lib": ["DOM", "ES6", "DOM.Iterable"],
+    "moduleResolution": "node",
+    "target": "ES6"
+  },
+  "include": ["./src/**.tsx"]
+}
