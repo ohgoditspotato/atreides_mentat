@@ -18,7 +18,7 @@ export type TreacheryCard = WeaponCard | DefenceCard | UselessCard;
 
 export interface HouseState {
   spice: number;
-  cards: ReadonlyArray<TreacheryCard>;
+  cards: Array<TreacheryCard>;
 }
 
 export const addCard = createAction("add_card", (house_name: HouseName, card: TreacheryCard) => {
@@ -51,6 +51,8 @@ export const modifySpice = createAction("modify_spice", (house_name: HouseName, 
   };
 });
 
+export const showEditHouse = createAction<HouseName | undefined>("show_edit_house");
+
 export const startGame = createAction("start_game");
 export const resetGame = createAction("reset_game");
 export const toggleHouse = createAction<HouseName>("toggle_house");
@@ -64,44 +66,54 @@ export interface GameState {
     [key in HouseName]?: HouseState;
   };
   in_progress: boolean;
+  edit_house?: HouseName;
 }
 
 const defaultState: GameState = { houses: {}, in_progress: false };
 
+function getHouse(name: HouseName, state: GameState) {
+  const house = state.houses[name];
+  if (house === undefined) {
+    throw new Error("House " + name + " not present in this game");
+  }
+  return house;
+}
+
 export const gameStateReducer = createReducer(defaultState, builder => {
   builder.addCase(addCard, (state, action) => {
-    let house = state.houses[action.payload.house_name];
-    if (house !== undefined) {
-      console.log(
-        "Adding card: ",
-        action.payload.card.kind,
-        " to house: ",
-        action.payload.house_name
-      );
-      house.cards.push(action.payload.card);
-    } else {
-      throw new Error("House not present in this game, cannot add card");
-    }
+    let house = getHouse(action.payload.house_name, state);
+    house.cards.push(action.payload.card);
   });
 
   builder.addCase(removeCard, (state, action) => {
-    let house = state.houses[action.payload.house_name];
-    if (house === undefined) {
-      throw new Error("House not present in this game, cannot remove card");
-    }
-    const deleted = house.cards.splice(action.payload.index, 1)[0];
-    console.log("Removed card: ", deleted.kind, " from house: ", action.payload.house_name);
+    let house = getHouse(action.payload.house_name, state);
+    house.cards.splice(action.payload.index, 1);
   });
 
   builder.addCase(modifySpice, (state, action) => {
-    let house = state.houses[action.payload.house_name];
-    if (house === undefined) {
-      throw new Error("House not present in this game, cannot modify spice");
-    }
+    let house = getHouse(action.payload.house_name, state);
     house.spice += action.payload.spice;
     if (house.spice < 0) {
       house.spice = 0;
     }
+  });
+
+  builder.addCase(showEditHouse, (state, action) => {
+    if (action.payload === undefined) {
+      state.edit_house = undefined;
+      return;
+    }
+    getHouse(action.payload, state);
+    state.edit_house = action.payload;
+  });
+
+  builder.addCase(startGame, state => {
+    state.in_progress = true;
+  });
+
+  builder.addCase(resetGame, state => {
+    state.houses = {};
+    state.in_progress = false;
   });
 
   builder.addCase(toggleHouse, (state, action) => {
@@ -114,14 +126,5 @@ export const gameStateReducer = createReducer(defaultState, builder => {
         spice: 0, // TODO actually set the starting spice by house
       };
     }
-  });
-
-  builder.addCase(startGame, state => {
-    state.in_progress = true;
-  });
-
-  builder.addCase(resetGame, state => {
-    state.houses = {};
-    state.in_progress = false;
   });
 });
