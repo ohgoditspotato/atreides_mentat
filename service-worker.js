@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/atreides_mentat/precache-manifest.7dd5d9b902db174e43f115220d7f71cd.js"
+  "/atreides_mentat/precache-manifest.cbb670713dfa53c2a3414937b3e6d0ba.js"
 );
 
 self.addEventListener('message', (event) => {
