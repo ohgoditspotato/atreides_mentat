@@ -1,6 +1,6 @@
-import { createAction, createReducer } from "/web_modules/@reduxjs/toolkit.js";
-import { TreacheryCard } from "./TreacheryCard.js";
-import { showNewGame } from "./ViewState.js";
+import { createAction, createReducer } from "@reduxjs/toolkit";
+import { TreacheryCard } from "./TreacheryCard";
+import { showNewGame } from "./ViewState";
 
 export interface HouseState {
   spice: number;

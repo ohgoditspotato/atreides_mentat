@@ -1,6 +1,6 @@
-import { combineReducers }from "/web_modules/redux.js"
-import { houseStateReducer } from "./HouseState.js";
-import { viewStateReducer } from "./ViewState.js";
+import { combineReducers } from "redux";
+import { houseStateReducer } from "./HouseState";
+import { viewStateReducer } from "./ViewState";
 
 export const rootReducer = combineReducers({
   houses: houseStateReducer,

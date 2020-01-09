@@ -1,9 +1,9 @@
-import * as React from "/web_modules/react.js";
-import * as ReactDOM from "/web_modules/react-dom.js";
-import { Provider } from "/web_modules/react-redux.js";
-import * as serviceWorker from "./serviceWorker.js";
-import ViewManager from "./ViewManager.js";
-import { stateStore } from "./Store.js";
+import React from "react";
+import ReactDOM from "react-dom";
+import ViewManager from "ts/ViewManager";
+import { Provider } from "react-redux";
+import * as serviceWorker from "./serviceWorker";
+import { stateStore } from "ts/Store";
 
 ReactDOM.render(
   <Provider store={stateStore}>
