@@ -1,15 +1,21 @@
 import * as React from "react";
-import { ALL_HOUSE_NAMES, toggleHouse } from "ts/HouseState";
-import { useSelector, useDispatch } from "react-redux";
-import { houseNameStr } from "ts/strings";
-import { RootState } from "ts/RootState";
-import { showOverview } from "ts/ViewState";
+import { useDispatch } from "react-redux";
+import { ALL_HOUSE_NAMES, houseNameStr } from "ts/houses";
+import { showOverview, initHouses } from "ts/state/actions";
+import { InitHousePayload } from "ts/state/types";
 
 export default () => {
-  const houses = useSelector((state: RootState) => state.houses);
+  const [state, setState] = React.useState<InitHousePayload>({
+    "harkonen": false,
+    "emperor": false,
+    "guild": false,
+    "bene": false,
+    "fremen": false
+  });
+
   let allow_start = false;
   for (let i of ALL_HOUSE_NAMES) {
-    if (houses[i] !== undefined) {
+    if (state[i]) {
       allow_start = true;
       break;
     }
@@ -26,8 +32,11 @@ export default () => {
               {houseNameStr(name)}
               <input
                 type="checkbox"
-                checked={!!houses[name]}
-                onChange={() => dispatch(toggleHouse(name))}
+                checked={!!state[name]}
+                onChange={() => {
+                  state[name] = !state[name];
+                  setState(state);
+                }}
               />
             </label>
             <div></div>
@@ -40,6 +49,7 @@ export default () => {
         disabled={!allow_start}
         onClick={() => {
           if (allow_start) {
+            dispatch(initHouses(state))
             dispatch(showOverview());
           }
         }}

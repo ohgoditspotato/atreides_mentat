@@ -1,4 +1,6 @@
-import { HouseName } from "./HouseState";
+export const ALL_HOUSE_NAMES = ["harkonen", "guild", "emperor", "bene", "fremen"] as const;
+export type HouseNameTuple = typeof ALL_HOUSE_NAMES;
+export type HouseName = HouseNameTuple[number];
 
 function assertNever(): never {
     throw new Error("Missing case in switch");

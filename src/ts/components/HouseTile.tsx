@@ -1,7 +1,6 @@
 import * as React from "react";
-import { HouseName } from "ts/HouseState";
-import { houseNameStr } from "ts/strings";
 import { useDispatch } from "react-redux";
+import { HouseName, houseNameStr } from "ts/houses";
 
 export interface HouseTileProps {
   spice: number;

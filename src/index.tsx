@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import ViewManager from "ts/ViewManager";
 import { Provider } from "react-redux";
 import * as serviceWorker from "./serviceWorker";
-import { stateStore } from "ts/Store";
+import { stateStore } from "ts/state/store";
 
 ReactDOM.render(
   <Provider store={stateStore}>

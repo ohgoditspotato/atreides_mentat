@@ -1,9 +1,9 @@
 import * as React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { ALL_HOUSE_NAMES } from "ts/HouseState";
 import HouseTile from "./HouseTile";
-import { RootState } from "ts/RootState";
-import { showNewGame } from "ts/ViewState";
+import { RootState } from "ts/state/reducers";
+import { ALL_HOUSE_NAMES } from "ts/houses";
+import { showNewGame } from "ts/state/actions";
 
 const GameOverview: React.FC = () => {
   const state = useSelector((state: RootState) => ({
