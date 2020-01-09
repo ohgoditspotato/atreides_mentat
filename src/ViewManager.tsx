@@ -1,10 +1,10 @@
-import React from "react";
-import NewGame from "./components/NewGame";
-import { useSelector } from "react-redux";
-import GameOverview from "./components/GameOverview";
-import { RootState } from "./RootState";
-import HouseTile from "./components/HouseTile";
-import { HouseName, HouseState } from "./HouseState";
+import * as React from "/web_modules/react.js";
+import { useSelector } from "/web_modules/react-redux.js";
+import NewGame from "./components/NewGame.js";
+import GameOverview from "./components/GameOverview.js";
+import { RootState } from "./RootState.js";
+import HouseTile from "./components/HouseTile.js";
+import { HouseName, HouseState } from "./HouseState.js";
 
 const ViewManager: React.FC = () => {
   const state = useSelector((state: RootState) => {

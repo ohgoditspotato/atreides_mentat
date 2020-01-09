@@ -1,5 +1,5 @@
-import { HouseName } from "./HouseState";
-import { createAction, createReducer } from "@reduxjs/toolkit";
+import { HouseName } from "./HouseState.js";
+import { createAction, createReducer } from "/web_modules/@reduxjs/toolkit.js";
 
 export type View = "new_game" | "overview" | "house_details" | "edit_spice" | "add_card";
 

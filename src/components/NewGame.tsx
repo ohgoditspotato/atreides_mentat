@@ -1,9 +1,9 @@
-import * as React from "react";
-import { ALL_HOUSE_NAMES, toggleHouse } from "ts/HouseState";
-import { useSelector, useDispatch } from "react-redux";
-import { houseNameStr } from "ts/strings";
-import { RootState } from "ts/RootState";
-import { showOverview } from "ts/ViewState";
+import * as React from "/web_modules/react.js";
+import { useSelector, useDispatch } from "/web_modules/react-redux.js";
+import { ALL_HOUSE_NAMES, toggleHouse } from "../HouseState.js";
+import { houseNameStr } from "../strings.js";
+import { RootState } from "../RootState.js";
+import { showOverview } from "../ViewState.js";
 
 export default () => {
   const houses = useSelector((state: RootState) => state.houses);

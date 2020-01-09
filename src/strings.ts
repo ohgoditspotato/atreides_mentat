@@ -1,4 +1,4 @@
-import { HouseName } from "./HouseState";
+import { HouseName } from "./HouseState.js";
 
 function assertNever(): never {
     throw new Error("Missing case in switch");
