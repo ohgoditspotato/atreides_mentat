@@ -1,0 +1,19 @@
+{
+  "files": {
+    "main.js": "/atreides_mentat/static/js/main.fa3424d7.chunk.js",
+    "main.js.map": "/atreides_mentat/static/js/main.fa3424d7.chunk.js.map",
+    "runtime-main.js": "/atreides_mentat/static/js/runtime-main.d88582d5.js",
+    "runtime-main.js.map": "/atreides_mentat/static/js/runtime-main.d88582d5.js.map",
+    "static/js/2.529f9893.chunk.js": "/atreides_mentat/static/js/2.529f9893.chunk.js",
+    "static/js/2.529f9893.chunk.js.map": "/atreides_mentat/static/js/2.529f9893.chunk.js.map",
+    "index.html": "/atreides_mentat/index.html",
+    "precache-manifest.7dd5d9b902db174e43f115220d7f71cd.js": "/atreides_mentat/precache-manifest.7dd5d9b902db174e43f115220d7f71cd.js",
+    "service-worker.js": "/atreides_mentat/service-worker.js",
+    "static/js/2.529f9893.chunk.js.LICENSE": "/atreides_mentat/static/js/2.529f9893.chunk.js.LICENSE"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.d88582d5.js",
+    "static/js/2.529f9893.chunk.js",
+    "static/js/main.fa3424d7.chunk.js"
+  ]
+}
