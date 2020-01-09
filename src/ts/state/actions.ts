@@ -9,39 +9,33 @@ export const showHouseDetails = createAction<HouseName>("view/house_details");
 export const showEditSpice = createAction<HouseName>("view/edit_spice");
 export const showAddCard = createAction<HouseName>("view/add_card");
 
-export const addCard = createAction(
-  "houses/add_card",
-  (house_name: HouseName, card: TreacheryCard) => {
-    return {
-      payload: {
-        house_name,
-        card,
-      },
-    };
-  }
-);
+export const addCard = createAction("houses/add_card", (house: HouseName, card: TreacheryCard) => {
+  return {
+    payload: {
+      house,
+      card,
+    },
+  };
+});
 
-export const removeCard = createAction(
-  "houses/remove_card",
-  (house_name: HouseName, index: number) => {
-    return {
-      payload: {
-        house_name,
-        index,
-      },
-    };
-  }
-);
+export const removeCard = createAction("houses/remove_card", (house: HouseName, index: number) => {
+  return {
+    payload: {
+      house,
+      index,
+    },
+  };
+});
 
 export const modifySpice = createAction(
   "houses/modify_spice",
-  (house_name: HouseName, spice: number) => {
+  (house: HouseName, spice: number) => {
     if (!Number.isInteger(spice)) {
       throw new Error("Spice value must be an integer");
     }
     return {
       payload: {
-        house_name,
+        house,
         spice,
       },
     };

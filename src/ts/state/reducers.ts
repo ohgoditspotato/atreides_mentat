@@ -23,17 +23,17 @@ export const houseStateReducer = createReducer({} as HousesState, builder => {
   }
 
   builder.addCase(addCard, (state, action) => {
-    let house = getHouse(action.payload.house_name, state);
+    let house = getHouse(action.payload.house, state);
     house.cards.push(action.payload.card);
   });
 
   builder.addCase(removeCard, (state, action) => {
-    let house = getHouse(action.payload.house_name, state);
+    let house = getHouse(action.payload.house, state);
     house.cards.splice(action.payload.index, 1);
   });
 
   builder.addCase(modifySpice, (state, action) => {
-    let house = getHouse(action.payload.house_name, state);
+    let house = getHouse(action.payload.house, state);
     house.spice += action.payload.spice;
     if (house.spice < 0) {
       house.spice = 0;

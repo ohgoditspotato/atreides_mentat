@@ -32,10 +32,10 @@ export default () => {
               {houseNameStr(name)}
               <input
                 type="checkbox"
-                checked={!!state[name]}
+                checked={state[name]}
                 onChange={() => {
-                  state[name] = !state[name];
-                  setState(state);
+                  let toggle = !state[name];
+                  setState({...state, [name]: toggle});
                 }}
               />
             </label>

@@ -14,7 +14,7 @@ const GameOverview: React.FC = () => {
   for (let name of ALL_HOUSE_NAMES) {
     const houseState = state.houses[name];
     if (houseState !== undefined) {
-      housesArray.push(<HouseTile house_name={name} spice={houseState.spice} />);
+      housesArray.push(<HouseTile house={name} spice={houseState.spice} key={name}/>);
     }
   }
   return (

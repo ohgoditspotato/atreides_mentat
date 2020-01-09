@@ -6,6 +6,7 @@ import NewGame from "./components/NewGame";
 import { HouseName } from "./houses";
 import { RootState } from "ts/state/reducers";
 import { HouseState } from "ts/state/types";
+import EditSpice from "ts/components/EditSpice";
 
 const ViewManager: React.FC = () => {
   const state = useSelector((state: RootState) => {
@@ -30,11 +31,16 @@ const ViewManager: React.FC = () => {
       return <GameOverview />;
     case "house_details":
       if (state.house !== undefined) {
-        return <HouseTile spice={state.house.spice} house_name={state.house.name} />;
+        return <HouseTile spice={state.house.spice} house={state.house.name} />;
       }
       else {
-        throw new Error("Missing view.house_name");
+        throw new Error("Missing view.house");
       }
+    case "edit_spice":
+      if (state.house === undefined) {
+        throw new Error("Missing view.house");
+      }
+      return <EditSpice spice={state.house.spice} house={state.house.name}></EditSpice>
     default: {
       throw new Error("Unhandled active_view state");
     }
