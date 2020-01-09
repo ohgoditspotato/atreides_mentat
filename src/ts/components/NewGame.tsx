@@ -1,11 +1,12 @@
 import * as React from "react";
-import { ALL_HOUSE_NAMES, toggleHouse, startGame } from "ts/State";
+import { ALL_HOUSE_NAMES, toggleHouse } from "ts/HouseState";
 import { useSelector, useDispatch } from "react-redux";
-import { StateType } from "ts/Store";
 import { houseNameStr } from "ts/strings";
+import { RootState } from "ts/RootState";
+import { showOverview } from "ts/ViewState";
 
 export default () => {
-  const houses = useSelector((state: StateType) => state.houses);
+  const houses = useSelector((state: RootState) => state.houses);
   let allow_start = false;
   for (let i of ALL_HOUSE_NAMES) {
     if (houses[i] !== undefined) {
@@ -20,13 +21,13 @@ export default () => {
       <p>Select houses in the game</p>
       {ALL_HOUSE_NAMES.map(name => {
         return (
-          <div>
+          <div key={name}>
             <label>
               {houseNameStr(name)}
               <input
                 type="checkbox"
                 checked={!!houses[name]}
-                onClick={() => dispatch(toggleHouse(name))}
+                onChange={() => dispatch(toggleHouse(name))}
               />
             </label>
             <div></div>
@@ -39,7 +40,7 @@ export default () => {
         disabled={!allow_start}
         onClick={() => {
           if (allow_start) {
-            dispatch(startGame());
+            dispatch(showOverview());
           }
         }}
       />

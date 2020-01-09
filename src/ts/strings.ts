@@ -1,4 +1,4 @@
-import { HouseName } from "./State";
+import { HouseName } from "./HouseState";
 
 function assertNever(): never {
     throw new Error("Missing case in switch");

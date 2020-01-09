@@ -1,19 +1,15 @@
 import * as React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { GameState, HouseState, ALL_HOUSE_NAMES, resetGame } from "ts/State";
+import { ALL_HOUSE_NAMES } from "ts/HouseState";
 import HouseTile from "./HouseTile";
-import EditHouse from "./EditHouse";
+import { RootState } from "ts/RootState";
+import { showNewGame } from "ts/ViewState";
 
 const GameOverview: React.FC = () => {
-  const state = useSelector((state: GameState) => ({
+  const state = useSelector((state: RootState) => ({
     houses: state.houses,
-    edit_house: state.edit_house,
   }));
   const dispatch = useDispatch();
-  if (state.edit_house !== undefined) {
-    return <EditHouse />;
-  }
-
   const housesArray: JSX.Element[] = [];
   for (let name of ALL_HOUSE_NAMES) {
     const houseState = state.houses[name];
@@ -28,7 +24,7 @@ const GameOverview: React.FC = () => {
         type="button"
         value="Reset game"
         onClick={() => {
-          dispatch(resetGame());
+          dispatch(showNewGame());
         }}
       />
     </div>

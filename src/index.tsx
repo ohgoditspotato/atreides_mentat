@@ -1,13 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import App from "ts/App";
+import ViewManager from "ts/ViewManager";
 import { Provider } from "react-redux";
 import * as serviceWorker from "./serviceWorker";
-import { gameStateStore } from "ts/Store";
+import { stateStore } from "ts/Store";
 
 ReactDOM.render(
-  <Provider store={gameStateStore}>
-    <App />
+  <Provider store={stateStore}>
+    <ViewManager />
   </Provider>,
   document.getElementById("root")
 );

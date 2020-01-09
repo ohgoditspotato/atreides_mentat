@@ -1,7 +1,6 @@
 import { createStore } from "@reduxjs/toolkit";
-import { gameStateReducer } from "./State";
+import { rootReducer } from "./RootState";
 
-export const gameStateStore = createStore(gameStateReducer);
+export const stateStore = createStore(rootReducer);
 
-export type GameDispatch = typeof gameStateStore.dispatch;
-export type StateType = ReturnType<typeof gameStateReducer>;
+export type StoreDispatch = typeof stateStore.dispatch;
