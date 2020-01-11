@@ -9,6 +9,7 @@ import {
   showEditSpice,
   showAddCard,
   initHouses,
+  showViewCards,
 } from "ts/state/actions";
 import { ALL_HOUSE_NAMES, HouseName } from "ts/houses";
 import { HousesState, ViewState } from "ts/state/types";
@@ -85,6 +86,11 @@ export const viewStateReducer = createReducer(defaultViewState, builder => {
     state.active_view = "add_card";
     state.house_name = action.payload;
   });
+
+  builder.addCase(showViewCards, (state, action) => {
+    state.active_view = "view_cards";
+    state.house_name = action.payload;
+  })
 });
 
 export const rootReducer = combineReducers({

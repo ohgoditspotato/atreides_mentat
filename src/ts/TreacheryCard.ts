@@ -13,3 +13,4 @@ export interface UselessCard {
 }
 
 export type TreacheryCard = WeaponCard | DefenceCard | UselessCard;
+export type TreacheryCardKind = TreacheryCard["kind"];

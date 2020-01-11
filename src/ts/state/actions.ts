@@ -7,6 +7,7 @@ export const showNewGame = createAction("view/new_game");
 export const showOverview = createAction("view/overview");
 export const showHouseDetails = createAction<HouseName>("view/house_details");
 export const showEditSpice = createAction<HouseName>("view/edit_spice");
+export const showViewCards = createAction<HouseName>("view/view_cards");
 export const showAddCard = createAction<HouseName>("view/add_card");
 
 export const addCard = createAction("houses/add_card", (house: HouseName, card: TreacheryCard) => {

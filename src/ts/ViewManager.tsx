@@ -7,15 +7,21 @@ import { HouseName } from "./houses";
 import { RootState } from "ts/state/reducers";
 import { HouseState } from "ts/state/types";
 import EditSpice from "ts/components/EditSpice";
+import ViewCards from "ts/components/ViewCards";
+import { TreacheryCard } from "ts/TreacheryCard";
+import AddCard from "ts/components/AddCard";
 
 const ViewManager: React.FC = () => {
   const state = useSelector((state: RootState) => {
-    let house: { name: HouseName; spice: number } | undefined = undefined;
+    let house:
+      | { name: HouseName; spice: number; cards: ReadonlyArray<TreacheryCard> }
+      | undefined = undefined;
     if (state.view.house_name !== undefined) {
       const house_state = state.houses[state.view.house_name] as HouseState;
       house = {
         name: state.view.house_name,
         spice: house_state.spice,
+        cards: house_state.cards,
       };
     }
     return {
@@ -32,15 +38,24 @@ const ViewManager: React.FC = () => {
     case "house_details":
       if (state.house !== undefined) {
         return <HouseTile spice={state.house.spice} house={state.house.name} />;
-      }
-      else {
+      } else {
         throw new Error("Missing view.house");
       }
     case "edit_spice":
       if (state.house === undefined) {
         throw new Error("Missing view.house");
       }
-      return <EditSpice spice={state.house.spice} house={state.house.name}></EditSpice>
+      return <EditSpice spice={state.house.spice} house={state.house.name} />;
+    case "view_cards":
+      if (state.house === undefined) {
+        throw new Error("Missing view.house");
+      }
+      return <ViewCards house={state.house.name} cards={state.house.cards} />;
+    case "add_card":
+      if (state.house === undefined) {
+        throw new Error("Missing view.house");
+      }
+      return <AddCard house={state.house.name} />;
     default: {
       throw new Error("Unhandled active_view state");
     }

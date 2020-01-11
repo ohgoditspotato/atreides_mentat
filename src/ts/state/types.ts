@@ -15,7 +15,13 @@ export type HousesState = {
   [key in HouseName]?: HouseState;
 };
 
-export type View = "new_game" | "overview" | "house_details" | "edit_spice" | "add_card";
+export type View =
+  | "new_game"
+  | "overview"
+  | "house_details"
+  | "edit_spice"
+  | "view_cards"
+  | "add_card";
 
 export interface ViewState {
   active_view: View;
