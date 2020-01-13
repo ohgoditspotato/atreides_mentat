@@ -1,7 +1,8 @@
 import * as React from "react";
 import { TreacheryCard } from "ts/TreacheryCard";
+import Card from "react-bootstrap/Card";
 
-const Card: React.FC<TreacheryCard> = props => {
+const Frannalyn: React.FC<TreacheryCard> = props => {
   let detail: string = "";
   switch (props.kind) {
     case "weapon":
@@ -12,11 +13,11 @@ const Card: React.FC<TreacheryCard> = props => {
   }
 
   return (
-    <div>
-      <h3>{props.kind}</h3>
-      <h4>{detail}</h4>
-    </div>
+    <Card>
+      <Card.Title>{props.kind}</Card.Title>
+      <Card.Text>{detail}</Card.Text>
+    </Card>
   );
 };
 
-export default Card;
+export default Frannalyn;
