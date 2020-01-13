@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "ccc47d78b2a77510b3504cf9ad729762",
+    "revision": "6e9cdd100b58ad452b533e52a0ae835c",
     "url": "/atreides_mentat/index.html"
   },
   {
