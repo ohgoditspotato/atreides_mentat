@@ -11,10 +11,11 @@ const ConfirmResetModal: React.FC = () => {
       <div className="modal-background" onClick={close}></div>
       <div className="modal-card">
         <header className="modal-card-head">
-          <p className="modal-card-title">Are you sure you wish to reset the game?</p>
+          <p className="modal-card-title">Reset the game</p>
           <button className="delete" onClick={close}></button>
         </header>
         <section className="modal-card-body">
+          <p className="subtitle is-5">Are you sure?</p>
           <div className="buttons">
             <button className="button is-danger" onClick={() => dispatch(reset_game())}>
               Yes
