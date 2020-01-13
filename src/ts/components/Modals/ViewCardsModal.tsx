@@ -55,9 +55,6 @@ const ViewCards: React.FC<{
             >
               Add card
             </button>
-            <button className="button is-secondary" onClick={close}>
-              Back
-            </button>
           </div>
         </footer>
       </div>

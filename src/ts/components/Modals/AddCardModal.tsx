@@ -69,10 +69,10 @@ const available_cards: ReadonlyArray<treachery_card_t> = [
 
 const AddCardModal: React.FC<{ house: house_name_t }> = props => {
   const dispatch = useDispatch();
-  const close = () => dispatch(close_modal());
+  const close = () => dispatch(show_view_cards_modal(props.house));
   return (
     <div className="modal is-active">
-      <div className="modal-background"></div>
+      <div className="modal-background" onClick={close}></div>
       <div className="modal-card">
         <header className="modal-card-head">
           <p className="modal-card-title">Add card to {house_name_str(props.house)}</p>

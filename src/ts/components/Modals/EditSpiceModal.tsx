@@ -70,11 +70,6 @@ const EditSpice: React.FC<Props> = props => {
             </div>
           </div>
         </section>
-        <footer className="modal-card-foot">
-          <button className="button is-secondary" onClick={close}>
-            Back
-          </button>
-        </footer>
       </div>
     </div>
   );
