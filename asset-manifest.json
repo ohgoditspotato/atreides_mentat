@@ -1,19 +1,22 @@
 {
   "files": {
-    "main.js": "/atreides_mentat/static/js/main.46af2fad.chunk.js",
-    "main.js.map": "/atreides_mentat/static/js/main.46af2fad.chunk.js.map",
+    "main.js": "/atreides_mentat/static/js/main.a665ca26.chunk.js",
+    "main.js.map": "/atreides_mentat/static/js/main.a665ca26.chunk.js.map",
     "runtime-main.js": "/atreides_mentat/static/js/runtime-main.d88582d5.js",
     "runtime-main.js.map": "/atreides_mentat/static/js/runtime-main.d88582d5.js.map",
-    "static/js/2.825e368b.chunk.js": "/atreides_mentat/static/js/2.825e368b.chunk.js",
-    "static/js/2.825e368b.chunk.js.map": "/atreides_mentat/static/js/2.825e368b.chunk.js.map",
+    "static/css/2.70d9d258.chunk.css": "/atreides_mentat/static/css/2.70d9d258.chunk.css",
+    "static/js/2.b89a17c9.chunk.js": "/atreides_mentat/static/js/2.b89a17c9.chunk.js",
+    "static/js/2.b89a17c9.chunk.js.map": "/atreides_mentat/static/js/2.b89a17c9.chunk.js.map",
     "index.html": "/atreides_mentat/index.html",
-    "precache-manifest.06077327f2afd45fd90305b8cac42c32.js": "/atreides_mentat/precache-manifest.06077327f2afd45fd90305b8cac42c32.js",
+    "precache-manifest.d3cba1f223a4999c1641f9f1a14f6c43.js": "/atreides_mentat/precache-manifest.d3cba1f223a4999c1641f9f1a14f6c43.js",
     "service-worker.js": "/atreides_mentat/service-worker.js",
-    "static/js/2.825e368b.chunk.js.LICENSE": "/atreides_mentat/static/js/2.825e368b.chunk.js.LICENSE"
+    "static/css/2.70d9d258.chunk.css.map": "/atreides_mentat/static/css/2.70d9d258.chunk.css.map",
+    "static/js/2.b89a17c9.chunk.js.LICENSE": "/atreides_mentat/static/js/2.b89a17c9.chunk.js.LICENSE"
   },
   "entrypoints": [
     "static/js/runtime-main.d88582d5.js",
-    "static/js/2.825e368b.chunk.js",
-    "static/js/main.46af2fad.chunk.js"
+    "static/css/2.70d9d258.chunk.css",
+    "static/js/2.b89a17c9.chunk.js",
+    "static/js/main.a665ca26.chunk.js"
   ]
 }
