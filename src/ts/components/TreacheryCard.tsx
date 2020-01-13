@@ -19,8 +19,10 @@ const TreacheryCard: React.FC<{ card: treachery_card_t }> = props => {
   }
   return (
     <div className="card has-text-centered">
-      <header className={"card-header has-background-" + colour.bg + " has-text-" + colour.text}>
-        <p className="is-uppercase">{props.card.kind}</p>
+      <header className={"card-header has-background-" + colour.bg}>
+        <p className={"card-header-title is-uppercase" + " has-text-" + colour.text}>
+          {props.card.kind}
+        </p>
       </header>
       <div className="card-content">
         <p className="subtitle is-5 is-capitalized">{subtitle}</p>
