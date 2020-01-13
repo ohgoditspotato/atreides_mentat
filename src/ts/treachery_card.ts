@@ -16,7 +16,7 @@ export interface special_card {
   kind: "special";
   type:
     | "truthtrance"
-    | "tleilaxughola"
+    | "tleilaxu ghola"
     | "karama"
     | "cheap hero"
     | "hajr"
@@ -24,7 +24,11 @@ export interface special_card {
     | "family atomics";
 }
 
-export type treachery_card_t = weapon_card | defence_card | useless_card | special_card;
+export interface unknown_card {
+  kind: "unknown"
+}
+
+export type treachery_card_t = weapon_card | defence_card | useless_card | special_card | unknown_card;
 export type treachery_card_kind = treachery_card_t["kind"];
 export type special_card_type = special_card["type"];
 export type weapon_card_type = weapon_card["type"];

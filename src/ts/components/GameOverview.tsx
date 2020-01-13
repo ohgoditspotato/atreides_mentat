@@ -2,11 +2,13 @@ import * as React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { root_state } from "ts/state/reducers";
 import { ALL_HOUSE_NAMES, house_name_t } from "ts/houses";
-import { reset_game } from "ts/state/actions";
+import { show_reset_game_modal } from "ts/state/actions";
 import { house_state_t } from "ts/state/types";
 import EditSpiceModal from "ts/components/Modals/EditSpiceModal";
 import HouseTile from "ts/components/HouseTile";
-import ViewCardsModal from "./Modals/ViewCardsModal";
+import ViewCardsModal from "ts/components/Modals/ViewCardsModal";
+import AddCardModal from "ts/components/Modals/AddCardModal";
+import ConfirmResetModal from "ts/components/Modals/ConfirmResetModal";
 
 const Modal: React.FC = props => {
   const state = useSelector((root_state: root_state) => ({
@@ -25,6 +27,12 @@ const Modal: React.FC = props => {
     }
     case "view_cards": {
       return <ViewCardsModal house={house.name} cards={house.cards} />;
+    }
+    case "add_card": {
+      return <AddCardModal house={house.name} />;
+    }
+    case "reset_game": {
+      return <ConfirmResetModal />;
     }
     default:
       return null;
@@ -49,18 +57,16 @@ const GameOverview: React.FC = () => {
     <>
       <section className="section">
         <div className="container">
-          <div className="columns is-multiline">
-            {housesArray}
-          </div>
+          <div className="columns is-multiline">{housesArray}</div>
         </div>
       </section>
       <section className="section">
         <div className="container">
           <div className="buttons">
             <button
-              className="button is-danger is-fullwidth"
+              className="button is-secondary"
               onClick={() => {
-                dispatch(reset_game());
+                dispatch(show_reset_game_modal());
               }}
             >
               Reset game

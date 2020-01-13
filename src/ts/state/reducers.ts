@@ -9,9 +9,10 @@ import {
   start_game,
   show_view_cards_modal,
   reset_game,
+  show_reset_game_modal,
 } from "ts/state/actions";
 import { ALL_HOUSE_NAMES, house_name_t } from "ts/houses";
-import { houses_state_t, view_state_t, game_state_t } from "ts/state/types";
+import { houses_state_t, view_state_t, game_state_t, house_state_t } from "ts/state/types";
 
 const houses_initial_spice = {
   harkonen: 10,
@@ -52,11 +53,16 @@ export const house_state_reducer = createReducer({} as houses_state_t, builder =
   builder.addCase(start_game, (state, action) => {
     for (let house of ALL_HOUSE_NAMES) {
       if (action.payload[house]) {
-        state[house] = {
+        const initial_house_state: house_state_t = {
           spice: houses_initial_spice[house],
-          cards: [],
+          cards: [{ kind: "unknown" }],
           name: house,
         };
+        if (house === "harkonen") {
+          initial_house_state.cards.push({ kind: "unknown" });
+          initial_house_state.cards.push({ kind: "unknown" });
+        }
+        state[house] = initial_house_state;
       } else {
         state[house] = undefined;
       }
@@ -88,6 +94,11 @@ export const view_state_reducer = createReducer(default_view_state, builder => {
   builder.addCase(show_view_cards_modal, (state, action) => {
     state.active_modal = "view_cards";
     state.house_name = action.payload;
+  });
+
+  builder.addCase(show_reset_game_modal, state => {
+    state.active_modal = "reset_game";
+    state.house_name = undefined;
   });
 });
 

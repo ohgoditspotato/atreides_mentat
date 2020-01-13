@@ -25,7 +25,14 @@ const EditSpice: React.FC<Props> = props => {
           <button className="delete" onClick={close}></button>
         </header>
         <section className="modal-card-body">
-          <p className="is-size-3 is-text-weight-bold">{props.spice} spice</p>
+          <div className="level">
+            <div className="level-item has-text-centered">
+              <div>
+                <p className="heading">Spice</p>
+                <p className="title">{props.spice}</p>
+              </div>
+            </div>
+          </div>
           <div className="field">
             <input
               className="input"
@@ -47,7 +54,7 @@ const EditSpice: React.FC<Props> = props => {
                   setSpiceChange(1);
                 }}
               >
-                Add
+                Increase
               </button>
             </div>
             <div className="column is-half">
@@ -58,7 +65,7 @@ const EditSpice: React.FC<Props> = props => {
                   setSpiceChange(1);
                 }}
               >
-                Remove
+                Decrease
               </button>
             </div>
           </div>

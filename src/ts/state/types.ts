@@ -15,7 +15,7 @@ export type houses_state_t = {
   [key in house_name_t]?: house_state_t;
 };
 
-export type active_modal = "none" | "edit_spice" | "view_cards" | "add_card";
+export type active_modal = "none" | "edit_spice" | "view_cards" | "add_card" | "reset_game";
 
 export interface view_state_t {
   active_modal: active_modal;

@@ -1,29 +1,20 @@
 import * as React from "react";
 import { house_name_t, house_name_str } from "ts/houses";
-import { treachery_card_t, treachery_card_kind } from "ts/treachery_card";
+import { treachery_card_t } from "ts/treachery_card";
 import { useDispatch } from "react-redux";
-import { show_add_cards_modal, close_modal as closeModal } from "ts/state/actions";
+import { show_add_cards_modal, close_modal, house_remove_card } from "ts/state/actions";
+import TreacheryCard from "ts/components/TreacheryCard";
 
-const treachery_card_colours: { [key in treachery_card_kind]: string } = {
-  defence: "info",
-  special: "link",
-  useless: "warning",
-  weapon: "danger",
-};
-
-const TreacheryCardComponent: React.FC<{ card: treachery_card_t }> = props => {
-  return (
-    <div className="card">
-      <header className={"card-header"}></header>
-    </div>
-  );
-};
-
-const ViewCards: React.FC<{ house: house_name_t; cards: ReadonlyArray<treachery_card_t> }> = props => {
+const ViewCards: React.FC<{
+  house: house_name_t;
+  cards: ReadonlyArray<treachery_card_t>;
+}> = props => {
   const dispatch = useDispatch();
-  const close = () => {
-    dispatch(closeModal());
-  };
+  const close = () => dispatch(close_modal());
+  let allow_add_card = props.cards.length < 4;
+  if (props.house === "harkonen") {
+    allow_add_card = props.cards.length < 8;
+  }
 
   return (
     <div className="modal is-active">
@@ -34,15 +25,33 @@ const ViewCards: React.FC<{ house: house_name_t; cards: ReadonlyArray<treachery_
           <button className="delete" onClick={close}></button>
         </header>
         <section className="modal-card-body">
-          {props.cards.length !== 0
-            ? props.cards.map(card => <TreacheryCardComponent card={card} />)
-            : "No cards"}
+          <div className="columns is-multiline">
+            {props.cards.map((card, index) => (
+              <div className="column is-half">
+                <TreacheryCard card={card}>
+                  <button
+                    className="button is-danger"
+                    onClick={() => {
+                      dispatch(house_remove_card(props.house, index));
+                    }}
+                  >
+                    Remove
+                  </button>
+                </TreacheryCard>
+              </div>
+            ))}
+          </div>
         </section>
         <footer className="modal-card-foot">
           <div className="buttons">
             <button
               className="button is-primary"
-              onClick={() => dispatch(show_add_cards_modal(props.house))}
+              onClick={() => {
+                if (allow_add_card) {
+                  dispatch(show_add_cards_modal(props.house));
+                }
+              }}
+              disabled={!allow_add_card}
             >
               Add card
             </button>
