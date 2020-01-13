@@ -9,10 +9,9 @@ const HouseSelect: React.FC<{
   checked: boolean;
   onClick: () => void;
 }> = props => {
-  const [checked, setChecked] = React.useState<boolean>(false);
   let className = "button";
   if (props.checked) {
-    className += " is-success";
+    className += " is-primary";
   }
   return (
     <button className={className} onClick={props.onClick}>
@@ -61,20 +60,22 @@ export default () => {
               />
             ))}
           </div>
-          <div className="buttons is-centered">
-            <button
-              className="button is-primary is-fullwidth"
-              disabled={!allow_start}
-              onClick={() => {
-                if (allow_start) {
-                  dispatch(start_game(state));
-                  dispatch(close_modal());
-                }
-              }}
-            >
-              Start game
-            </button>
-          </div>
+        </div>
+      </section>
+      <section className="section">
+        <div className="buttons is-centered">
+          <button
+            className="button is-success"
+            disabled={!allow_start}
+            onClick={() => {
+              if (allow_start) {
+                dispatch(start_game(state));
+                dispatch(close_modal());
+              }
+            }}
+          >
+            Start game
+          </button>
         </div>
       </section>
     </>
