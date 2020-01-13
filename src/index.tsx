@@ -4,9 +4,18 @@ import ViewManager from "ts/ViewManager";
 import { Provider } from "react-redux";
 import * as serviceWorker from "./serviceWorker";
 import { stateStore } from "ts/state/store";
+import "bulma/css/bulma.css";
 
 ReactDOM.render(
   <Provider store={stateStore}>
+    <section className="hero is-primary">
+      <div className="hero-body">
+        <div className="container">
+          <p className="title is-1">Dune</p>
+          <p className="subtitle is-5">Atreides mentat</p>
+        </div>
+      </div>
+    </section>
     <ViewManager />
   </Provider>,
   document.getElementById("root")

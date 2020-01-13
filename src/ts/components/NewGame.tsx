@@ -1,13 +1,25 @@
 import * as React from "react";
 import { useDispatch } from "react-redux";
-import { ALL_HOUSE_NAMES, houseNameStr } from "ts/houses";
+import { ALL_HOUSE_NAMES, houseNameStr, HouseName } from "ts/houses";
 import { showOverview, initHouses } from "ts/state/actions";
 import { InitHousePayload } from "ts/state/types";
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
+
+const HouseSelect: React.FC<{
+  house: HouseName;
+  checked: boolean;
+  onClick: () => void;
+}> = props => {
+  const [checked, setChecked] = React.useState<boolean>(false);
+  let className = "button";
+  if (props.checked) {
+    className += " is-success";
+  }
+  return (
+    <button className={className} onClick={props.onClick}>
+      <div>{houseNameStr(props.house)}</div>
+    </button>
+  );
+};
 
 export default () => {
   const [state, setState] = React.useState<InitHousePayload>({
@@ -27,46 +39,44 @@ export default () => {
   }
   const dispatch = useDispatch();
   return (
-    <Container>
-      <Row>
-        <Col className="text-center">
-          <h1>New game</h1>
-        </Col>
-      </Row>
-      <Form>
-        <p>Select houses in the game</p>
-        {ALL_HOUSE_NAMES.map(name => {
-          return (
-            <Form.Group key={name}>
-              <Form.Check
-                type="checkbox"
+    <>
+      <section className="section">
+        <div className="container">
+          <p className="title is-1">New game</p>
+          <p className="subtitle is-5">Select which houses are present in the game</p>
+        </div>
+      </section>
+      <section className="section">
+        <div className="container">
+          <div className="buttons is-centered">
+            {ALL_HOUSE_NAMES.map(name => (
+              <HouseSelect
+                house={name}
                 checked={state[name]}
-                onChange={() => {
-                  let toggle = !state[name];
-                  setState({ ...state, [name]: toggle });
+                onClick={() => {
+                  const new_checked = !state[name];
+                  setState({ ...state, [name]: new_checked });
                 }}
-                label={houseNameStr(name)}
+                key={name}
               />
-            </Form.Group>
-          );
-        })}
-        <Form.Group>
-          <Button
-            variant="primary"
-            type="button"
-            block
-            disabled={!allow_start}
-            onClick={() => {
-              if (allow_start) {
-                dispatch(initHouses(state));
-                dispatch(showOverview());
-              }
-            }}
-          >
-            Start game
-          </Button>
-        </Form.Group>
-      </Form>
-    </Container>
+            ))}
+          </div>
+          <div className="buttons is-centered">
+            <button
+              className="button is-primary is-fullwidth"
+              disabled={!allow_start}
+              onClick={() => {
+                if (allow_start) {
+                  dispatch(initHouses(state));
+                  dispatch(showOverview());
+                }
+              }}
+            >
+              Start game
+            </button>
+          </div>
+        </div>
+      </section>
+    </>
   );
 };

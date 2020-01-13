@@ -35,12 +35,6 @@ const ViewManager: React.FC = () => {
       return <NewGame />;
     case "overview":
       return <GameOverview />;
-    case "house_details":
-      if (state.house !== undefined) {
-        return <HouseTile spice={state.house.spice} house={state.house.name} />;
-      } else {
-        throw new Error("Missing view.house");
-      }
     case "edit_spice":
       if (state.house === undefined) {
         throw new Error("Missing view.house");

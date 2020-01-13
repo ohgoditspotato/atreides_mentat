@@ -14,6 +14,15 @@ import {
 import { ALL_HOUSE_NAMES, HouseName } from "ts/houses";
 import { HousesState, ViewState } from "ts/state/types";
 
+const housesInitialSpice = {
+  harkonen: 10,
+  atreides: 10,
+  fremen: 3,
+  bene: 5,
+  guild: 5,
+  emperor: 10,
+} as const;
+
 export const houseStateReducer = createReducer({} as HousesState, builder => {
   function getHouse(name: HouseName, state: HousesState) {
     const house = state[name];
@@ -45,7 +54,7 @@ export const houseStateReducer = createReducer({} as HousesState, builder => {
     for (let house of ALL_HOUSE_NAMES) {
       if (action.payload[house]) {
         state[house] = {
-          spice: 0,
+          spice: housesInitialSpice[house],
           cards: [],
           name: house,
         };
@@ -90,7 +99,7 @@ export const viewStateReducer = createReducer(defaultViewState, builder => {
   builder.addCase(showViewCards, (state, action) => {
     state.active_view = "view_cards";
     state.house_name = action.payload;
-  })
+  });
 });
 
 export const rootReducer = combineReducers({

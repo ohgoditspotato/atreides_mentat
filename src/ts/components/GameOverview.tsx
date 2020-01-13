@@ -14,20 +14,31 @@ const GameOverview: React.FC = () => {
   for (let name of ALL_HOUSE_NAMES) {
     const houseState = state.houses[name];
     if (houseState !== undefined) {
-      housesArray.push(<HouseTile house={name} spice={houseState.spice} key={name}/>);
+      housesArray.push(<HouseTile house={name} spice={houseState.spice} key={name} cards={houseState.cards} />);
     }
   }
   return (
-    <div>
-      {housesArray}
-      <input
-        type="button"
-        value="Reset game"
-        onClick={() => {
-          dispatch(showNewGame());
-        }}
-      />
-    </div>
+    <>
+      <section className="section">
+        <div className="container">
+          <div className="columns">{housesArray}</div>
+        </div>
+      </section>
+      <section className="section">
+        <div className="container">
+          <div className="buttons">
+            <button
+              className="button is-danger is-fullwidth"
+              onClick={() => {
+                dispatch(showNewGame());
+              }}
+            >
+              Reset game
+            </button>
+          </div>
+        </div>
+      </section>
+    </>
   );
 };
 
