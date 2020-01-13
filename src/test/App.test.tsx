@@ -1,9 +1,9 @@
 import React from "react";
 import { render } from "@testing-library/react";
-import ViewManager from "ts/ViewManager";
+import GameContainer from "ts/components/GameContainer";
 
 test("renders learn react link", () => {
-  const { getByText } = render(<ViewManager />);
+  const { getByText } = render(<GameContainer />);
   const linkElement = getByText(/learn react/i);
   expect(linkElement).toBeInTheDocument();
 });

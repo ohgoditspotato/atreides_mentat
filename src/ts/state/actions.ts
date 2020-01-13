@@ -1,16 +1,14 @@
 import { createAction } from "@reduxjs/toolkit";
-import { HouseName } from "ts/houses";
-import { TreacheryCard } from "ts/TreacheryCard";
+import { house_name_t } from "ts/houses";
+import { treachery_card } from "ts/treachery_card";
 import { InitHousePayload } from "ts/state/types";
 
-export const showNewGame = createAction("view/new_game");
 export const showOverview = createAction("view/overview");
-export const showHouseDetails = createAction<HouseName>("view/house_details");
-export const showEditSpice = createAction<HouseName>("view/edit_spice");
-export const showViewCards = createAction<HouseName>("view/view_cards");
-export const showAddCard = createAction<HouseName>("view/add_card");
+export const showEditSpice = createAction<house_name_t>("view/edit_spice");
+export const showViewCards = createAction<house_name_t>("view/view_cards");
+export const showAddCard = createAction<house_name_t>("view/add_card");
 
-export const addCard = createAction("houses/add_card", (house: HouseName, card: TreacheryCard) => {
+export const addCard = createAction("houses/add_card", (house: house_name_t, card: treachery_card) => {
   return {
     payload: {
       house,
@@ -19,7 +17,7 @@ export const addCard = createAction("houses/add_card", (house: HouseName, card: 
   };
 });
 
-export const removeCard = createAction("houses/remove_card", (house: HouseName, index: number) => {
+export const removeCard = createAction("houses/remove_card", (house: house_name_t, index: number) => {
   return {
     payload: {
       house,
@@ -30,7 +28,7 @@ export const removeCard = createAction("houses/remove_card", (house: HouseName, 
 
 export const modifySpice = createAction(
   "houses/modify_spice",
-  (house: HouseName, spice: number) => {
+  (house: house_name_t, spice: number) => {
     if (!Number.isInteger(spice)) {
       throw new Error("Spice value must be an integer");
     }
@@ -43,4 +41,5 @@ export const modifySpice = createAction(
   }
 );
 
-export const initHouses = createAction<InitHousePayload>("houses/init");
+export const startGame = createAction<InitHousePayload>("game/start");
+export const resetGame = createAction("game/reset");

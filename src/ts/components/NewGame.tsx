@@ -1,11 +1,11 @@
 import * as React from "react";
 import { useDispatch } from "react-redux";
-import { ALL_HOUSE_NAMES, houseNameStr, HouseName } from "ts/houses";
-import { showOverview, initHouses } from "ts/state/actions";
+import { ALL_HOUSE_NAMES, houseNameStr, house_name_t } from "ts/houses";
+import { showOverview, startGame } from "ts/state/actions";
 import { InitHousePayload } from "ts/state/types";
 
 const HouseSelect: React.FC<{
-  house: HouseName;
+  house: house_name_t;
   checked: boolean;
   onClick: () => void;
 }> = props => {
@@ -67,7 +67,7 @@ export default () => {
               disabled={!allow_start}
               onClick={() => {
                 if (allow_start) {
-                  dispatch(initHouses(state));
+                  dispatch(startGame(state));
                   dispatch(showOverview());
                 }
               }}

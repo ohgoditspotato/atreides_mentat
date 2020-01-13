@@ -1,12 +1,12 @@
 import * as React from "react";
 
 import { useDispatch } from "react-redux";
-import { HouseName, houseNameStr } from "ts/houses";
+import { house_name_t, houseNameStr } from "ts/houses";
 import { modifySpice, showOverview } from "ts/state/actions";
 
 interface Props {
   spice: number;
-  house: HouseName;
+  house: house_name_t;
 }
 
 const EditSpice: React.FC<Props> = props => {
@@ -18,7 +18,7 @@ const EditSpice: React.FC<Props> = props => {
 
   return (
     <div className="modal is-active">
-      <div className="modal-background"></div>
+      <div className="modal-background" onClick={close}></div>
       <div className="modal-card">
         <header className="modal-card-head">
           <p className="modal-card-title">{houseNameStr(props.house)}</p>
@@ -64,8 +64,8 @@ const EditSpice: React.FC<Props> = props => {
           </div>
         </section>
         <footer className="modal-card-foot">
-          <button className="button is-primary" onClick={close}>
-            Done
+          <button className="button is-secondary" onClick={close}>
+            Back
           </button>
         </footer>
       </div>

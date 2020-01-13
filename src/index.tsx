@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import ViewManager from "ts/ViewManager";
+import GameContainer from "ts/components/GameContainer";
 import { Provider } from "react-redux";
 import * as serviceWorker from "./serviceWorker";
 import { stateStore } from "ts/state/store";
@@ -16,7 +16,7 @@ ReactDOM.render(
         </div>
       </div>
     </section>
-    <ViewManager />
+    <GameContainer />
   </Provider>,
   document.getElementById("root")
 );

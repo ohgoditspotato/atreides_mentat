@@ -3,16 +3,15 @@ import {
   addCard,
   removeCard,
   modifySpice,
-  showNewGame,
-  showOverview,
-  showHouseDetails,
+  showOverview as closeModal,
   showEditSpice,
   showAddCard,
-  initHouses,
+  startGame,
   showViewCards,
+  resetGame,
 } from "ts/state/actions";
-import { ALL_HOUSE_NAMES, HouseName } from "ts/houses";
-import { HousesState, ViewState } from "ts/state/types";
+import { ALL_HOUSE_NAMES, house_name_t } from "ts/houses";
+import { HousesState, ViewState, GameState } from "ts/state/types";
 
 const housesInitialSpice = {
   harkonen: 10,
@@ -24,7 +23,7 @@ const housesInitialSpice = {
 } as const;
 
 export const houseStateReducer = createReducer({} as HousesState, builder => {
-  function getHouse(name: HouseName, state: HousesState) {
+  function getHouse(name: house_name_t, state: HousesState) {
     const house = state[name];
     if (house === undefined) {
       throw new Error("House " + name + " not present in this game");
@@ -50,7 +49,7 @@ export const houseStateReducer = createReducer({} as HousesState, builder => {
     }
   });
 
-  builder.addCase(initHouses, (state, action) => {
+  builder.addCase(startGame, (state, action) => {
     for (let house of ALL_HOUSE_NAMES) {
       if (action.payload[house]) {
         state[house] = {
@@ -66,45 +65,49 @@ export const houseStateReducer = createReducer({} as HousesState, builder => {
 });
 
 const defaultViewState: ViewState = {
-  active_view: "new_game",
+  active_modal: "none",
   house_name: undefined,
 };
 
 export const viewStateReducer = createReducer(defaultViewState, builder => {
-  builder.addCase(showNewGame, (state, _) => {
-    state.active_view = "new_game";
+  builder.addCase(closeModal, (state, _) => {
+    state.active_modal = "none";
     state.house_name = undefined;
-  });
-
-  builder.addCase(showOverview, (state, _) => {
-    state.active_view = "overview";
-    state.house_name = undefined;
-  });
-
-  builder.addCase(showHouseDetails, (state, action) => {
-    state.active_view = "house_details";
-    state.house_name = action.payload;
   });
 
   builder.addCase(showEditSpice, (state, action) => {
-    state.active_view = "edit_spice";
+    state.active_modal = "edit_spice";
     state.house_name = action.payload;
   });
 
   builder.addCase(showAddCard, (state, action) => {
-    state.active_view = "add_card";
+    state.active_modal = "add_card";
     state.house_name = action.payload;
   });
 
   builder.addCase(showViewCards, (state, action) => {
-    state.active_view = "view_cards";
+    state.active_modal = "view_cards";
     state.house_name = action.payload;
+  });
+});
+
+const defaultGameState: GameState = {
+  initialized: false,
+};
+
+export const gameStateReducer = createReducer(defaultGameState, builder => {
+  builder.addCase(startGame, (state, action) => {
+    state.initialized = true;
+  });
+  builder.addCase(resetGame, (state, action) => {
+    state.initialized = false;
   });
 });
 
 export const rootReducer = combineReducers({
   houses: houseStateReducer,
   view: viewStateReducer,
+  game: gameStateReducer,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;
