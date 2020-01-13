@@ -24,8 +24,8 @@ export interface special_card {
     | "family atomics";
 }
 
-export type treachery_card = weapon_card | defence_card | useless_card | special_card;
-export type treachery_card_kind = treachery_card["kind"];
+export type treachery_card_t = weapon_card | defence_card | useless_card | special_card;
+export type treachery_card_kind = treachery_card_t["kind"];
 export type special_card_type = special_card["type"];
 export type weapon_card_type = weapon_card["type"];
 export type defence_card_type = defence_card["type"];

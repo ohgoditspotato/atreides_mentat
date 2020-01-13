@@ -1,8 +1,8 @@
 import * as React from "react";
 
 import { useDispatch } from "react-redux";
-import { house_name_t, houseNameStr } from "ts/houses";
-import { modifySpice, showOverview } from "ts/state/actions";
+import { house_name_t, house_name_str } from "ts/houses";
+import { house_modify_spice, close_modal } from "ts/state/actions";
 
 interface Props {
   spice: number;
@@ -13,7 +13,7 @@ const EditSpice: React.FC<Props> = props => {
   const dispatch = useDispatch();
   const [spiceChange, setSpiceChange] = React.useState(1);
   const close = () => {
-    dispatch(showOverview());
+    dispatch(close_modal());
   };
 
   return (
@@ -21,7 +21,7 @@ const EditSpice: React.FC<Props> = props => {
       <div className="modal-background" onClick={close}></div>
       <div className="modal-card">
         <header className="modal-card-head">
-          <p className="modal-card-title">{houseNameStr(props.house)}</p>
+          <p className="modal-card-title">{house_name_str(props.house)}</p>
           <button className="delete" onClick={close}></button>
         </header>
         <section className="modal-card-body">
@@ -43,7 +43,7 @@ const EditSpice: React.FC<Props> = props => {
               <button
                 className="button is-success is-fullwidth"
                 onClick={() => {
-                  dispatch(modifySpice(props.house, spiceChange));
+                  dispatch(house_modify_spice(props.house, spiceChange));
                   setSpiceChange(1);
                 }}
               >
@@ -54,7 +54,7 @@ const EditSpice: React.FC<Props> = props => {
               <button
                 className="button is-danger is-fullwidth"
                 onClick={() => {
-                  dispatch(modifySpice(props.house, -spiceChange));
+                  dispatch(house_modify_spice(props.house, -spiceChange));
                   setSpiceChange(1);
                 }}
               >

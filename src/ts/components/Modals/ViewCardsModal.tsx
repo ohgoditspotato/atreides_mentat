@@ -1,8 +1,8 @@
 import * as React from "react";
-import { house_name_t, houseNameStr } from "ts/houses";
-import { treachery_card, treachery_card_kind } from "ts/treachery_card";
+import { house_name_t, house_name_str } from "ts/houses";
+import { treachery_card_t, treachery_card_kind } from "ts/treachery_card";
 import { useDispatch } from "react-redux";
-import { showAddCard, showOverview as closeModal } from "ts/state/actions";
+import { show_add_cards_modal, close_modal as closeModal } from "ts/state/actions";
 
 const treachery_card_colours: { [key in treachery_card_kind]: string } = {
   defence: "info",
@@ -11,7 +11,7 @@ const treachery_card_colours: { [key in treachery_card_kind]: string } = {
   weapon: "danger",
 };
 
-const TreacheryCardComponent: React.FC<{ card: treachery_card }> = props => {
+const TreacheryCardComponent: React.FC<{ card: treachery_card_t }> = props => {
   return (
     <div className="card">
       <header className={"card-header"}></header>
@@ -19,7 +19,7 @@ const TreacheryCardComponent: React.FC<{ card: treachery_card }> = props => {
   );
 };
 
-const ViewCards: React.FC<{ house: house_name_t; cards: ReadonlyArray<treachery_card> }> = props => {
+const ViewCards: React.FC<{ house: house_name_t; cards: ReadonlyArray<treachery_card_t> }> = props => {
   const dispatch = useDispatch();
   const close = () => {
     dispatch(closeModal());
@@ -30,7 +30,7 @@ const ViewCards: React.FC<{ house: house_name_t; cards: ReadonlyArray<treachery_
       <div className="modal-background" onClick={close}></div>
       <div className="modal-card">
         <header className="modal-card-head">
-          <p className="modal-card-title">Cards for {houseNameStr(props.house)}</p>
+          <p className="modal-card-title">Cards for {house_name_str(props.house)}</p>
           <button className="delete" onClick={close}></button>
         </header>
         <section className="modal-card-body">
@@ -42,7 +42,7 @@ const ViewCards: React.FC<{ house: house_name_t; cards: ReadonlyArray<treachery_
           <div className="buttons">
             <button
               className="button is-primary"
-              onClick={() => dispatch(showAddCard(props.house))}
+              onClick={() => dispatch(show_add_cards_modal(props.house))}
             >
               Add card
             </button>

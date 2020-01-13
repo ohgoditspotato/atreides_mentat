@@ -3,11 +3,11 @@ import ReactDOM from "react-dom";
 import GameContainer from "ts/components/GameContainer";
 import { Provider } from "react-redux";
 import * as serviceWorker from "./serviceWorker";
-import { stateStore } from "ts/state/store";
+import { state_store } from "ts/state/store";
 import "bulma/css/bulma.css";
 
 ReactDOM.render(
-  <Provider store={stateStore}>
+  <Provider store={state_store}>
     <section className="hero is-primary">
       <div className="hero-body">
         <div className="container">

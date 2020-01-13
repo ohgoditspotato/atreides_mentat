@@ -1,15 +1,15 @@
 import * as React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { RootState } from "ts/state/reducers";
+import { root_state } from "ts/state/reducers";
 import { ALL_HOUSE_NAMES, house_name_t } from "ts/houses";
-import { resetGame } from "ts/state/actions";
-import { HouseState } from "ts/state/types";
+import { reset_game } from "ts/state/actions";
+import { house_state_t } from "ts/state/types";
 import EditSpiceModal from "ts/components/Modals/EditSpiceModal";
 import HouseTile from "ts/components/HouseTile";
 import ViewCardsModal from "./Modals/ViewCardsModal";
 
 const Modal: React.FC = props => {
-  const state = useSelector((root_state: RootState) => ({
+  const state = useSelector((root_state: root_state) => ({
     houses: root_state.houses,
     view: root_state.view,
   }));
@@ -18,7 +18,7 @@ const Modal: React.FC = props => {
     return null;
   }
 
-  const house = state.houses[state.view.house_name as house_name_t] as HouseState;
+  const house = state.houses[state.view.house_name as house_name_t] as house_state_t;
   switch (state.view.active_modal) {
     case "edit_spice": {
       return <EditSpiceModal house={house.name} spice={house.spice} />;
@@ -32,7 +32,7 @@ const Modal: React.FC = props => {
 };
 
 const GameOverview: React.FC = () => {
-  const state = useSelector((state: RootState) => ({
+  const state = useSelector((state: root_state) => ({
     houses: state.houses,
   }));
   const dispatch = useDispatch();
@@ -60,7 +60,7 @@ const GameOverview: React.FC = () => {
             <button
               className="button is-danger is-fullwidth"
               onClick={() => {
-                dispatch(resetGame());
+                dispatch(reset_game());
               }}
             >
               Reset game

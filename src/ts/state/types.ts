@@ -1,27 +1,27 @@
 import { house_name_t } from "../houses";
-import { treachery_card } from "../treachery_card";
+import { treachery_card_t } from "../treachery_card";
 
-export type InitHousePayload = {
+export type start_game_spec = {
   [key in house_name_t]: boolean;
 };
 
-export interface HouseState {
+export interface house_state_t {
   spice: number;
-  cards: Array<treachery_card>;
+  cards: Array<treachery_card_t>;
   name: house_name_t;
 }
 
-export type HousesState = {
-  [key in house_name_t]?: HouseState;
+export type houses_state_t = {
+  [key in house_name_t]?: house_state_t;
 };
 
-export type ActiveModal = "none" | "edit_spice" | "view_cards" | "add_card";
+export type active_modal = "none" | "edit_spice" | "view_cards" | "add_card";
 
-export interface ViewState {
-  active_modal: ActiveModal;
+export interface view_state_t {
+  active_modal: active_modal;
   house_name?: house_name_t;
 }
 
-export interface GameState {
+export interface game_state_t {
   initialized: boolean;
 }

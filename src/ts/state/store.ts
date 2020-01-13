@@ -1,10 +1,10 @@
 import { createStore, compose } from "@reduxjs/toolkit";
-import { rootReducer, RootState } from "./reducers";
+import { root_reducer, root_state } from "./reducers";
 import persistState from "redux-localstorage";
 
 const enhancer = compose(persistState(["houses", "game"] as any));
 
-const initialState: RootState = {
+const initial_state: root_state = {
   houses: {},
   view: {
     active_modal: "none",
@@ -13,6 +13,4 @@ const initialState: RootState = {
   game: { initialized: false },
 };
 
-export const stateStore = createStore(rootReducer, initialState, enhancer as any);
-
-export type StoreDispatch = typeof stateStore.dispatch;
+export const state_store = createStore(root_reducer, initial_state, enhancer as any);

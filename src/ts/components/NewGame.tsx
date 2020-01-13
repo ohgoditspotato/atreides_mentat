@@ -1,8 +1,8 @@
 import * as React from "react";
 import { useDispatch } from "react-redux";
-import { ALL_HOUSE_NAMES, houseNameStr, house_name_t } from "ts/houses";
-import { showOverview, startGame } from "ts/state/actions";
-import { InitHousePayload } from "ts/state/types";
+import { ALL_HOUSE_NAMES, house_name_str, house_name_t } from "ts/houses";
+import { close_modal, start_game } from "ts/state/actions";
+import { start_game_spec } from "ts/state/types";
 
 const HouseSelect: React.FC<{
   house: house_name_t;
@@ -16,13 +16,13 @@ const HouseSelect: React.FC<{
   }
   return (
     <button className={className} onClick={props.onClick}>
-      <div>{houseNameStr(props.house)}</div>
+      <div>{house_name_str(props.house)}</div>
     </button>
   );
 };
 
 export default () => {
-  const [state, setState] = React.useState<InitHousePayload>({
+  const [state, setState] = React.useState<start_game_spec>({
     harkonen: false,
     emperor: false,
     guild: false,
@@ -67,8 +67,8 @@ export default () => {
               disabled={!allow_start}
               onClick={() => {
                 if (allow_start) {
-                  dispatch(startGame(state));
-                  dispatch(showOverview());
+                  dispatch(start_game(state));
+                  dispatch(close_modal());
                 }
               }}
             >
