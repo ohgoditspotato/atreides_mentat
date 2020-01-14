@@ -35,7 +35,7 @@ export const house_state_reducer = createReducer({} as houses_state_t, builder =
 
   builder.addCase(house_add_card, (state, action) => {
     let house = getHouse(action.payload.house, state);
-    house.cards.push(action.payload.card);
+    house.cards = [action.payload.card, ...house.cards];
   });
 
   builder.addCase(house_remove_card, (state, action) => {

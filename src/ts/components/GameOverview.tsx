@@ -19,7 +19,6 @@ const Modal: React.FC = props => {
   if (state.view.active_modal === "none") {
     return null;
   }
-
   const house = state.houses[state.view.house_name as house_name_t] as house_state_t;
   switch (state.view.active_modal) {
     case "edit_spice": {
@@ -49,11 +48,10 @@ const GameOverview: React.FC = () => {
     const houseState = state.houses[name];
     if (houseState !== undefined) {
       housesArray.push(
-        <div className="column is-half">
+        <div className="column is-half" key={name}>
           <HouseTile
             house={name}
             spice={houseState.spice}
-            key={name}
             cards={houseState.cards}
             karama_used={houseState.karama_used}
           />

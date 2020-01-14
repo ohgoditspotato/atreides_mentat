@@ -4,6 +4,7 @@ import { treachery_card_t } from "ts/treachery_card";
 import TreacheryCard from "ts/components/TreacheryCard";
 import { useDispatch } from "react-redux";
 import { house_add_card, show_view_cards_modal } from "ts/state/actions";
+import Modal from "ts/components/Modals/Modal";
 
 const available_cards: ReadonlyArray<{ card: treachery_card_t; num?: number }> = [
   {
@@ -111,32 +112,23 @@ const AddCardModal: React.FC<{ house: house_name_t }> = props => {
   const dispatch = useDispatch();
   const close = () => dispatch(show_view_cards_modal(props.house));
   return (
-    <div className="modal is-active">
-      <div className="modal-background" onClick={close}></div>
-      <div className="modal-card">
-        <header className="modal-card-head">
-          <p className="modal-card-title">Add card to {props.house}</p>
-          <button className="delete" onClick={close}></button>
-        </header>
-        <section className="modal-card-body">
-          <div className="columns is-multiline">
-            {available_cards.map((card, index) => (
-              <div
-                className="column is-half"
-                onClick={() => {
-                  dispatch(house_add_card(props.house, card.card));
-                  dispatch(show_view_cards_modal(props.house));
-                }}
-                style={{ cursor: "pointer" }}
-              >
-                <TreacheryCard card={card.card} num={card.num} key={"card-" + index} />
-              </div>
-            ))}
+    <Modal close={close} header={"Add card to " + props.house}>
+      <div className="columns is-multiline">
+        {available_cards.map((card, index) => (
+          <div
+            className="column is-half"
+            onClick={() => {
+              dispatch(house_add_card(props.house, card.card));
+              dispatch(show_view_cards_modal(props.house));
+            }}
+            style={{ cursor: "pointer" }}
+            key={"card-" + index} 
+          >
+            <TreacheryCard card={card.card} num={card.num} />
           </div>
-        </section>
-        <footer className="modal-card-foot"></footer>
+        ))}
       </div>
-    </div>
+    </Modal>
   );
 };
 

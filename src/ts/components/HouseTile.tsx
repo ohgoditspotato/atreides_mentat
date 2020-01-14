@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useDispatch } from "react-redux";
-import { house_name_t, ALL_HOUSE_NAMES } from "ts/houses";
+import { house_name_t } from "ts/houses";
 import {
   show_edit_spice_modal,
   show_view_cards_modal,
