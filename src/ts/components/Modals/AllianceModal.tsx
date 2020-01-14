@@ -11,27 +11,15 @@ const AllianceModal: React.FC<{ house: house_name_t; ally: house_name_t | null }
   const dispatch = useDispatch();
   const close = () => dispatch(close_modal());
 
-  const possible_allies = ALL_HOUSE_NAMES.filter(
-    name => houses_state[name].active && houses_state[name].ally == null && name !== props.house
-  );
+  const possible_allies = [
+    null,
+    ...ALL_HOUSE_NAMES.filter(
+      name => houses_state[name].active && houses_state[name].ally == null && name !== props.house
+    ),
+  ];
 
   return (
     <Modal close={close} header="Select ally">
-      <div
-        className="box"
-        onClick={() => {
-          dispatch(house_set_ally(props.house, null));
-          close();
-        }}
-        style={{ cursor: "pointer" }}
-      >
-        <div className="columns">
-          <div className="column is-2" />
-          <div className="column">
-            <h2 className="title is-3">None</h2>
-          </div>
-        </div>
-      </div>
       {possible_allies.map(name => (
         <div
           className="box"
