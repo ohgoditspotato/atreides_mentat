@@ -3,7 +3,7 @@ import { treachery_card_t, treachery_card_kind } from "ts/treachery_card";
 
 const treachery_card_colours: { [key in treachery_card_kind]: { text: string; bg: string } } = {
   DEFENSE: { text: "white", bg: "link" },
-  SPECIAL: { text: "white", bg: "info" },
+  SPECIAL: { text: "white", bg: "grey" },
   USELESS: { text: "black", bg: "warning" },
   WEAPON: { text: "white", bg: "danger" },
   UNKNOWN: { text: "white", bg: "black" },

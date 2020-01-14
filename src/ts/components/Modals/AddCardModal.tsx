@@ -96,6 +96,7 @@ const AddCardModal: React.FC<{ house: house_name_t }> = props => {
             ))}
           </div>
         </section>
+        <footer className="modal-card-foot"></footer>
       </div>
     </div>
   );
