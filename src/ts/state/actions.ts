@@ -7,6 +7,7 @@ export const close_modal = createAction("view/none");
 export const show_edit_spice_modal = createAction<house_name_t>("view/edit_spice");
 export const show_view_cards_modal = createAction<house_name_t>("view/view_cards");
 export const show_add_cards_modal = createAction<house_name_t>("view/add_card");
+export const show_alliance_modal = createAction<house_name_t>("view/alliance");
 export const show_reset_game_modal = createAction("view/reset");
 
 export const house_add_card = createAction(
@@ -43,6 +44,18 @@ export const house_modify_spice = createAction(
       payload: {
         house,
         spice,
+      },
+    };
+  }
+);
+
+export const house_set_ally = createAction(
+  "houses/set_ally",
+  (house: house_name_t, ally: house_name_t | null) => {
+    return {
+      payload: {
+        house,
+        ally,
       },
     };
   }

@@ -5,6 +5,7 @@ import {
   show_edit_spice_modal,
   show_view_cards_modal,
   house_toggle_karama,
+  show_alliance_modal,
 } from "ts/state/actions";
 import { treachery_card_t } from "ts/treachery_card";
 import HouseBanner from "ts/components/HouseBanner";
@@ -14,6 +15,7 @@ export interface HouseTileProps {
   house: house_name_t;
   cards: ReadonlyArray<treachery_card_t>;
   karama_used: boolean;
+  ally: house_name_t | null;
 }
 
 const HouseTile: React.FC<HouseTileProps> = props => {
@@ -46,6 +48,14 @@ const HouseTile: React.FC<HouseTileProps> = props => {
             onClick={() => dispatch(house_toggle_karama(props.house))}
           >
             Karama
+          </button>
+        </div>
+        <div className="column is-half">
+          <button
+            className={"button is-fullwidth " + (props.ally ? "is-dark" : "is-light")}
+            onClick={() => dispatch(show_alliance_modal(props.house))}
+          >
+            {props.ally ? props.ally : "No alliance"}
           </button>
         </div>
       </div>

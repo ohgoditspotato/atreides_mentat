@@ -19,13 +19,11 @@ const icon_map = {
 
 const HouseBanner: React.FC<{ house: house_name_t }> = props => {
   return (
-    <div className="level">
-      <div className="level-right">
-        <div className="level-item">{icon_map[props.house]}</div>
-        <div className="level-item">
+    <div className="columns is-vcentered">
+        <div className="column is-2">{icon_map[props.house]}</div>
+        <div className="column">
           <h2 className="title is-3">{props.house}</h2>
         </div>
-      </div>
     </div>
   );
 };

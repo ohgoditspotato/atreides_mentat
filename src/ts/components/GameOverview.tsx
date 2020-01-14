@@ -9,6 +9,7 @@ import HouseTile from "ts/components/HouseTile";
 import ViewCardsModal from "ts/components/Modals/ViewCardsModal";
 import AddCardModal from "ts/components/Modals/AddCardModal";
 import ConfirmResetModal from "ts/components/Modals/ConfirmResetModal";
+import AllianceModal from "ts/components/Modals/AllianceModal";
 
 const Modal: React.FC = props => {
   const state = useSelector((root_state: root_state) => ({
@@ -30,6 +31,9 @@ const Modal: React.FC = props => {
     case "add_card": {
       return <AddCardModal house={house.name} />;
     }
+    case "alliance": {
+      return <AllianceModal house={house.name} ally={house.ally} />;
+    }
     case "reset_game": {
       return <ConfirmResetModal />;
     }
@@ -43,28 +47,30 @@ const GameOverview: React.FC = () => {
     houses: state.houses,
   }));
   const dispatch = useDispatch();
-  const housesArray: JSX.Element[] = [];
-  for (let name of ALL_HOUSE_NAMES) {
-    const houseState = state.houses[name];
-    if (houseState !== undefined) {
-      housesArray.push(
-        <div className="column is-half" key={name}>
-          <HouseTile
-            house={name}
-            spice={houseState.spice}
-            cards={houseState.cards}
-            karama_used={houseState.karama_used}
-          />
-        </div>
-      );
-    }
-  }
 
   return (
     <>
       <section className="section">
         <div className="container">
-          <div className="columns is-multiline">{housesArray}</div>
+          <div className="columns is-multiline">
+            {ALL_HOUSE_NAMES.map(name => {
+              const house = state.houses[name];
+              if (!house.active) {
+                return null;
+              }
+              return (
+                <div className="column is-half" key={name}>
+                  <HouseTile
+                    house={name}
+                    spice={house.spice}
+                    cards={house.cards}
+                    karama_used={house.karama_used}
+                    ally={house.ally}
+                  />
+                </div>
+              );
+            })}
+          </div>
         </div>
       </section>
       <section className="section">

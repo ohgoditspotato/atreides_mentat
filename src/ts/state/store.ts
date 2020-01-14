@@ -1,23 +1,17 @@
-import { createStore, compose } from "@reduxjs/toolkit";
+import { createStore } from "redux";
 import { root_reducer, root_state } from "./reducers";
-import persistState from "redux-localstorage";
 
-const enhancer = compose(persistState(["houses", "game"] as any));
+import { persistStore, persistReducer } from "redux-persist";
+import storage from "redux-persist/lib/storage";
+import autoMergeLevel2 from "redux-persist/lib/stateReconciler/autoMergeLevel2";
 
-const initial_state: root_state = {
-  houses: {
-    ATREIDES: {
-      cards: [],
-      karama_used: false,
-      name: "ATREIDES",
-      spice: 0,
-    },
-  },
-  view: {
-    active_modal: "none",
-    house_name: undefined,
-  },
-  game: { initialized: false },
+const persistConfig = {
+  key: "root",
+  storage: storage,
+  stateReconciler: autoMergeLevel2,
 };
 
-export const state_store = createStore(root_reducer, initial_state, enhancer as any);
+const pReducer = persistReducer<root_state>(persistConfig, root_reducer);
+
+export const store = createStore(pReducer);
+export const persistor = persistStore(store);

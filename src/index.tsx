@@ -3,19 +3,23 @@ import ReactDOM from "react-dom";
 import GameContainer from "ts/components/GameContainer";
 import { Provider } from "react-redux";
 import * as serviceWorker from "./serviceWorker";
-import { state_store } from "ts/state/store";
+import { PersistGate } from "redux-persist/lib/integration/react";
+import { store, persistor } from "ts/state/store";
+
 import "bulma/css/bulma.css";
 
 ReactDOM.render(
-  <Provider store={state_store}>
-    <section className="hero is-primary">
-      <div className="hero-body">
-        <div className="container">
-          <p className="title is-1">Atreides mentat</p>
-          <p className="subtitle is-5">for Dune (2019)</p>
+  <Provider store={store}>
+    <PersistGate persistor={persistor}>
+      <section className="hero is-primary">
+        <div className="hero-body">
+          <div className="container">
+            <p className="title is-1">Atreides mentat</p>
+            <p className="subtitle is-5">for Dune (2019)</p>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </PersistGate>
     <GameContainer />
   </Provider>,
   document.getElementById("root")

@@ -11,23 +11,67 @@ import {
   show_reset_game_modal,
   house_toggle_karama,
   close_modal,
+  show_alliance_modal,
+  house_set_ally,
 } from "ts/state/actions";
 import { ENEMY_HOUSE_NAMES, house_name_t } from "ts/houses";
-import { houses_state_t, view_state_t, game_state_t, house_state_t } from "ts/state/types";
+import { houses_state_t, view_state_t, game_state_t } from "ts/state/types";
 
-const houses_initial_spice = {
-  ATREIDES: 10,
-  "BENE GESSERIT": 5,
-  EMPEROR: 10,
-  FREMEN: 3,
-  HARKONNEN: 10,
-  "SPACING GUILD": 5,
-} as const;
+export const initial_houses_state: houses_state_t = {
+  ATREIDES: {
+    active: true,
+    ally: null,
+    cards: [],
+    karama_used: false,
+    name: "ATREIDES",
+    spice: 10,
+  },
+  "BENE GESSERIT": {
+    active: false,
+    ally: null,
+    cards: [{ kind: "UNKNOWN" }],
+    karama_used: false,
+    name: "BENE GESSERIT",
+    spice: 5,
+  },
+  EMPEROR: {
+    active: false,
+    ally: null,
+    cards: [{ kind: "UNKNOWN" }],
+    karama_used: false,
+    name: "EMPEROR",
+    spice: 10,
+  },
+  FREMEN: {
+    active: false,
+    ally: null,
+    cards: [{ kind: "UNKNOWN" }],
+    karama_used: false,
+    name: "FREMEN",
+    spice: 3,
+  },
+  HARKONNEN: {
+    active: false,
+    ally: null,
+    cards: [{ kind: "UNKNOWN" }, { kind: "UNKNOWN" }, { kind: "UNKNOWN" }],
+    karama_used: false,
+    name: "HARKONNEN",
+    spice: 10,
+  },
+  "SPACING GUILD": {
+    active: false,
+    ally: null,
+    cards: [{ kind: "UNKNOWN" }],
+    karama_used: false,
+    name: "SPACING GUILD",
+    spice: 5,
+  },
+};
 
-export const house_state_reducer = createReducer({} as houses_state_t, builder => {
+export const house_state_reducer = createReducer(initial_houses_state, builder => {
   function getHouse(name: house_name_t, state: houses_state_t) {
     const house = state[name];
-    if (house === undefined) {
+    if (!house.active) {
       throw new Error("House " + name + " not present in this game");
     }
     return house;
@@ -51,40 +95,44 @@ export const house_state_reducer = createReducer({} as houses_state_t, builder =
     }
   });
 
-  builder.addCase(start_game, (state, action) => {
-    for (let house of ENEMY_HOUSE_NAMES) {
-      if (action.payload[house]) {
-        const initial_house_state: house_state_t = {
-          spice: houses_initial_spice[house],
-          cards: [{ kind: "UNKNOWN" }],
-          name: house,
-          karama_used: false,
-        };
-        if (house === "HARKONNEN") {
-          initial_house_state.cards.push({ kind: "UNKNOWN" });
-          initial_house_state.cards.push({ kind: "UNKNOWN" });
-        }
-        state[house] = initial_house_state;
-      } else {
-        state[house] = undefined;
-      }
-    }
-
-    state["ATREIDES"] = {
-      spice: houses_initial_spice["ATREIDES"],
-      cards: [],
-      name: "ATREIDES",
-      karama_used: false,
-    };
-  });
-
   builder.addCase(house_toggle_karama, (state, action) => {
     let house = getHouse(action.payload, state);
     house.karama_used = !house.karama_used;
   });
+
+  builder.addCase(house_set_ally, (state, action) => {
+    if (action.payload.house === action.payload.ally) {
+      throw new Error("Cannot ally to self!");
+    }
+
+    let house = getHouse(action.payload.house, state);
+    if (house.ally && house.ally !== action.payload.ally) {
+      state[house.ally].ally = null;
+    }
+    house.ally = action.payload.ally;
+    if (house.ally) {
+      const old_ally = state[house.ally].ally;
+      state[house.ally].ally = house.name;
+      if (old_ally) {
+        state[old_ally].ally = null;
+      }
+    }
+  });
+
+  builder.addCase(reset_game, _ => {
+    return initial_houses_state;
+  });
+
+  builder.addCase(start_game, (state, action) => {
+    for (let house of ENEMY_HOUSE_NAMES) {
+      if (action.payload[house]) {
+        state[house].active = true;
+      }
+    }
+  });
 });
 
-const default_view_state: view_state_t = {
+export const default_view_state: view_state_t = {
   active_modal: "none",
   house_name: undefined,
 };
@@ -110,13 +158,18 @@ export const view_state_reducer = createReducer(default_view_state, builder => {
     state.house_name = action.payload;
   });
 
+  builder.addCase(show_alliance_modal, (state, action) => {
+    state.active_modal = "alliance";
+    state.house_name = action.payload;
+  });
+
   builder.addCase(show_reset_game_modal, state => {
     state.active_modal = "reset_game";
     state.house_name = undefined;
   });
 });
 
-const default_game_state: game_state_t = {
+export const default_game_state: game_state_t = {
   initialized: false,
 };
 
