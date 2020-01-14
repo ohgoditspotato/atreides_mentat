@@ -1,11 +1,11 @@
 import * as React from "react";
 import { useDispatch } from "react-redux";
-import { ALL_HOUSE_NAMES, house_name_str, house_name_t } from "ts/houses";
+import { ENEMY_HOUSE_NAMES, enemy_house_name_t } from "ts/houses";
 import { close_modal, start_game } from "ts/state/actions";
 import { start_game_spec } from "ts/state/types";
 
 const HouseSelect: React.FC<{
-  house: house_name_t;
+  house: enemy_house_name_t;
   checked: boolean;
   onClick: () => void;
 }> = props => {
@@ -15,22 +15,22 @@ const HouseSelect: React.FC<{
   }
   return (
     <button className={className} onClick={props.onClick}>
-      <div>{house_name_str(props.house)}</div>
+      <div>{props.house}</div>
     </button>
   );
 };
 
 export default () => {
   const [state, setState] = React.useState<start_game_spec>({
-    harkonen: false,
-    emperor: false,
-    guild: false,
-    bene: false,
-    fremen: false,
+    HARKONNEN: false,
+    EMPEROR: false,
+    "SPACING GUILD": false,
+    "BENE GESERIT": false,
+    FREMEN: false,
   });
 
   let allow_start = false;
-  for (let i of ALL_HOUSE_NAMES) {
+  for (let i of ENEMY_HOUSE_NAMES) {
     if (state[i]) {
       allow_start = true;
       break;
@@ -48,7 +48,7 @@ export default () => {
       <section className="section">
         <div className="container">
           <div className="buttons is-centered">
-            {ALL_HOUSE_NAMES.map(name => (
+            {ENEMY_HOUSE_NAMES.map(name => (
               <HouseSelect
                 house={name}
                 checked={state[name]}

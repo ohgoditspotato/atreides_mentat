@@ -1,7 +1,7 @@
 import * as React from "react";
 
 import { useDispatch } from "react-redux";
-import { house_name_t, house_name_str } from "ts/houses";
+import { house_name_t } from "ts/houses";
 import { house_modify_spice, close_modal } from "ts/state/actions";
 
 interface Props {
@@ -21,7 +21,7 @@ const EditSpice: React.FC<Props> = props => {
       <div className="modal-background" onClick={close}></div>
       <div className="modal-card">
         <header className="modal-card-head">
-          <p className="modal-card-title">{house_name_str(props.house)}</p>
+          <p className="modal-card-title">{props.house}</p>
           <button className="delete" onClick={close}></button>
         </header>
         <section className="modal-card-body">

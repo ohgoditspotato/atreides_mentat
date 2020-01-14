@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { root_state } from "ts/state/reducers";
-import { ALL_HOUSE_NAMES, house_name_t } from "ts/houses";
+import { house_name_t, ALL_HOUSE_NAMES } from "ts/houses";
 import { show_reset_game_modal } from "ts/state/actions";
 import { house_state_t } from "ts/state/types";
 import EditSpiceModal from "ts/components/Modals/EditSpiceModal";

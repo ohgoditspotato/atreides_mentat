@@ -1,69 +1,109 @@
 import * as React from "react";
-import { house_name_t, house_name_str } from "ts/houses";
+import { house_name_t } from "ts/houses";
 import { treachery_card_t } from "ts/treachery_card";
 import TreacheryCard from "ts/components/TreacheryCard";
 import { useDispatch } from "react-redux";
 import { house_add_card, show_view_cards_modal } from "ts/state/actions";
 
-const available_cards: ReadonlyArray<treachery_card_t> = [
+const available_cards: ReadonlyArray<{ card: treachery_card_t; num?: number }> = [
   {
-    kind: "WEAPON",
-    type: "Poison",
+    card: {
+      kind: "WEAPON",
+      type: "Poison",
+    },
+    num: 4,
   },
   {
-    kind: "WEAPON",
-    type: "Projectile",
+    card: {
+      kind: "WEAPON",
+      type: "Projectile",
+    },
+    num: 4,
   },
   {
-    kind: "WEAPON",
-    type: "Lasgun",
-  },
-
-  {
-    kind: "DEFENSE",
-    type: "Shield",
-  },
-  {
-    kind: "DEFENSE",
-    type: "Snooper",
-  },
-
-  {
-    kind: "SPECIAL",
-    type: "Cheap Hero",
-  },
-  {
-    kind: "SPECIAL",
-    type: "Karama",
+    card: {
+      kind: "WEAPON",
+      type: "Lasgun",
+    },
+    num: 1,
   },
 
   {
-    kind: "SPECIAL",
-    type: "Family Atomics",
+    card: {
+      kind: "DEFENSE",
+      type: "Shield",
+    },
+    num: 4,
   },
   {
-    kind: "SPECIAL",
-    type: "Hajr",
-  },
-  {
-    kind: "SPECIAL",
-    type: "Truthtrance",
-  },
-  {
-    kind: "SPECIAL",
-    type: "Tleilaxu Ghola",
-  },
-  {
-    kind: "SPECIAL",
-    type: "Weather Control",
+    card: {
+      kind: "DEFENSE",
+      type: "Snooper",
+    },
+    num: 4,
   },
 
   {
-    kind: "USELESS",
+    card: {
+      kind: "SPECIAL",
+      type: "Cheap Hero",
+    },
+    num: 3,
+  },
+  {
+    card: {
+      kind: "SPECIAL",
+      type: "Karama",
+    },
+    num: 2,
+  },
+  {
+    card: {
+      kind: "SPECIAL",
+      type: "Truthtrance",
+    },
+    num: 2,
+  },
+  {
+    card: {
+      kind: "SPECIAL",
+      type: "Family Atomics",
+    },
+    num: 1,
+  },
+  {
+    card: {
+      kind: "SPECIAL",
+      type: "Hajr",
+    },
+    num: 1,
+  },
+  {
+    card: {
+      kind: "SPECIAL",
+      type: "Tleilaxu Ghola",
+    },
+    num: 1,
+  },
+  {
+    card: {
+      kind: "SPECIAL",
+      type: "Weather Control",
+    },
+    num: 1,
   },
 
   {
-    kind: "UNKNOWN",
+    card: {
+      kind: "USELESS",
+    },
+    num: 5,
+  },
+
+  {
+    card: {
+      kind: "UNKNOWN",
+    },
   },
 ];
 
@@ -75,7 +115,7 @@ const AddCardModal: React.FC<{ house: house_name_t }> = props => {
       <div className="modal-background" onClick={close}></div>
       <div className="modal-card">
         <header className="modal-card-head">
-          <p className="modal-card-title">Add card to {house_name_str(props.house)}</p>
+          <p className="modal-card-title">Add card to {props.house}</p>
           <button className="delete" onClick={close}></button>
         </header>
         <section className="modal-card-body">
@@ -84,14 +124,12 @@ const AddCardModal: React.FC<{ house: house_name_t }> = props => {
               <div
                 className="column is-half"
                 onClick={() => {
-                  dispatch(house_add_card(props.house, card));
+                  dispatch(house_add_card(props.house, card.card));
                   dispatch(show_view_cards_modal(props.house));
                 }}
                 style={{ cursor: "pointer" }}
               >
-                <TreacheryCard card={card}>
-                  <button className="button is-success">Add to hand</button>
-                </TreacheryCard>
+                <TreacheryCard card={card.card} num={card.num} />
               </div>
             ))}
           </div>

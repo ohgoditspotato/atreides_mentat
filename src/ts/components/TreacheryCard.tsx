@@ -9,7 +9,11 @@ const treachery_card_colours: { [key in treachery_card_kind]: { text: string; bg
   UNKNOWN: { text: "white", bg: "black" },
 };
 
-const TreacheryCard: React.FC<{ card: treachery_card_t; onDelete?: () => void }> = props => {
+const TreacheryCard: React.FC<{
+  card: treachery_card_t;
+  onDelete?: () => void;
+  num?: number;
+}> = props => {
   const colour = treachery_card_colours[props.card.kind];
   let subtitle = "";
   switch (props.card.kind) {
@@ -26,10 +30,19 @@ const TreacheryCard: React.FC<{ card: treachery_card_t; onDelete?: () => void }>
       break;
     }
   }
+
+  let num = "";
+  if (props.num === undefined) {
+    num = " ";
+  } else {
+    num = `x ${props.num}`;
+  }
+
   return (
     <div className="message has-text-centered">
       <header className={"message-header has-background-" + colour.bg}>
         <p className={"card-header-title has-text-" + colour.text}>{props.card.kind}</p>
+        <p>{num}</p>
         {props.onDelete ? <button className="delete" onClick={props.onDelete}></button> : null}
       </header>
       <div className="message-body">

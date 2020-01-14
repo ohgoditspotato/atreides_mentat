@@ -3,7 +3,6 @@ import {
   house_add_card,
   house_remove_card,
   house_modify_spice,
-  close_modal as closeModal,
   show_edit_spice_modal,
   show_add_cards_modal,
   start_game,
@@ -11,17 +10,18 @@ import {
   reset_game,
   show_reset_game_modal,
   house_toggle_karama,
+  close_modal,
 } from "ts/state/actions";
-import { ALL_HOUSE_NAMES, house_name_t } from "ts/houses";
+import { ENEMY_HOUSE_NAMES, house_name_t } from "ts/houses";
 import { houses_state_t, view_state_t, game_state_t, house_state_t } from "ts/state/types";
 
 const houses_initial_spice = {
-  harkonen: 10,
-  atreides: 10,
-  fremen: 3,
-  bene: 5,
-  guild: 5,
-  emperor: 10,
+  HARKONNEN: 10,
+  ATREIDES: 10,
+  FREMEN: 3,
+  "BENE GESERIT": 5,
+  "SPACING GUILD": 5,
+  EMPEROR: 10,
 } as const;
 
 export const house_state_reducer = createReducer({} as houses_state_t, builder => {
@@ -52,7 +52,7 @@ export const house_state_reducer = createReducer({} as houses_state_t, builder =
   });
 
   builder.addCase(start_game, (state, action) => {
-    for (let house of ALL_HOUSE_NAMES) {
+    for (let house of ENEMY_HOUSE_NAMES) {
       if (action.payload[house]) {
         const initial_house_state: house_state_t = {
           spice: houses_initial_spice[house],
@@ -60,7 +60,7 @@ export const house_state_reducer = createReducer({} as houses_state_t, builder =
           name: house,
           karama_used: false,
         };
-        if (house === "harkonen") {
+        if (house === "HARKONNEN") {
           initial_house_state.cards.push({ kind: "UNKNOWN" });
           initial_house_state.cards.push({ kind: "UNKNOWN" });
         }
@@ -69,6 +69,13 @@ export const house_state_reducer = createReducer({} as houses_state_t, builder =
         state[house] = undefined;
       }
     }
+
+    state["ATREIDES"] = {
+      spice: houses_initial_spice["ATREIDES"],
+      cards: [],
+      name: "ATREIDES",
+      karama_used: false,
+    };
   });
 
   builder.addCase(house_toggle_karama, (state, action) => {
@@ -83,7 +90,7 @@ const default_view_state: view_state_t = {
 };
 
 export const view_state_reducer = createReducer(default_view_state, builder => {
-  builder.addCase(closeModal, (state, _) => {
+  builder.addCase(close_modal, (state, _) => {
     state.active_modal = "none";
     state.house_name = undefined;
   });

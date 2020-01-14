@@ -1,5 +1,5 @@
 import * as React from "react";
-import { house_name_t, house_name_str } from "ts/houses";
+import { house_name_t } from "ts/houses";
 import { treachery_card_t } from "ts/treachery_card";
 import { useDispatch } from "react-redux";
 import { show_add_cards_modal, close_modal, house_remove_card } from "ts/state/actions";
@@ -12,7 +12,7 @@ const ViewCards: React.FC<{
   const dispatch = useDispatch();
   const close = () => dispatch(close_modal());
   let allow_add_card = props.cards.length < 4;
-  if (props.house === "harkonen") {
+  if (props.house === "HARKONNEN") {
     allow_add_card = props.cards.length < 8;
   }
 
@@ -21,7 +21,7 @@ const ViewCards: React.FC<{
       <div className="modal-background" onClick={close}></div>
       <div className="modal-card">
         <header className="modal-card-head">
-          <p className="modal-card-title">Cards for {house_name_str(props.house)}</p>
+          <p className="modal-card-title">Cards for {props.house}</p>
           <button className="delete" onClick={close}></button>
         </header>
         <section className="modal-card-body">

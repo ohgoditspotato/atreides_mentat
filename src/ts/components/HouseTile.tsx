@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useDispatch } from "react-redux";
-import { house_name_t, house_name_str } from "ts/houses";
+import { house_name_t } from "ts/houses";
 import {
   show_edit_spice_modal,
   show_view_cards_modal,
@@ -20,7 +20,7 @@ const HouseTile: React.FC<HouseTileProps> = props => {
   return (
     <div className="column is-half">
       <div className="box">
-        <h2 className="title is-3 has-text-centered">{house_name_str(props.house)}</h2>
+        <h2 className="title is-3 has-text-centered">{props.house}</h2>
         <div className="columns is-multiline">
           <div className="column is-half">
             <button

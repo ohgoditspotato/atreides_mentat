@@ -5,7 +5,14 @@ import persistState from "redux-localstorage";
 const enhancer = compose(persistState(["houses", "game"] as any));
 
 const initial_state: root_state = {
-  houses: {},
+  houses: {
+    ATREIDES: {
+      cards: [],
+      karama_used: false,
+      name: "ATREIDES",
+      spice: 0,
+    },
+  },
   view: {
     active_modal: "none",
     house_name: undefined,
