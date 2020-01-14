@@ -40,7 +40,9 @@ const HouseTile: React.FC<HouseTileProps> = props => {
         </div>
         <div className="column is-half">
           <button
-            className={"button is-fullwidth" + (props.karama_used ? " is-danger is-inverted" : " is-success")}
+            className={
+              "button is-fullwidth" + (props.karama_used ? " is-danger is-inverted" : " is-success")
+            }
             onClick={() => dispatch(house_toggle_karama(props.house))}
           >
             Karama

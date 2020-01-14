@@ -69,9 +69,9 @@ export default () => {
         </div>
       </section>
       <section className="section">
-        <div className="buttons is-centered">
+        <div className="container">
           <button
-            className="button is-success"
+            className="button is-primary is-fullwidth"
             disabled={!allow_start}
             onClick={() => {
               if (allow_start) {

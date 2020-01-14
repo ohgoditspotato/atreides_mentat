@@ -61,6 +61,7 @@ const GameOverview: React.FC = () => {
       );
     }
   }
+
   return (
     <>
       <section className="section">
@@ -70,7 +71,7 @@ const GameOverview: React.FC = () => {
       </section>
       <section className="section">
         <div className="container">
-          <div className="buttons">
+          <div className="buttons is-centered">
             <button
               className="button is-secondary"
               onClick={() => {
