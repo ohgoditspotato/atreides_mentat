@@ -10,6 +10,7 @@ import {
   show_view_cards_modal,
   reset_game,
   show_reset_game_modal,
+  house_toggle_karama,
 } from "ts/state/actions";
 import { ALL_HOUSE_NAMES, house_name_t } from "ts/houses";
 import { houses_state_t, view_state_t, game_state_t, house_state_t } from "ts/state/types";
@@ -55,18 +56,24 @@ export const house_state_reducer = createReducer({} as houses_state_t, builder =
       if (action.payload[house]) {
         const initial_house_state: house_state_t = {
           spice: houses_initial_spice[house],
-          cards: [{ kind: "unknown" }],
+          cards: [{ kind: "UNKNOWN" }],
           name: house,
+          karama_used: false,
         };
         if (house === "harkonen") {
-          initial_house_state.cards.push({ kind: "unknown" });
-          initial_house_state.cards.push({ kind: "unknown" });
+          initial_house_state.cards.push({ kind: "UNKNOWN" });
+          initial_house_state.cards.push({ kind: "UNKNOWN" });
         }
         state[house] = initial_house_state;
       } else {
         state[house] = undefined;
       }
     }
+  });
+
+  builder.addCase(house_toggle_karama, (state, action) => {
+    let house = getHouse(action.payload, state);
+    house.karama_used = !house.karama_used;
   });
 });
 

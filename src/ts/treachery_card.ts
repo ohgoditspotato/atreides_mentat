@@ -1,31 +1,31 @@
 export interface weapon_card {
-  kind: "weapon";
-  type: "projectile" | "poison" | "lasgun";
+  kind: "WEAPON";
+  type: "Projectile" | "Poison" | "Lasgun";
 }
 
 export interface defence_card {
-  kind: "defence";
-  type: "shield" | "snooper";
+  kind: "DEFENSE";
+  type: "Shield" | "Snooper";
 }
 
 export interface useless_card {
-  kind: "useless";
+  kind: "USELESS";
 }
 
 export interface special_card {
-  kind: "special";
+  kind: "SPECIAL";
   type:
-    | "truthtrance"
-    | "tleilaxu ghola"
-    | "karama"
-    | "cheap hero"
-    | "hajr"
-    | "weather control"
-    | "family atomics";
+    | "Truthtrance"
+    | "Tleilaxu Ghola"
+    | "Karama"
+    | "Cheap Hero"
+    | "Hajr"
+    | "Weather Control"
+    | "Family Atomics";
 }
 
 export interface unknown_card {
-  kind: "unknown"
+  kind: "UNKNOWN"
 }
 
 export type treachery_card_t = weapon_card | defence_card | useless_card | special_card | unknown_card;

@@ -9,6 +9,7 @@ export interface house_state_t {
   spice: number;
   cards: Array<treachery_card_t>;
   name: house_name_t;
+  karama_used: boolean;
 }
 
 export type houses_state_t = {

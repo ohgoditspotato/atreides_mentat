@@ -28,34 +28,26 @@ const ViewCards: React.FC<{
           <div className="columns is-multiline">
             {props.cards.map((card, index) => (
               <div className="column is-half">
-                <TreacheryCard card={card}>
-                  <button
-                    className="button is-danger"
-                    onClick={() => {
-                      dispatch(house_remove_card(props.house, index));
-                    }}
-                  >
-                    Remove
-                  </button>
-                </TreacheryCard>
+                <TreacheryCard
+                  card={card}
+                  onDelete={() => dispatch(house_remove_card(props.house, index))}
+                />
               </div>
             ))}
           </div>
         </section>
         <footer className="modal-card-foot">
-          <div className="buttons">
-            <button
-              className="button is-primary"
-              onClick={() => {
-                if (allow_add_card) {
-                  dispatch(show_add_cards_modal(props.house));
-                }
-              }}
-              disabled={!allow_add_card}
-            >
-              Add card
-            </button>
-          </div>
+          <button
+            className="button is-primary is-fullwidth"
+            onClick={() => {
+              if (allow_add_card) {
+                dispatch(show_add_cards_modal(props.house));
+              }
+            }}
+            disabled={!allow_add_card}
+          >
+            Add card
+          </button>
         </footer>
       </div>
     </div>

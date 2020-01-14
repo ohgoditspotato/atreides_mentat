@@ -48,5 +48,7 @@ export const house_modify_spice = createAction(
   }
 );
 
+export const house_toggle_karama = createAction<house_name_t>("houses/toggle_karama");
+
 export const start_game = createAction<start_game_spec>("game/start");
 export const reset_game = createAction("game/reset");

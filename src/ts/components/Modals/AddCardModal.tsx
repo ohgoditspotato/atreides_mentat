@@ -7,63 +7,63 @@ import { close_modal, house_add_card, show_view_cards_modal } from "ts/state/act
 
 const available_cards: ReadonlyArray<treachery_card_t> = [
   {
-    kind: "weapon",
-    type: "poison",
+    kind: "WEAPON",
+    type: "Poison",
   },
   {
-    kind: "weapon",
-    type: "projectile",
+    kind: "WEAPON",
+    type: "Projectile",
   },
   {
-    kind: "weapon",
-    type: "lasgun",
-  },
-
-  {
-    kind: "defence",
-    type: "shield",
-  },
-  {
-    kind: "defence",
-    type: "snooper",
+    kind: "WEAPON",
+    type: "Lasgun",
   },
 
   {
-    kind: "special",
-    type: "cheap hero",
+    kind: "DEFENSE",
+    type: "Shield",
   },
   {
-    kind: "special",
-    type: "karama",
-  },
-
-  {
-    kind: "special",
-    type: "family atomics",
-  },
-  {
-    kind: "special",
-    type: "hajr",
-  },
-  {
-    kind: "special",
-    type: "truthtrance",
-  },
-  {
-    kind: "special",
-    type: "tleilaxu ghola",
-  },
-  {
-    kind: "special",
-    type: "weather control",
+    kind: "DEFENSE",
+    type: "Snooper",
   },
 
   {
-    kind: "useless",
+    kind: "SPECIAL",
+    type: "Cheap Hero",
+  },
+  {
+    kind: "SPECIAL",
+    type: "Karama",
   },
 
   {
-    kind: "unknown",
+    kind: "SPECIAL",
+    type: "Family Atomics",
+  },
+  {
+    kind: "SPECIAL",
+    type: "Hajr",
+  },
+  {
+    kind: "SPECIAL",
+    type: "Truthtrance",
+  },
+  {
+    kind: "SPECIAL",
+    type: "Tleilaxu Ghola",
+  },
+  {
+    kind: "SPECIAL",
+    type: "Weather Control",
+  },
+
+  {
+    kind: "USELESS",
+  },
+
+  {
+    kind: "UNKNOWN",
   },
 ];
 
@@ -87,6 +87,7 @@ const AddCardModal: React.FC<{ house: house_name_t }> = props => {
                   dispatch(house_add_card(props.house, card));
                   dispatch(show_view_cards_modal(props.house));
                 }}
+                style={{ cursor: "pointer" }}
               >
                 <TreacheryCard card={card}>
                   <button className="button is-success">Add to hand</button>
