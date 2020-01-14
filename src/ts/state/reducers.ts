@@ -16,12 +16,12 @@ import { ENEMY_HOUSE_NAMES, house_name_t } from "ts/houses";
 import { houses_state_t, view_state_t, game_state_t, house_state_t } from "ts/state/types";
 
 const houses_initial_spice = {
-  HARKONNEN: 10,
   ATREIDES: 10,
-  FREMEN: 3,
   "BENE GESSERIT": 5,
-  "SPACING GUILD": 5,
   EMPEROR: 10,
+  FREMEN: 3,
+  HARKONNEN: 10,
+  "SPACING GUILD": 5,
 } as const;
 
 export const house_state_reducer = createReducer({} as houses_state_t, builder => {

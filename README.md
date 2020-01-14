@@ -12,7 +12,6 @@ Hosted at https://ohgoditspotato.github.io/atreides_mentat/
 
 
 ### TODO
-- Order cards by most recently added to the hand
 - Add icons to the cards
 - Add rules to the cards
 - Add alliance tracking
@@ -20,5 +19,5 @@ Hosted at https://ohgoditspotato.github.io/atreides_mentat/
 - Add card pool & track which cards are left in the pool
 - Add view screen for the pool
 - Add place to record / view the next Spice card
-- Add traitor tracker - should record which leaders for each faction are traitors, and who has the the traitor
+- Add traitor tracker - should record which leaders for each faction are traitors, and who has the traitor
 - More intuitive faction card
