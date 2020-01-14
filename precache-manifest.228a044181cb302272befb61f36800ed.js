@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "1165d4080c450d783dca7aafc9f0e2b3",
+    "revision": "cfb0b4ae374ee47266284a5222ce8092",
     "url": "/atreides_mentat/index.html"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/atreides_mentat/static/js/2.37418401.chunk.js.LICENSE"
   },
   {
-    "revision": "7a329eb73ccb6b5d7c20",
-    "url": "/atreides_mentat/static/js/main.2dc23d21.chunk.js"
+    "revision": "aaee5b4833b30759f046",
+    "url": "/atreides_mentat/static/js/main.e48afdd7.chunk.js"
   },
   {
     "revision": "31199c8e39e863c08e1d",
