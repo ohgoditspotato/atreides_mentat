@@ -3,7 +3,7 @@ import { house_name_t, house_name_str } from "ts/houses";
 import { treachery_card_t } from "ts/treachery_card";
 import TreacheryCard from "ts/components/TreacheryCard";
 import { useDispatch } from "react-redux";
-import { close_modal, house_add_card, show_view_cards_modal } from "ts/state/actions";
+import { house_add_card, show_view_cards_modal } from "ts/state/actions";
 
 const available_cards: ReadonlyArray<treachery_card_t> = [
   {

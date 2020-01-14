@@ -1,7 +1,7 @@
 {
   "name": "atreides_mentat",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
   "homepage": "https://ohgoditspotato.github.io/atreides_mentat/",
   "dependencies": {
     "@reduxjs/toolkit": "^1.2.1",
@@ -27,7 +27,6 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
     "format": "npx prettier --write ./src/ts/**/*.ts* ./src/ts/components/**/*.ts*"
   },
