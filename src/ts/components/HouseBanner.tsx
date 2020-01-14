@@ -9,12 +9,12 @@ import { ReactComponent as HarkonnenIcon } from "assets/harkonnen.svg";
 import { ReactComponent as GuildIcon } from "assets/spacing_guild.svg";
 
 const icon_map = {
-  ATREIDES: <AtreidesIcon width={64} />,
-  "BENE GESSERIT": <BeneIcon width={64} />,
-  EMPEROR: <EmperorIcon width={64} />,
-  FREMEN: <FremenIcon width={64} />,
-  HARKONNEN: <HarkonnenIcon width={64} />,
-  "SPACING GUILD": <GuildIcon width={64} />,
+  ATREIDES: <AtreidesIcon className="column is-2" />,
+  "BENE GESSERIT": <BeneIcon className="column is-2" />,
+  EMPEROR: <EmperorIcon className="column is-2" />,
+  FREMEN: <FremenIcon className="column is-2" />,
+  HARKONNEN: <HarkonnenIcon className="column is-2" />,
+  "SPACING GUILD": <GuildIcon className="column is-2" />,
 };
 
 const HouseBanner: React.FC<{ house: house_name_t | null }> = props => {
@@ -22,11 +22,11 @@ const HouseBanner: React.FC<{ house: house_name_t | null }> = props => {
   if (props.house !== null) {
     icon = icon_map[props.house];
   } else {
-    icon = <div style={{ height: 64, width: 64 }} />;
+    icon = <div className="column is-2" />;
   }
   return (
     <div className="columns is-vcentered is-mobile">
-      <div className="column is-2">{icon}</div>
+      {icon}
       <div className="column">
         <h2 className="title is-3">{props.house ? props.house : "None"}</h2>
       </div>

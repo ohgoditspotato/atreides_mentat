@@ -122,7 +122,7 @@ const AddCardModal: React.FC<{ house: house_name_t }> = props => {
               dispatch(show_view_cards_modal(props.house));
             }}
             style={{ cursor: "pointer" }}
-            key={"card-" + index} 
+            key={"card-" + index}
           >
             <TreacheryCard card={card.card} num={card.num} />
           </div>
