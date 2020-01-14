@@ -25,7 +25,7 @@ const HouseBanner: React.FC<{ house: house_name_t | null }> = props => {
     icon = <div style={{ height: 64, width: 64 }} />;
   }
   return (
-    <div className="columns is-vcentered">
+    <div className="columns is-vcentered is-mobile">
       <div className="column is-2">{icon}</div>
       <div className="column">
         <h2 className="title is-3">{props.house ? props.house : "None"}</h2>
