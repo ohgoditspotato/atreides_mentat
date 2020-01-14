@@ -49,13 +49,15 @@ const GameOverview: React.FC = () => {
     const houseState = state.houses[name];
     if (houseState !== undefined) {
       housesArray.push(
-        <HouseTile
-          house={name}
-          spice={houseState.spice}
-          key={name}
-          cards={houseState.cards}
-          karama_used={houseState.karama_used}
-        />
+        <div className="column is-half">
+          <HouseTile
+            house={name}
+            spice={houseState.spice}
+            key={name}
+            cards={houseState.cards}
+            karama_used={houseState.karama_used}
+          />
+        </div>
       );
     }
   }

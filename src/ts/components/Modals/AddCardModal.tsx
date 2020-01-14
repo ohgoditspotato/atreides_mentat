@@ -120,7 +120,7 @@ const AddCardModal: React.FC<{ house: house_name_t }> = props => {
         </header>
         <section className="modal-card-body">
           <div className="columns is-multiline">
-            {available_cards.map(card => (
+            {available_cards.map((card, index) => (
               <div
                 className="column is-half"
                 onClick={() => {
@@ -129,7 +129,7 @@ const AddCardModal: React.FC<{ house: house_name_t }> = props => {
                 }}
                 style={{ cursor: "pointer" }}
               >
-                <TreacheryCard card={card.card} num={card.num} />
+                <TreacheryCard card={card.card} num={card.num} key={"card-" + index} />
               </div>
             ))}
           </div>

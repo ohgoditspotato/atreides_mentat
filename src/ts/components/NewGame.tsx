@@ -3,20 +3,26 @@ import { useDispatch } from "react-redux";
 import { ENEMY_HOUSE_NAMES, enemy_house_name_t } from "ts/houses";
 import { close_modal, start_game } from "ts/state/actions";
 import { start_game_spec } from "ts/state/types";
+import HouseBanner from "ts/components/HouseBanner";
 
 const HouseSelect: React.FC<{
   house: enemy_house_name_t;
   checked: boolean;
   onClick: () => void;
 }> = props => {
-  let className = "button";
+  let className = "button is-fullwidth";
   if (props.checked) {
-    className += " is-primary";
+    className += " is-success";
   }
   return (
-    <button className={className} onClick={props.onClick}>
-      <div>{props.house}</div>
-    </button>
+    <div className="column is-half" onClick={props.onClick} style={{ cursor: "pointer" }}>
+      <div className="box">
+        <HouseBanner house={props.house} />
+        <button className={className}>
+          <div>{props.checked ? "Ready" : "Not in game"}</div>
+        </button>
+      </div>
+    </div>
   );
 };
 
@@ -25,7 +31,7 @@ export default () => {
     HARKONNEN: false,
     EMPEROR: false,
     "SPACING GUILD": false,
-    "BENE GESERIT": false,
+    "BENE GESSERIT": false,
     FREMEN: false,
   });
 
@@ -47,7 +53,7 @@ export default () => {
       </section>
       <section className="section">
         <div className="container">
-          <div className="buttons is-centered">
+          <div className="columns is-multiline">
             {ENEMY_HOUSE_NAMES.map(name => (
               <HouseSelect
                 house={name}

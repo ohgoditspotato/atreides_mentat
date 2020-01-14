@@ -31,6 +31,7 @@ const ViewCards: React.FC<{
                 <TreacheryCard
                   card={card}
                   onDelete={() => dispatch(house_remove_card(props.house, index))}
+                  key={"card-" + index}
                 />
               </div>
             ))}

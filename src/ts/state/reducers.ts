@@ -19,7 +19,7 @@ const houses_initial_spice = {
   HARKONNEN: 10,
   ATREIDES: 10,
   FREMEN: 3,
-  "BENE GESERIT": 5,
+  "BENE GESSERIT": 5,
   "SPACING GUILD": 5,
   EMPEROR: 10,
 } as const;
