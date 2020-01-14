@@ -8,12 +8,12 @@
       "type": "image/x-icon"
     },
     {
-      "src": "dune-192.png",
+      "src": "atreides-192.png",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "dune-512.png",
+      "src": "atreides-512.png",
       "type": "image/png",
       "sizes": "512x512"
     }
