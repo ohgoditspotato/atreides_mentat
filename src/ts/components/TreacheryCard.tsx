@@ -20,14 +20,14 @@ const treachery_card_colours = {
 } as const;
 
 const icons = {
-  Shield: <ShieldIcon />,
-  Snooper: <SnooperIcon />,
-  Lasgun: <LaserIcon />,
-  Poison: <PoisonDropIcon />,
-  Projectile: <CrosshairIcon />,
-  Special: <HaltIcon />,
-  Useless: <GuitarIcon />,
-  Unknown: <UnknownIcon />,
+  Shield: <ShieldIcon width={32}/>,
+  Snooper: <SnooperIcon width={32} />,
+  Lasgun: <LaserIcon width={32} />,
+  Poison: <PoisonDropIcon width={32} />,
+  Projectile: <CrosshairIcon width={32} />,
+  Special: <HaltIcon width={32} />,
+  Useless: <GuitarIcon width={32} />,
+  Unknown: <UnknownIcon width={32} />,
 } as const;
 
 const TreacheryCard: React.FC<{
@@ -79,7 +79,7 @@ const TreacheryCard: React.FC<{
       >
         {num && (
           <p>
-            <b>{num == 1 ? "Unique" : `${num} cards`}</b>
+            <b>{num === 1 ? "Unique" : `${num} cards`}</b>
           </p>
         )}
         {text}

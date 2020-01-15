@@ -18,8 +18,8 @@ export type houses_state_t = {
   [key in house_name_t]: house_state_t;
 };
 
-export type active_modal =
-  | "none"
+export type active_page =
+  | "overview"
   | "edit_spice"
   | "view_cards"
   | "add_card"
@@ -27,7 +27,7 @@ export type active_modal =
   | "alliance";
 
 export interface view_state_t {
-  active_modal: active_modal;
+  active_page: active_page;
   house_name?: house_name_t;
 }
 

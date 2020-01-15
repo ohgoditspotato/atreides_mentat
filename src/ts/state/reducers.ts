@@ -3,15 +3,15 @@ import {
   house_add_card,
   house_remove_card,
   house_modify_spice,
-  show_edit_spice_modal,
-  show_add_cards_modal,
+  show_edit_spice_page,
+  show_add_cards_page,
   start_game,
-  show_view_cards_modal,
+  show_view_cards_page,
   reset_game,
-  show_reset_game_modal,
+  show_reset_game_page,
   house_toggle_karama,
   close_modal,
-  show_alliance_modal,
+  show_alliance_page,
   house_set_ally,
 } from "ts/state/actions";
 import { ENEMY_HOUSE_NAMES, house_name_t } from "ts/houses";
@@ -19,52 +19,52 @@ import { houses_state_t, view_state_t, game_state_t } from "ts/state/types";
 import { list_priorities } from "ts/treachery_card";
 
 export const initial_houses_state: houses_state_t = {
-  ATREIDES: {
+  Atreides: {
     active: true,
     ally: null,
     cards: [],
     karama_used: false,
-    name: "ATREIDES",
+    name: "Atreides",
     spice: 10,
   },
-  "BENE GESSERIT": {
+  "Bene Gesserit": {
     active: false,
     ally: null,
     cards: [{ kind: "Unknown" }],
     karama_used: false,
-    name: "BENE GESSERIT",
+    name: "Bene Gesserit",
     spice: 5,
   },
-  EMPEROR: {
+  Emperor: {
     active: false,
     ally: null,
     cards: [{ kind: "Unknown" }],
     karama_used: false,
-    name: "EMPEROR",
+    name: "Emperor",
     spice: 10,
   },
-  FREMEN: {
+  Fremen: {
     active: false,
     ally: null,
     cards: [{ kind: "Unknown" }],
     karama_used: false,
-    name: "FREMEN",
+    name: "Fremen",
     spice: 3,
   },
-  HARKONNEN: {
+  Harkonnen: {
     active: false,
     ally: null,
     cards: [{ kind: "Unknown" }, { kind: "Unknown" }, { kind: "Unknown" }],
     karama_used: false,
-    name: "HARKONNEN",
+    name: "Harkonnen",
     spice: 10,
   },
-  "SPACING GUILD": {
+  "Spacing Guild": {
     active: false,
     ally: null,
     cards: [{ kind: "Unknown" }],
     karama_used: false,
-    name: "SPACING GUILD",
+    name: "Spacing Guild",
     spice: 5,
   },
 };
@@ -135,38 +135,38 @@ export const house_state_reducer = createReducer(initial_houses_state, builder =
 });
 
 export const default_view_state: view_state_t = {
-  active_modal: "none",
+  active_page: "overview",
   house_name: undefined,
 };
 
 export const view_state_reducer = createReducer(default_view_state, builder => {
   builder.addCase(close_modal, (state, _) => {
-    state.active_modal = "none";
+    state.active_page = "overview";
     state.house_name = undefined;
   });
 
-  builder.addCase(show_edit_spice_modal, (state, action) => {
-    state.active_modal = "edit_spice";
+  builder.addCase(show_edit_spice_page, (state, action) => {
+    state.active_page = "edit_spice";
     state.house_name = action.payload;
   });
 
-  builder.addCase(show_add_cards_modal, (state, action) => {
-    state.active_modal = "add_card";
+  builder.addCase(show_add_cards_page, (state, action) => {
+    state.active_page = "add_card";
     state.house_name = action.payload;
   });
 
-  builder.addCase(show_view_cards_modal, (state, action) => {
-    state.active_modal = "view_cards";
+  builder.addCase(show_view_cards_page, (state, action) => {
+    state.active_page = "view_cards";
     state.house_name = action.payload;
   });
 
-  builder.addCase(show_alliance_modal, (state, action) => {
-    state.active_modal = "alliance";
+  builder.addCase(show_alliance_page, (state, action) => {
+    state.active_page = "alliance";
     state.house_name = action.payload;
   });
 
-  builder.addCase(show_reset_game_modal, state => {
-    state.active_modal = "reset_game";
+  builder.addCase(show_reset_game_page, state => {
+    state.active_page = "reset_game";
     state.house_name = undefined;
   });
 });

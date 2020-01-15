@@ -3,8 +3,9 @@ import { house_name_t } from "ts/houses";
 import { treachery_card_t } from "ts/treachery_card";
 import TreacheryCard from "ts/components/TreacheryCard";
 import { useDispatch } from "react-redux";
-import { house_add_card, show_view_cards_modal } from "ts/state/actions";
-import Modal from "ts/components/Modals/Modal";
+import { house_add_card, show_view_cards_page } from "ts/state/actions";
+import Page from "ts/components/Pages/Page";
+import HouseBanner from "ts/components/HouseBanner";
 
 const available_cards: ReadonlyArray<{ card: treachery_card_t; num?: number }> = [
   {
@@ -108,18 +109,18 @@ const available_cards: ReadonlyArray<{ card: treachery_card_t; num?: number }> =
   },
 ];
 
-const AddCardModal: React.FC<{ house: house_name_t }> = props => {
+const AddCardPage: React.FC<{ house: house_name_t }> = props => {
   const dispatch = useDispatch();
-  const close = () => dispatch(show_view_cards_modal(props.house));
+  const close = () => dispatch(show_view_cards_page(props.house));
   return (
-    <Modal close={close} header={"Add card to " + props.house}>
+    <Page close={close} header={<HouseBanner house={props.house} />}>
       <div className="columns is-multiline">
         {available_cards.map((card, index) => (
           <div
-            className="column is-half"
+            className="column is-one-quarter-widescreen is-half"
             onClick={() => {
               dispatch(house_add_card(props.house, card.card));
-              dispatch(show_view_cards_modal(props.house));
+              dispatch(show_view_cards_page(props.house));
             }}
             style={{ cursor: "pointer" }}
             key={"card-" + index}
@@ -128,8 +129,8 @@ const AddCardModal: React.FC<{ house: house_name_t }> = props => {
           </div>
         ))}
       </div>
-    </Modal>
+    </Page>
   );
 };
 
-export default AddCardModal;
+export default AddCardPage;

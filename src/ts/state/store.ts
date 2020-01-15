@@ -9,6 +9,9 @@ const migrations = {
   0: (state: any) => {
     return { ...state, houses: undefined };
   },
+  1: (state: any) => {
+    return { ...state, houses: undefined };
+  },
 };
 
 const persistConfig = {
@@ -16,7 +19,7 @@ const persistConfig = {
   storage: storage,
   stateReconciler: autoMergeLevel2,
   migrate: createMigrate(migrations),
-  version: 0
+  version: 1,
 };
 
 const pReducer = persistReducer<root_state>(persistConfig, root_reducer);

@@ -28,11 +28,11 @@ const HouseSelect: React.FC<{
 
 export default () => {
   const [state, setState] = React.useState<start_game_spec>({
-    HARKONNEN: false,
-    EMPEROR: false,
-    "SPACING GUILD": false,
-    "BENE GESSERIT": false,
-    FREMEN: false,
+    Harkonnen: false,
+    Emperor: false,
+    "Spacing Guild": false,
+    "Bene Gesserit": false,
+    Fremen: false,
   });
 
   let allow_start = false;

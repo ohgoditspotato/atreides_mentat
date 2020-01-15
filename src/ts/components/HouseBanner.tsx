@@ -10,13 +10,13 @@ import { ReactComponent as GuildIcon } from "assets/houses/spacing_guild.svg";
 import { ReactComponent as NoneIcon } from "assets/houses/none.svg";
 
 const icon_map = {
-  ATREIDES: <AtreidesIcon className="column is-2" />,
-  "BENE GESSERIT": <BeneIcon className="column is-2" />,
-  EMPEROR: <EmperorIcon className="column is-2" />,
-  FREMEN: <FremenIcon className="column is-2" />,
-  HARKONNEN: <HarkonnenIcon className="column is-2" />,
-  "SPACING GUILD": <GuildIcon className="column is-2" />,
-  NONE: <NoneIcon className="column is-2" />,
+  Atreides: <AtreidesIcon />,
+  "Bene Gesserit": <BeneIcon />,
+  Emperor: <EmperorIcon />,
+  Fremen: <FremenIcon />,
+  Harkonnen: <HarkonnenIcon />,
+  "Spacing Guild": <GuildIcon />,
+  "No ally": <NoneIcon />,
 };
 
 const HouseBanner: React.FC<{ house: house_name_t | null }> = props => {
@@ -24,13 +24,17 @@ const HouseBanner: React.FC<{ house: house_name_t | null }> = props => {
   if (props.house !== null) {
     icon = icon_map[props.house];
   } else {
-    icon = icon_map["NONE"];
+    icon = icon_map["No ally"];
   }
   return (
-    <div className="columns is-vcentered is-mobile">
-      {icon}
-      <div className="column">
-        <h2 className="title is-3">{props.house ? props.house : "None"}</h2>
+    <div className="level is-mobile">
+      <div className="level-left">
+        <div className="level-item">
+          <figure className="image is-32x32">{icon}</figure>
+        </div>
+        <div className="level-item">
+          <h2 className="title is-3">{props.house ? props.house : "No ally"}</h2>
+        </div>
       </div>
     </div>
   );

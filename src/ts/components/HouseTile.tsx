@@ -2,10 +2,10 @@ import * as React from "react";
 import { useDispatch } from "react-redux";
 import { house_name_t } from "ts/houses";
 import {
-  show_edit_spice_modal,
-  show_view_cards_modal,
+  show_edit_spice_page,
+  show_view_cards_page,
   house_toggle_karama,
-  show_alliance_modal,
+  show_alliance_page,
 } from "ts/state/actions";
 import { treachery_card_t } from "ts/treachery_card";
 import HouseBanner from "ts/components/HouseBanner";
@@ -23,11 +23,11 @@ const HouseTile: React.FC<HouseTileProps> = props => {
   return (
     <div className="box">
       <HouseBanner house={props.house} />
-      <div className="columns is-multiline">
+      <div className="columns is-multiline is-mobile">
         <div className="column is-half">
           <button
             className="button is-warning is-fullwidth"
-            onClick={() => dispatch(show_edit_spice_modal(props.house))}
+            onClick={() => dispatch(show_edit_spice_page(props.house))}
           >
             {props.spice} spice
           </button>
@@ -35,7 +35,7 @@ const HouseTile: React.FC<HouseTileProps> = props => {
         <div className="column is-half">
           <button
             className="button is-info is-fullwidth"
-            onClick={() => dispatch(show_view_cards_modal(props.house))}
+            onClick={() => dispatch(show_view_cards_page(props.house))}
           >
             {props.cards.length} card{props.cards.length === 1 ? "" : "s"}
           </button>
@@ -53,9 +53,9 @@ const HouseTile: React.FC<HouseTileProps> = props => {
         <div className="column is-half">
           <button
             className={"button is-fullwidth " + (props.ally ? "is-dark" : "is-light")}
-            onClick={() => dispatch(show_alliance_modal(props.house))}
+            onClick={() => dispatch(show_alliance_page(props.house))}
           >
-            {props.ally ? props.ally : "No alliance"}
+            {props.ally ? props.ally : "No ally"}
           </button>
         </div>
       </div>
