@@ -9,21 +9,21 @@ import Modal from "ts/components/Modals/Modal";
 const available_cards: ReadonlyArray<{ card: treachery_card_t; num?: number }> = [
   {
     card: {
-      kind: "WEAPON",
+      kind: "Weapon",
       type: "Poison",
     },
     num: 4,
   },
   {
     card: {
-      kind: "WEAPON",
+      kind: "Weapon",
       type: "Projectile",
     },
     num: 4,
   },
   {
     card: {
-      kind: "WEAPON",
+      kind: "Weapon",
       type: "Lasgun",
     },
     num: 1,
@@ -31,14 +31,14 @@ const available_cards: ReadonlyArray<{ card: treachery_card_t; num?: number }> =
 
   {
     card: {
-      kind: "DEFENSE",
+      kind: "Defense",
       type: "Shield",
     },
     num: 4,
   },
   {
     card: {
-      kind: "DEFENSE",
+      kind: "Defense",
       type: "Snooper",
     },
     num: 4,
@@ -46,49 +46,49 @@ const available_cards: ReadonlyArray<{ card: treachery_card_t; num?: number }> =
 
   {
     card: {
-      kind: "SPECIAL",
+      kind: "Special",
       type: "Cheap Hero",
     },
     num: 3,
   },
   {
     card: {
-      kind: "SPECIAL",
+      kind: "Special",
       type: "Karama",
     },
     num: 2,
   },
   {
     card: {
-      kind: "SPECIAL",
+      kind: "Special",
       type: "Truthtrance",
     },
     num: 2,
   },
   {
     card: {
-      kind: "SPECIAL",
+      kind: "Special",
       type: "Family Atomics",
     },
     num: 1,
   },
   {
     card: {
-      kind: "SPECIAL",
+      kind: "Special",
       type: "Hajr",
     },
     num: 1,
   },
   {
     card: {
-      kind: "SPECIAL",
+      kind: "Special",
       type: "Tleilaxu Ghola",
     },
     num: 1,
   },
   {
     card: {
-      kind: "SPECIAL",
+      kind: "Special",
       type: "Weather Control",
     },
     num: 1,
@@ -96,14 +96,14 @@ const available_cards: ReadonlyArray<{ card: treachery_card_t; num?: number }> =
 
   {
     card: {
-      kind: "USELESS",
+      kind: "Useless",
     },
     num: 5,
   },
 
   {
     card: {
-      kind: "UNKNOWN",
+      kind: "Unknown",
     },
   },
 ];

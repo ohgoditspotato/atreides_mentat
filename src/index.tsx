@@ -14,7 +14,7 @@ ReactDOM.render(
       <section className="hero is-primary">
         <div className="hero-body">
           <div className="container">
-            <p className="title is-1">Atreides mentat</p>
+            <p className="title is-1">Atreides Mentat</p>
             <p className="subtitle is-5">for Dune (2019)</p>
           </div>
         </div>

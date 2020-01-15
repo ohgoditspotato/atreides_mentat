@@ -12,10 +12,6 @@ Keep track of your opponents spice stash, which treachery cards they have, and w
 Hosted at https://ohgoditspotato.github.io/atreides_mentat/
 
 ### TODO
-
-- Add icons to the cards
-- Add rules to the card
-- Add card descriptions
 - Add card pool & track which cards are left in the pool
 - Add view screen for the pool
 - Add place to record / view the next Spice card

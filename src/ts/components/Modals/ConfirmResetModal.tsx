@@ -9,14 +9,18 @@ const ConfirmResetModal: React.FC = () => {
 
   return (
     <Modal header="Reset the game" close={close}>
-      <p className="subtitle is-5">Are you sure?</p>
-      <div className="buttons">
-        <button className="button is-danger" onClick={() => dispatch(reset_game())}>
-          Yes
-        </button>
-        <button className="button is-secondary" onClick={close}>
-          No
-        </button>
+      <p className="subtitle is-5 has-text-centered">Are you sure?</p>
+      <div className="columns is-mobile">
+        <div className="column is-half">
+          <button className="button is-danger is-fullwidth" onClick={() => dispatch(reset_game())}>
+            Yes
+          </button>
+        </div>
+        <div className="column is-half">
+          <button className="button is-secondary is-fullwidth" onClick={close}>
+            No
+          </button>
+        </div>
       </div>
     </Modal>
   );

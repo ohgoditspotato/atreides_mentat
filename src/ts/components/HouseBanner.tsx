@@ -1,12 +1,13 @@
 import * as React from "react";
 import { house_name_t } from "ts/houses";
 
-import { ReactComponent as AtreidesIcon } from "assets/atreides.svg";
-import { ReactComponent as BeneIcon } from "assets/bene_gesserit.svg";
-import { ReactComponent as EmperorIcon } from "assets/emperor.svg";
-import { ReactComponent as FremenIcon } from "assets/fremen.svg";
-import { ReactComponent as HarkonnenIcon } from "assets/harkonnen.svg";
-import { ReactComponent as GuildIcon } from "assets/spacing_guild.svg";
+import { ReactComponent as AtreidesIcon } from "assets/houses/atreides.svg";
+import { ReactComponent as BeneIcon } from "assets/houses/bene_gesserit.svg";
+import { ReactComponent as EmperorIcon } from "assets/houses/emperor.svg";
+import { ReactComponent as FremenIcon } from "assets/houses/fremen.svg";
+import { ReactComponent as HarkonnenIcon } from "assets/houses/harkonnen.svg";
+import { ReactComponent as GuildIcon } from "assets/houses/spacing_guild.svg";
+import { ReactComponent as NoneIcon } from "assets/houses/none.svg";
 
 const icon_map = {
   ATREIDES: <AtreidesIcon className="column is-2" />,
@@ -15,6 +16,7 @@ const icon_map = {
   FREMEN: <FremenIcon className="column is-2" />,
   HARKONNEN: <HarkonnenIcon className="column is-2" />,
   "SPACING GUILD": <GuildIcon className="column is-2" />,
+  NONE: <NoneIcon className="column is-2" />,
 };
 
 const HouseBanner: React.FC<{ house: house_name_t | null }> = props => {
@@ -22,7 +24,7 @@ const HouseBanner: React.FC<{ house: house_name_t | null }> = props => {
   if (props.house !== null) {
     icon = icon_map[props.house];
   } else {
-    icon = <div className="column is-2" />;
+    icon = icon_map["NONE"];
   }
   return (
     <div className="columns is-vcentered is-mobile">

@@ -1,52 +1,88 @@
 import * as React from "react";
-import { treachery_card_t, treachery_card_kind } from "ts/treachery_card";
+import { treachery_card_t } from "ts/treachery_card";
 
-const treachery_card_colours: { [key in treachery_card_kind]: { text: string; bg: string } } = {
-  DEFENSE: { text: "white", bg: "link" },
-  SPECIAL: { text: "white", bg: "grey" },
-  USELESS: { text: "black", bg: "warning" },
-  WEAPON: { text: "white", bg: "danger" },
-  UNKNOWN: { text: "white", bg: "black" },
-};
+import { ReactComponent as CrosshairIcon } from "assets/cards/crosshair.svg";
+import { ReactComponent as GuitarIcon } from "assets/cards/guitar.svg";
+import { ReactComponent as HaltIcon } from "assets/cards/halt.svg";
+import { ReactComponent as SnooperIcon } from "assets/cards/snooper.svg";
+import { ReactComponent as LaserIcon } from "assets/cards/laser.svg";
+import { ReactComponent as PoisonDropIcon } from "assets/cards/poison_drop.svg";
+import { ReactComponent as ShieldIcon } from "assets/cards/shield.svg";
+import { ReactComponent as UnknownIcon } from "assets/cards/unknown.svg";
+import card_text from "ts/components/card_text";
+
+const treachery_card_colours = {
+  Weapon: { text: "white", bg: "danger" },
+  Defense: { text: "white", bg: "link" },
+  Special: { text: "white", bg: "grey" },
+  Useless: { text: "black", bg: "warning" },
+  Unknown: { text: "white", bg: "black" },
+} as const;
+
+const icons = {
+  Shield: <ShieldIcon />,
+  Snooper: <SnooperIcon />,
+  Lasgun: <LaserIcon />,
+  Poison: <PoisonDropIcon />,
+  Projectile: <CrosshairIcon />,
+  Special: <HaltIcon />,
+  Useless: <GuitarIcon />,
+  Unknown: <UnknownIcon />,
+} as const;
 
 const TreacheryCard: React.FC<{
   card: treachery_card_t;
   onDelete?: () => void;
   num?: number;
-}> = props => {
-  const colour = treachery_card_colours[props.card.kind];
-  let subtitle = "";
-  switch (props.card.kind) {
-    case "UNKNOWN": {
-      subtitle = "???";
+}> = ({ card, onDelete, num }) => {
+  const info = treachery_card_colours[card.kind];
+  let title = "";
+  let text: JSX.Element | null = null;
+  let icon: JSX.Element;
+  switch (card.kind) {
+    case "Unknown": {
+      title = "Unknown";
+      icon = icons["Unknown"];
+      text = card_text.Unknown;
       break;
     }
-    case "USELESS": {
-      subtitle = "This card has no effect";
+    case "Useless": {
+      title = "Useless";
+      icon = icons["Useless"];
+      text = card_text.Useless;
       break;
     }
-    default: {
-      subtitle = props.card.type;
+    case "Special": {
+      title = "Special - " + card.type;
+      icon = icons["Special"];
+      text = card_text[card.type];
+      break;
+    }
+    case "Weapon":
+    case "Defense": {
+      title = card.kind + " - " + card.type;
+      icon = icons[card.type];
+      text = card_text[card.type];
       break;
     }
   }
-
-  let num = "";
-  if (props.num === undefined) {
-    num = " ";
-  } else {
-    num = `x ${props.num}`;
-  }
-
   return (
-    <div className="message has-text-centered">
-      <header className={"message-header has-background-" + colour.bg}>
-        <p className={"card-header-title has-text-" + colour.text}>{props.card.kind}</p>
-        <p>{num}</p>
-        {props.onDelete ? <button className="delete" onClick={props.onDelete}></button> : null}
+    <div className="card">
+      <header className={"modal-card-head has-background-" + info.bg} style={{ padding: "0 20px" }}>
+        <figure className="image is-32x32 level-item">{icon}</figure>
+        <div className={"card-header-title has-text-" + info.text}>{title}</div>
+        {onDelete ? <button className="delete" onClick={onDelete}></button> : null}
       </header>
-      <div className="message-body">
-        <p>{subtitle}</p>
+      <div
+        className="card-content is-size-7 content"
+        style={{ height: "25vh", maxHeight: "200px", overflowY: "auto" }}
+      >
+        {num && (
+          <p>
+            <b>{num == 1 ? "Unique" : `${num} cards`}</b>
+          </p>
+        )}
+        {text}
       </div>
     </div>
   );

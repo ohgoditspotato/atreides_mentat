@@ -16,6 +16,7 @@ import {
 } from "ts/state/actions";
 import { ENEMY_HOUSE_NAMES, house_name_t } from "ts/houses";
 import { houses_state_t, view_state_t, game_state_t } from "ts/state/types";
+import { list_priorities } from "ts/treachery_card";
 
 export const initial_houses_state: houses_state_t = {
   ATREIDES: {
@@ -29,7 +30,7 @@ export const initial_houses_state: houses_state_t = {
   "BENE GESSERIT": {
     active: false,
     ally: null,
-    cards: [{ kind: "UNKNOWN" }],
+    cards: [{ kind: "Unknown" }],
     karama_used: false,
     name: "BENE GESSERIT",
     spice: 5,
@@ -37,7 +38,7 @@ export const initial_houses_state: houses_state_t = {
   EMPEROR: {
     active: false,
     ally: null,
-    cards: [{ kind: "UNKNOWN" }],
+    cards: [{ kind: "Unknown" }],
     karama_used: false,
     name: "EMPEROR",
     spice: 10,
@@ -45,7 +46,7 @@ export const initial_houses_state: houses_state_t = {
   FREMEN: {
     active: false,
     ally: null,
-    cards: [{ kind: "UNKNOWN" }],
+    cards: [{ kind: "Unknown" }],
     karama_used: false,
     name: "FREMEN",
     spice: 3,
@@ -53,7 +54,7 @@ export const initial_houses_state: houses_state_t = {
   HARKONNEN: {
     active: false,
     ally: null,
-    cards: [{ kind: "UNKNOWN" }, { kind: "UNKNOWN" }, { kind: "UNKNOWN" }],
+    cards: [{ kind: "Unknown" }, { kind: "Unknown" }, { kind: "Unknown" }],
     karama_used: false,
     name: "HARKONNEN",
     spice: 10,
@@ -61,7 +62,7 @@ export const initial_houses_state: houses_state_t = {
   "SPACING GUILD": {
     active: false,
     ally: null,
-    cards: [{ kind: "UNKNOWN" }],
+    cards: [{ kind: "Unknown" }],
     karama_used: false,
     name: "SPACING GUILD",
     spice: 5,
@@ -79,7 +80,8 @@ export const house_state_reducer = createReducer(initial_houses_state, builder =
 
   builder.addCase(house_add_card, (state, action) => {
     let house = getHouse(action.payload.house, state);
-    house.cards = [action.payload.card, ...house.cards];
+    house.cards.push(action.payload.card);
+    house.cards.sort((a, b) => list_priorities[a.kind] - list_priorities[b.kind]);
   });
 
   builder.addCase(house_remove_card, (state, action) => {
