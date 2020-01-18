@@ -1,0 +1,27 @@
+@charset "utf-8";
+@import "~bulma/bulma";
+
+.add-card-button {
+  position: relative;
+}
+
+.add-card-button::after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  content: "";
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+/* Transition to showing the bigger shadow on hover */
+.add-card-button:hover::after {
+  opacity: 1;
+}
+
+.modal-card.is-full {
+  width: 95%;
+}

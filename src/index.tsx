@@ -6,12 +6,13 @@ import * as serviceWorker from "./serviceWorker";
 import { PersistGate } from "redux-persist/lib/integration/react";
 import { store, persistor } from "ts/state/store";
 
-import "bulma/css/bulma.css";
+import "scss/main.scss";
+import "@fortawesome/fontawesome-free/css/all.css"
 
 ReactDOM.render(
   <Provider store={store}>
     <PersistGate persistor={persistor}>
-      <section className="hero is-primary">
+      <section className="hero is-dark">
         <div className="hero-body">
           <div className="container">
             <p className="title is-1">Atreides Mentat</p>

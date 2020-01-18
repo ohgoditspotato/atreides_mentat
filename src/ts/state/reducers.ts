@@ -3,16 +3,14 @@ import {
   house_add_card,
   house_remove_card,
   house_modify_spice,
-  show_edit_spice_page,
-  show_add_cards_page,
+  show_add_cards_modal,
   start_game,
-  show_view_cards_page,
   reset_game,
-  show_reset_game_page,
+  show_reset_game_modal,
   house_toggle_karama,
   close_modal,
-  show_alliance_page,
   house_set_ally,
+  house_toggle_expand_cards,
 } from "ts/state/actions";
 import { ENEMY_HOUSE_NAMES, house_name_t } from "ts/houses";
 import { houses_state_t, view_state_t, game_state_t } from "ts/state/types";
@@ -26,6 +24,7 @@ export const initial_houses_state: houses_state_t = {
     karama_used: false,
     name: "Atreides",
     spice: 10,
+    show_cards: false,
   },
   "Bene Gesserit": {
     active: false,
@@ -34,6 +33,7 @@ export const initial_houses_state: houses_state_t = {
     karama_used: false,
     name: "Bene Gesserit",
     spice: 5,
+    show_cards: false,
   },
   Emperor: {
     active: false,
@@ -42,6 +42,7 @@ export const initial_houses_state: houses_state_t = {
     karama_used: false,
     name: "Emperor",
     spice: 10,
+    show_cards: false,
   },
   Fremen: {
     active: false,
@@ -50,6 +51,7 @@ export const initial_houses_state: houses_state_t = {
     karama_used: false,
     name: "Fremen",
     spice: 3,
+    show_cards: false,
   },
   Harkonnen: {
     active: false,
@@ -58,6 +60,7 @@ export const initial_houses_state: houses_state_t = {
     karama_used: false,
     name: "Harkonnen",
     spice: 10,
+    show_cards: false,
   },
   "Spacing Guild": {
     active: false,
@@ -66,6 +69,7 @@ export const initial_houses_state: houses_state_t = {
     karama_used: false,
     name: "Spacing Guild",
     spice: 5,
+    show_cards: false,
   },
 };
 
@@ -121,6 +125,11 @@ export const house_state_reducer = createReducer(initial_houses_state, builder =
     }
   });
 
+  builder.addCase(house_toggle_expand_cards, (state, action) => {
+    let house = getHouse(action.payload.house, state);
+    house.show_cards = !house.show_cards;
+  });
+
   builder.addCase(reset_game, _ => {
     return initial_houses_state;
   });
@@ -135,38 +144,23 @@ export const house_state_reducer = createReducer(initial_houses_state, builder =
 });
 
 export const default_view_state: view_state_t = {
-  active_page: "overview",
+  active_modal: "overview",
   house_name: undefined,
 };
 
 export const view_state_reducer = createReducer(default_view_state, builder => {
   builder.addCase(close_modal, (state, _) => {
-    state.active_page = "overview";
+    state.active_modal = "overview";
     state.house_name = undefined;
   });
 
-  builder.addCase(show_edit_spice_page, (state, action) => {
-    state.active_page = "edit_spice";
+  builder.addCase(show_add_cards_modal, (state, action) => {
+    state.active_modal = "add_card";
     state.house_name = action.payload;
   });
 
-  builder.addCase(show_add_cards_page, (state, action) => {
-    state.active_page = "add_card";
-    state.house_name = action.payload;
-  });
-
-  builder.addCase(show_view_cards_page, (state, action) => {
-    state.active_page = "view_cards";
-    state.house_name = action.payload;
-  });
-
-  builder.addCase(show_alliance_page, (state, action) => {
-    state.active_page = "alliance";
-    state.house_name = action.payload;
-  });
-
-  builder.addCase(show_reset_game_page, state => {
-    state.active_page = "reset_game";
+  builder.addCase(show_reset_game_modal, state => {
+    state.active_modal = "reset_game";
     state.house_name = undefined;
   });
 });

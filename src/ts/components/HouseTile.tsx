@@ -1,14 +1,12 @@
 import * as React from "react";
 import { useDispatch } from "react-redux";
 import { house_name_t } from "ts/houses";
-import {
-  show_edit_spice_page,
-  show_view_cards_page,
-  house_toggle_karama,
-  show_alliance_page,
-} from "ts/state/actions";
+import { house_toggle_karama } from "ts/state/actions";
 import { treachery_card_t } from "ts/treachery_card";
 import HouseBanner from "ts/components/HouseBanner";
+import EditSpice from "ts/components/EditSpice";
+import ViewCards from "ts/components/ViewCards";
+import AllianceDropdown from "ts/components/AllianceDropdown";
 
 export interface HouseTileProps {
   spice: number;
@@ -20,45 +18,35 @@ export interface HouseTileProps {
 
 const HouseTile: React.FC<HouseTileProps> = props => {
   const dispatch = useDispatch();
+  const karamaButton = (
+    <button
+      className={
+        "button card-header-icon" +
+        (props.karama_used ? " is-danger is-inverted" : " is-success is-inverted")
+      }
+      onClick={() => dispatch(house_toggle_karama(props.house))}
+    >
+      <span className="icon">
+        <i className={"fas " + (props.karama_used ? "fa-times" : "fa-check")}></i>
+      </span>
+      <span>Karama</span>
+    </button>
+  );
   return (
-    <div className="box">
-      <HouseBanner house={props.house} />
-      <div className="columns is-multiline is-mobile">
-        <div className="column is-half">
-          <button
-            className="button is-warning is-fullwidth"
-            onClick={() => dispatch(show_edit_spice_page(props.house))}
-          >
-            {props.spice} spice
-          </button>
-        </div>
-        <div className="column is-half">
-          <button
-            className="button is-info is-fullwidth"
-            onClick={() => dispatch(show_view_cards_page(props.house))}
-          >
-            {props.cards.length} card{props.cards.length === 1 ? "" : "s"}
-          </button>
-        </div>
-        <div className="column is-half">
-          <button
-            className={
-              "button is-fullwidth" + (props.karama_used ? " is-danger is-inverted" : " is-success")
-            }
-            onClick={() => dispatch(house_toggle_karama(props.house))}
-          >
-            Karama
-          </button>
-        </div>
-        <div className="column is-half">
-          <button
-            className={"button is-fullwidth " + (props.ally ? "is-dark" : "is-light")}
-            onClick={() => dispatch(show_alliance_page(props.house))}
-          >
-            {props.ally ? props.ally : "No ally"}
-          </button>
+    <div className="box" style={{ height: "100%" }}>
+      <div className="columns is-mobile">
+        <div className="column">
+          <HouseBanner house={props.house} />
         </div>
       </div>
+      <div className="level is-mobile">
+        <EditSpice house={props.house} spice={props.spice} />
+          <div className="level-item">
+            <AllianceDropdown house={props.house} ally={props.ally} />
+          </div>
+          <div className="level-item">{karamaButton}</div>
+        </div>
+      <ViewCards house={props.house} cards={props.cards} />
     </div>
   );
 };

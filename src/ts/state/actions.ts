@@ -4,11 +4,8 @@ import { treachery_card_t } from "ts/treachery_card";
 import { start_game_spec } from "ts/state/types";
 
 export const close_modal = createAction("view/none");
-export const show_edit_spice_page = createAction<house_name_t>("view/edit_spice");
-export const show_view_cards_page = createAction<house_name_t>("view/view_cards");
-export const show_add_cards_page = createAction<house_name_t>("view/add_card");
-export const show_alliance_page = createAction<house_name_t>("view/alliance");
-export const show_reset_game_page = createAction("view/reset");
+export const show_add_cards_modal = createAction<house_name_t>("view/add_card");
+export const show_reset_game_modal = createAction("view/reset");
 
 export const house_add_card = createAction(
   "houses/add_card",
@@ -56,6 +53,17 @@ export const house_set_ally = createAction(
       payload: {
         house,
         ally,
+      },
+    };
+  }
+);
+
+export const house_toggle_expand_cards = createAction(
+  "houses/toggle_expand_cards",
+  (house: house_name_t) => {
+    return {
+      payload: {
+        house,
       },
     };
   }

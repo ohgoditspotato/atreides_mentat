@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useDispatch } from "react-redux";
 import { close_modal, reset_game } from "ts/state/actions";
-import Page from "ts/components/Pages/Page";
+import Modal from "ts/components/Modals/Modal";
 
 const ConfirmResetPage: React.FC = () => {
   const dispatch = useDispatch();
@@ -12,14 +12,13 @@ const ConfirmResetPage: React.FC = () => {
     </button>
   );
 
-  const header = (
-    <>
-      <h1>Reset the game</h1>
-      <p className="subtitle"> Are you sure?</p>
-    </>
-  );
+  const header = <h1>Reset the game</h1>;
 
-  return <Page header={header} close={close} buttons={[confirm_button]} />;
+  return (
+    <Modal header={header} close={close} buttons={[confirm_button]}>
+      <p className="subtitle"> Are you sure?</p>
+    </Modal>
+  );
 };
 
 export default ConfirmResetPage;

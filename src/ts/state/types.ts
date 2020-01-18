@@ -12,6 +12,7 @@ export interface house_state_t {
   karama_used: boolean;
   ally: house_name_t | null;
   active: boolean;
+  show_cards: boolean;
 }
 
 export type houses_state_t = {
@@ -20,14 +21,12 @@ export type houses_state_t = {
 
 export type active_page =
   | "overview"
-  | "edit_spice"
-  | "view_cards"
   | "add_card"
   | "reset_game"
   | "alliance";
 
 export interface view_state_t {
-  active_page: active_page;
+  active_modal: active_page;
   house_name?: house_name_t;
 }
 

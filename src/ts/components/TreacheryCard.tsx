@@ -20,7 +20,7 @@ const treachery_card_colours = {
 } as const;
 
 const icons = {
-  Shield: <ShieldIcon width={32}/>,
+  Shield: <ShieldIcon width={32} />,
   Snooper: <SnooperIcon width={32} />,
   Lasgun: <LaserIcon width={32} />,
   Poison: <PoisonDropIcon width={32} />,
@@ -67,16 +67,13 @@ const TreacheryCard: React.FC<{
     }
   }
   return (
-    <div className="card">
+    <div className="card" style={{ height: "30vh", maxHeight: "230px", overflowY: "auto" }}>
       <header className={"modal-card-head has-background-" + info.bg} style={{ padding: "0 20px" }}>
         <figure className="image is-32x32 level-item">{icon}</figure>
         <div className={"card-header-title has-text-" + info.text}>{title}</div>
         {onDelete ? <button className="delete" onClick={onDelete}></button> : null}
       </header>
-      <div
-        className="card-content is-size-7 content"
-        style={{ height: "25vh", maxHeight: "200px", overflowY: "auto" }}
-      >
+      <div className="card-content is-size-7 content">
         {num && (
           <p>
             <b>{num === 1 ? "Unique" : `${num} cards`}</b>

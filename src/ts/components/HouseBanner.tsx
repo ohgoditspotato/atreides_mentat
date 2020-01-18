@@ -9,7 +9,7 @@ import { ReactComponent as HarkonnenIcon } from "assets/houses/harkonnen.svg";
 import { ReactComponent as GuildIcon } from "assets/houses/spacing_guild.svg";
 import { ReactComponent as NoneIcon } from "assets/houses/none.svg";
 
-const icon_map = {
+export const icon_map = {
   Atreides: <AtreidesIcon />,
   "Bene Gesserit": <BeneIcon />,
   Emperor: <EmperorIcon />,
@@ -19,7 +19,7 @@ const icon_map = {
   "No ally": <NoneIcon />,
 };
 
-const HouseBanner: React.FC<{ house: house_name_t | null }> = props => {
+const HouseBanner: React.FC<{ house: house_name_t | null}> = props => {
   let icon;
   if (props.house !== null) {
     icon = icon_map[props.house];
