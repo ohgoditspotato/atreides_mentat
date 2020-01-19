@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/atreides_mentat/static/css/main.9c143467.chunk.css",
-    "main.js": "/atreides_mentat/static/js/main.b2ff482c.chunk.js",
-    "main.js.map": "/atreides_mentat/static/js/main.b2ff482c.chunk.js.map",
+    "main.js": "/atreides_mentat/static/js/main.c6dec791.chunk.js",
+    "main.js.map": "/atreides_mentat/static/js/main.c6dec791.chunk.js.map",
     "runtime-main.js": "/atreides_mentat/static/js/runtime-main.d88582d5.js",
     "runtime-main.js.map": "/atreides_mentat/static/js/runtime-main.d88582d5.js.map",
     "static/css/2.ba689351.chunk.css": "/atreides_mentat/static/css/2.ba689351.chunk.css",
     "static/js/2.9dbb513c.chunk.js": "/atreides_mentat/static/js/2.9dbb513c.chunk.js",
     "static/js/2.9dbb513c.chunk.js.map": "/atreides_mentat/static/js/2.9dbb513c.chunk.js.map",
     "index.html": "/atreides_mentat/index.html",
-    "precache-manifest.9e76ecab6c41b1dd16d3b576da4c89fe.js": "/atreides_mentat/precache-manifest.9e76ecab6c41b1dd16d3b576da4c89fe.js",
+    "precache-manifest.321b0a9039c2fbcf2c4430f3a81f117a.js": "/atreides_mentat/precache-manifest.321b0a9039c2fbcf2c4430f3a81f117a.js",
     "service-worker.js": "/atreides_mentat/service-worker.js",
     "static/css/2.ba689351.chunk.css.map": "/atreides_mentat/static/css/2.ba689351.chunk.css.map",
     "static/css/main.9c143467.chunk.css.map": "/atreides_mentat/static/css/main.9c143467.chunk.css.map",
@@ -36,6 +36,6 @@
     "static/css/2.ba689351.chunk.css",
     "static/js/2.9dbb513c.chunk.js",
     "static/css/main.9c143467.chunk.css",
-    "static/js/main.b2ff482c.chunk.js"
+    "static/js/main.c6dec791.chunk.js"
   ]
 }
