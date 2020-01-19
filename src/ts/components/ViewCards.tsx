@@ -52,7 +52,7 @@ const ViewCards: React.FC<{
                     }
                   }
                   return (
-                    <span className={"tag is-medium is-" + colour}>
+                    <span className={"tag is-medium is-" + colour} key={text}>
                       {text}
                       {deleteButton}
                     </span>
