@@ -67,7 +67,7 @@ const TreacheryCard: React.FC<{
     }
   }
   return (
-    <div className="card" style={{ height: "30vh", maxHeight: "230px", overflowY: "auto" }}>
+    <div className="card" style={{ height: "250px", overflowY: "auto" }}>
       <header className={"modal-card-head has-background-" + info.bg} style={{ padding: "0 20px" }}>
         <figure className="image is-32x32 level-item">{icon}</figure>
         <div className={"card-header-title has-text-" + info.text}>{title}</div>
