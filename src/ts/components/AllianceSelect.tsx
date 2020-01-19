@@ -17,7 +17,7 @@ const AllianceSelect: React.FC<{
   ] as const;
 
   return (
-    <div>
+    <>
       <p className="heading">Allied to</p>
       <div className="select">
         <select
@@ -39,7 +39,7 @@ const AllianceSelect: React.FC<{
           ))}
         </select>
       </div>
-    </div>
+    </>
   );
 };
 

@@ -8,7 +8,6 @@ import {
   house_toggle_expand_cards,
 } from "ts/state/actions";
 import TreacheryCard from "ts/components/TreacheryCard";
-import AddCardButton from "ts/components/AddCardButton";
 import { root_state } from "ts/state/reducers";
 
 const maxCards = (house: house_name_t) => {
@@ -25,21 +24,43 @@ const ViewCards: React.FC<{
 }> = props => {
   const dispatch = useDispatch();
   const showCards = useSelector((state: root_state) => state.houses[props.house].show_cards);
+  const allowAdd = props.cards.length < maxCards(props.house);
 
   return (
-    <div className="box is-marginless is-paddingless">
-      <div
-        style={{ cursor: "pointer", display: "flex" }}
-        className="is-unselectable"
-        onClick={() => dispatch(house_toggle_expand_cards(props.house))}
-      >
-        <p className="card-header-title">
-          {`${props.cards.length} Card${props.cards.length === 1 ? "" : "s"}`}
-        </p>
-        <div className="card-header-icon" aria-label="more options">
-          <span className="icon">
-            <i className={"fas fa-angle-" + (showCards ? "up" : "down")} aria-hidden="true"></i>
-          </span>
+    <div className="box">
+      <div className="columns is-mobile is-vcentered">
+        <div
+          className="column"
+          onClick={() => dispatch(house_toggle_expand_cards(props.house))}
+          style={{ cursor: "pointer" }}
+        >
+          <div className="heading is-marginless is-size-6">{`${props.cards.length} Card${
+            props.cards.length === 1 ? "" : "s"
+          }`}</div>
+        </div>
+        <div className="column is-narrow">
+          <div className="buttons">
+            <button
+              className="button"
+              onClick={() => {
+                if (allowAdd) dispatch(show_add_cards_modal(props.house));
+              }}
+              disabled={!allowAdd}
+            >
+              <span className="icon">
+                <i className="fas fa-plus" />
+              </span>
+              <span>Add card</span>
+            </button>
+            <button
+              className="button"
+              onClick={() => dispatch(house_toggle_expand_cards(props.house))}
+            >
+              <span className="icon">
+                <i className={"fas fa-arrow-" + (showCards ? "down" : "up")} />
+              </span>
+            </button>
+          </div>
         </div>
       </div>
       {showCards && (
@@ -52,11 +73,6 @@ const ViewCards: React.FC<{
               />
             </div>
           ))}
-          {props.cards.length < maxCards(props.house) && (
-            <div className="column is-half" key={"add-card"}>
-              <AddCardButton onClick={() => dispatch(show_add_cards_modal(props.house))} />
-            </div>
-          )}
         </div>
       )}
     </div>
