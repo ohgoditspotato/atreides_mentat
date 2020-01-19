@@ -7,7 +7,7 @@ import {
   house_remove_card,
   house_toggle_expand_cards,
 } from "ts/state/actions";
-import TreacheryCard from "ts/components/TreacheryCard";
+import TreacheryCard, { treachery_card_colours } from "ts/components/TreacheryCard";
 import { root_state } from "ts/state/reducers";
 
 const maxCards = (house: house_name_t) => {
@@ -34,9 +34,43 @@ const ViewCards: React.FC<{
           onClick={() => dispatch(house_toggle_expand_cards(props.house))}
           style={{ cursor: "pointer" }}
         >
-          <div className="heading is-marginless is-size-6">{`${props.cards.length} Card${
-            props.cards.length === 1 ? "" : "s"
-          }`}</div>
+          <span className={"heading is-size-6" + (showCards ? " is-marginless" : "")}>
+            {`${props.cards.length} Card${props.cards.length === 1 ? "" : "s"}`}
+          </span>
+          {!showCards && (
+            <div className="tags">
+              {props.cards.map((card, index) => {
+                const colour = treachery_card_colours[card.kind].bg;
+                switch (card.kind) {
+                  case "Weapon":
+                  case "Defense":
+                  case "Special": {
+                    return (
+                      <span key={index} className={"tag is-" + colour}>
+                        {card.type}
+                      </span>
+                    );
+                  }
+                  case "Useless": {
+                    return (
+                      <span key={index} className={"tag is-" + colour}>
+                        Useless
+                      </span>
+                    );
+                  }
+                  case "Unknown": {
+                    return (
+                      <span key={index} className={"tag is-" + colour}>
+                        Unknown
+                      </span>
+                    );
+                  }
+                  default:
+                    return null;
+                }
+              })}
+            </div>
+          )}
         </div>
         <div className="column is-narrow">
           <div className="buttons">

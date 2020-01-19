@@ -23,7 +23,6 @@ const HouseTile: React.FC<HouseTileProps> = props => {
       <span className="icon">
         <i className={"fas " + (houseState.karama_used ? "fa-times" : "fa-check")}></i>
       </span>
-      <span>{houseState.karama_used ? "Used" : "Unused"}</span>
     </button>
   );
   return (
@@ -33,16 +32,22 @@ const HouseTile: React.FC<HouseTileProps> = props => {
           <HouseBanner house={props.house} />
         </div>
       </div>
-      <div className="columns is-mobile is-centered">
-        <div className="column level-top">
-          <EditSpice house={props.house} spice={houseState.spice} />
+      <div className="columns is-centered">
+        <div className="column">
+          <div className="level-top">
+            <EditSpice house={props.house} spice={houseState.spice} />
+          </div>
         </div>
-        <div className="column level-top">
-          <AllianceSelect house={props.house} ally={houseState.ally} />
+        <div className="column">
+          <div className="level-top">
+            <AllianceSelect house={props.house} ally={houseState.ally} />
+          </div>
         </div>
-        <div className="column level-top">
-          <p className="heading">Karama</p>
-          {karamaButton}
+        <div className="column">
+          <div className="level-top">
+            <p className="heading">Karama</p>
+            {karamaButton}
+          </div>
         </div>
       </div>
       <ViewCards house={props.house} cards={houseState.cards} />

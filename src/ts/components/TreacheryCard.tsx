@@ -11,7 +11,7 @@ import { ReactComponent as ShieldIcon } from "assets/cards/shield.svg";
 import { ReactComponent as UnknownIcon } from "assets/cards/unknown.svg";
 import card_text from "ts/components/card_text";
 
-const treachery_card_colours = {
+export const treachery_card_colours = {
   Weapon: { text: "white", bg: "danger" },
   Defense: { text: "white", bg: "link" },
   Special: { text: "white", bg: "grey" },

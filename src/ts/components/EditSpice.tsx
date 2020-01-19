@@ -13,34 +13,40 @@ const EditSpice: React.FC<Props> = props => {
   const dispatch = useDispatch();
 
   return (
-    <>
-      <p className="heading">Spice</p>
-      <p className="title" style={{ marginBottom: "0.5rem" }}>
-        {props.spice}
-      </p>
-      <div className="buttons has-addons">
-        <button
-          className="button"
-          onClick={() => {
-            dispatch(house_modify_spice(props.house, 1));
-          }}
-        >
-          <span className="icon">
-            <i className="fas fa-plus"></i>
-          </span>
-        </button>
-        <button
-          className="button"
-          onClick={() => {
-            dispatch(house_modify_spice(props.house, -1));
-          }}
-        >
-          <span className="icon">
-            <i className="fas fa-minus"></i>
-          </span>
-        </button>
+    <div>
+      <p className="heading has-text-centered">Spice</p>
+      <div className="columns is-mobile">
+        <div className="column is-narrow">
+          <button
+            className="button"
+            onClick={() => {
+              dispatch(house_modify_spice(props.house, 1));
+            }}
+          >
+            <span className="icon">
+              <i className="fas fa-plus"></i>
+            </span>
+          </button>
+        </div>
+        <div className="column">
+          <p className="title" style={{ marginBottom: "0.5rem" }}>
+            {props.spice}
+          </p>
+        </div>
+        <div className="column is-narrow">
+          <button
+            className="button"
+            onClick={() => {
+              dispatch(house_modify_spice(props.house, -1));
+            }}
+          >
+            <span className="icon">
+              <i className="fas fa-minus"></i>
+            </span>
+          </button>
+        </div>
       </div>
-    </>
+    </div>
   );
 };
 
