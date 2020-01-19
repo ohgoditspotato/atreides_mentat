@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { ENEMY_HOUSE_NAMES, enemy_house_name_t } from "ts/houses";
 import { close_modal, start_game } from "ts/state/actions";
 import { start_game_spec } from "ts/state/types";
-import HouseBanner from "ts/components/HouseBanner";
+import { HouseNameWithIcon } from "ts/components/HouseBanner";
 
 const HouseSelect: React.FC<{
   house: enemy_house_name_t;
@@ -17,7 +17,9 @@ const HouseSelect: React.FC<{
   return (
     <div className="column is-half" onClick={props.onClick} style={{ cursor: "pointer" }}>
       <div className="box">
-        <HouseBanner house={props.house} />
+        <div className="columns is-mobile is-vcentered">
+          <HouseNameWithIcon house={props.house} />
+        </div>
         <button className={className}>
           <div>{props.checked ? "Ready" : "Not in game"}</div>
         </button>

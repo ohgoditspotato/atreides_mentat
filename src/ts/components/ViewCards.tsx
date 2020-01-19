@@ -32,47 +32,48 @@ const ViewCards: React.FC<{
         <div className="column">
           <div className="tags">
             <>
-              {props.cards.length === 0 && <span className="tag">No cards in hand</span>}
-              {props.cards.map((card, index) => {
-                const deleteButton = (
-                  <button
-                    className="delete is-small"
-                    onClick={() => dispatch(house_remove_card(props.house, index))}
-                  ></button>
-                );
-                const colour = treachery_card_colours[card.kind].bg;
-                let text: string = card.kind;
-                switch (card.kind) {
-                  case "Weapon":
-                  case "Defense":
-                  case "Special": {
-                    text = card.type;
-                    break;
+              {props.cards.length === 0 && <span className="tag is-medium">No cards in hand</span>}
+              {!showCards &&
+                props.cards.map((card, index) => {
+                  const deleteButton = (
+                    <button
+                      className="delete is-small"
+                      onClick={() => dispatch(house_remove_card(props.house, index, card))}
+                    ></button>
+                  );
+                  const colour = treachery_card_colours[card.kind].bg;
+                  let text: string = card.kind;
+                  switch (card.kind) {
+                    case "Weapon":
+                    case "Defense":
+                    case "Special": {
+                      text = card.type;
+                      break;
+                    }
                   }
-                }
-                return (
-                  <span className={"tag is-" + colour}>
-                    {text}
-                    {deleteButton}
-                  </span>
-                );
-              })}
+                  return (
+                    <span className={"tag is-medium is-" + colour}>
+                      {text}
+                      {deleteButton}
+                    </span>
+                  );
+                })}
             </>
           </div>
         </div>
         <div className="column is-narrow">
           <div className="buttons">
-            <button
-              className="button is-link is-outlined"
-              onClick={() => dispatch(house_toggle_expand_cards(props.house))}
-            >
-              <span className="icon">
-                <i className={"fas fa-angle-" + (showCards ? "up" : "down")} />
-              </span>
-              <span>
-                View
-              </span>
-            </button>
+            {props.cards.length > 0 && (
+              <button
+                className="button is-link is-outlined"
+                onClick={() => dispatch(house_toggle_expand_cards(props.house))}
+              >
+                <span className="icon">
+                  <i className={"fas fa-angle-" + (showCards ? "up" : "down")} />
+                </span>
+                <span>View</span>
+              </button>
+            )}
             <button
               className="button is-danger is-outlined"
               onClick={() => {
@@ -88,17 +89,20 @@ const ViewCards: React.FC<{
           </div>
         </div>
       </div>
-      {showCards && (
-        <div className="columns is-multiline">
-          {props.cards.map((card, index) => (
-            <div className="column is-half" key={"card-" + index}>
-              <TreacheryCard
-                card={card}
-                onDelete={() => dispatch(house_remove_card(props.house, index))}
-              />
-            </div>
-          ))}
-        </div>
+      {props.cards.length !== 0 && showCards && (
+        <>
+          <hr />
+          <div className="columns is-multiline">
+            {props.cards.map((card, index) => (
+              <div className="column is-half" key={"card-" + index}>
+                <TreacheryCard
+                  card={card}
+                  onDelete={() => dispatch(house_remove_card(props.house, index, card))}
+                />
+              </div>
+            ))}
+          </div>
+        </>
       )}
     </div>
   );

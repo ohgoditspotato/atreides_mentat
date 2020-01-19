@@ -2,73 +2,60 @@ import { createReducer, combineReducers } from "@reduxjs/toolkit";
 import {
   house_add_card,
   house_remove_card,
-  house_modify_spice,
   show_add_cards_modal,
   start_game,
   reset_game,
   show_reset_game_modal,
-  house_toggle_karama,
   close_modal,
   house_set_ally,
   house_toggle_expand_cards,
 } from "ts/state/actions";
 import { ENEMY_HOUSE_NAMES, house_name_t } from "ts/houses";
 import { houses_state_t, view_state_t, game_state_t } from "ts/state/types";
-import { list_priorities } from "ts/treachery_card";
+import { list_priorities, treachery_card_t } from "ts/treachery_card";
+import initialCardPool from "ts/state/initialCardPool";
 
 export const initial_houses_state: houses_state_t = {
   Atreides: {
     active: true,
     ally: null,
     cards: [],
-    karama_used: false,
     name: "Atreides",
-    spice: 10,
     show_cards: false,
   },
   "Bene Gesserit": {
     active: false,
     ally: null,
     cards: [{ kind: "Unknown" }],
-    karama_used: false,
     name: "Bene Gesserit",
-    spice: 5,
     show_cards: false,
   },
   Emperor: {
     active: false,
     ally: null,
     cards: [{ kind: "Unknown" }],
-    karama_used: false,
     name: "Emperor",
-    spice: 10,
     show_cards: false,
   },
   Fremen: {
     active: false,
     ally: null,
     cards: [{ kind: "Unknown" }],
-    karama_used: false,
     name: "Fremen",
-    spice: 3,
     show_cards: false,
   },
   Harkonnen: {
     active: false,
     ally: null,
     cards: [{ kind: "Unknown" }, { kind: "Unknown" }, { kind: "Unknown" }],
-    karama_used: false,
     name: "Harkonnen",
-    spice: 10,
     show_cards: false,
   },
   "Spacing Guild": {
     active: false,
     ally: null,
     cards: [{ kind: "Unknown" }],
-    karama_used: false,
     name: "Spacing Guild",
-    spice: 5,
     show_cards: false,
   },
 };
@@ -91,19 +78,6 @@ export const house_state_reducer = createReducer(initial_houses_state, builder =
   builder.addCase(house_remove_card, (state, action) => {
     let house = getHouse(action.payload.house, state);
     house.cards.splice(action.payload.index, 1);
-  });
-
-  builder.addCase(house_modify_spice, (state, action) => {
-    let house = getHouse(action.payload.house, state);
-    house.spice += action.payload.spice;
-    if (house.spice < 0) {
-      house.spice = 0;
-    }
-  });
-
-  builder.addCase(house_toggle_karama, (state, action) => {
-    let house = getHouse(action.payload, state);
-    house.karama_used = !house.karama_used;
   });
 
   builder.addCase(house_set_ally, (state, action) => {
@@ -167,14 +141,38 @@ export const view_state_reducer = createReducer(default_view_state, builder => {
 
 export const default_game_state: game_state_t = {
   initialized: false,
+  treachery_card_pool: initialCardPool,
 };
 
 export const game_state_reducer = createReducer(default_game_state, builder => {
   builder.addCase(start_game, (state, action) => {
     state.initialized = true;
   });
+
   builder.addCase(reset_game, (state, action) => {
-    state.initialized = false;
+    return default_game_state;
+  });
+
+  builder.addCase(house_add_card, (state, action) => {
+    const index = state.treachery_card_pool.findIndex(e => sameCard(action.payload.card, e.card));
+    if (index !== -1) {
+      const entry = state.treachery_card_pool[index];
+      if (entry.num !== undefined && entry.num > 0) {
+        entry.num -= 1;
+      }
+      state.treachery_card_pool[index] = entry;
+    }
+  });
+
+  builder.addCase(house_remove_card, (state, action) => {
+    const index = state.treachery_card_pool.findIndex(e => sameCard(action.payload.card, e.card));
+    if (index !== -1) {
+      const entry = state.treachery_card_pool[index];
+      if (entry.num !== undefined) {
+        entry.num += 1;
+      }
+      state.treachery_card_pool[index] = entry;
+    }
   });
 });
 
@@ -185,3 +183,10 @@ export const root_reducer = combineReducers({
 });
 
 export type root_state = ReturnType<typeof root_reducer>;
+
+function sameCard(a: treachery_card_t, b: treachery_card_t): boolean {
+  if (a.kind !== b.kind) {
+    return false;
+  }
+  return (a as any).type === (b as any).type;
+}

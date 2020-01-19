@@ -1,15 +1,14 @@
 import { enemy_house_name_t, house_name_t } from "../houses";
-import { treachery_card_t } from "../treachery_card";
+import cardPool from "ts/state/initialCardPool";
+import { treachery_card_t } from "ts/treachery_card";
 
 export type start_game_spec = {
   [key in enemy_house_name_t]: boolean;
 };
 
 export interface house_state_t {
-  spice: number;
   cards: Array<treachery_card_t>;
   name: house_name_t;
-  karama_used: boolean;
   ally: house_name_t | null;
   active: boolean;
   show_cards: boolean;
@@ -28,4 +27,5 @@ export interface view_state_t {
 
 export interface game_state_t {
   initialized: boolean;
+  treachery_card_pool: typeof cardPool;
 }

@@ -16,7 +16,7 @@ export const treachery_card_colours = {
   Defense: { text: "white", bg: "link" },
   Special: { text: "white", bg: "grey" },
   Useless: { text: "black", bg: "warning" },
-  Unknown: { text: "white", bg: "black" },
+  Unknown: { text: "white", bg: "dark" },
 } as const;
 
 const icons = {
@@ -76,7 +76,7 @@ const TreacheryCard: React.FC<{
       <div className="card-content is-size-7 content">
         {num && (
           <p>
-            <b>{num === 1 ? "Unique" : `${num} cards`}</b>
+            <b>{num} remaining</b>
           </p>
         )}
         {text}

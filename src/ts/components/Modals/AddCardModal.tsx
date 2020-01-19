@@ -1,133 +1,61 @@
 import * as React from "react";
 import { house_name_t } from "ts/houses";
-import { treachery_card_t } from "ts/treachery_card";
 import TreacheryCard from "ts/components/TreacheryCard";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { house_add_card, close_modal } from "ts/state/actions";
 import Modal from "ts/components/Modals/Modal";
-import HouseBanner from "ts/components/HouseBanner";
+import { HouseNameWithIcon } from "ts/components/HouseBanner";
+import { root_state } from "ts/state/reducers";
+import { treachery_card_t } from "ts/treachery_card";
 
-const available_cards: ReadonlyArray<{ card: treachery_card_t; num?: number }> = [
-  {
-    card: {
-      kind: "Weapon",
-      type: "Poison",
-    },
-    num: 4,
-  },
-  {
-    card: {
-      kind: "Weapon",
-      type: "Projectile",
-    },
-    num: 4,
-  },
-  {
-    card: {
-      kind: "Weapon",
-      type: "Lasgun",
-    },
-    num: 1,
-  },
-
-  {
-    card: {
-      kind: "Defense",
-      type: "Shield",
-    },
-    num: 4,
-  },
-  {
-    card: {
-      kind: "Defense",
-      type: "Snooper",
-    },
-    num: 4,
-  },
-
-  {
-    card: {
-      kind: "Special",
-      type: "Cheap Hero",
-    },
-    num: 3,
-  },
-  {
-    card: {
-      kind: "Special",
-      type: "Karama",
-    },
-    num: 2,
-  },
-  {
-    card: {
-      kind: "Special",
-      type: "Truthtrance",
-    },
-    num: 2,
-  },
-  {
-    card: {
-      kind: "Special",
-      type: "Family Atomics",
-    },
-    num: 1,
-  },
-  {
-    card: {
-      kind: "Special",
-      type: "Hajr",
-    },
-    num: 1,
-  },
-  {
-    card: {
-      kind: "Special",
-      type: "Tleilaxu Ghola",
-    },
-    num: 1,
-  },
-  {
-    card: {
-      kind: "Special",
-      type: "Weather Control",
-    },
-    num: 1,
-  },
-
-  {
-    card: {
-      kind: "Useless",
-    },
-    num: 5,
-  },
-
-  {
-    card: {
-      kind: "Unknown",
-    },
-  },
-];
+const TreacheryCardWrapper: React.FC<{
+  card: treachery_card_t;
+  num?: number;
+  house: house_name_t;
+}> = ({ house, card, num }) => {
+  const dispatch = useDispatch();
+  return (
+    <div
+      className="column is-one-quarter-widescreen is-half"
+      onClick={() => {
+        dispatch(house_add_card(house, card));
+        dispatch(close_modal());
+      }}
+      style={{ cursor: "pointer" }}
+    >
+      <TreacheryCard card={card} num={num} />
+    </div>
+  );
+};
 
 const AddCardPage: React.FC<{ house: house_name_t }> = props => {
   const dispatch = useDispatch();
+  const card_pool = useSelector((state: root_state) => {
+    return state.game.treachery_card_pool;
+  });
   const close = () => dispatch(close_modal());
+  const header = (
+    <div className="columns is-mobile is-vcentered">
+      <HouseNameWithIcon house={props.house} />
+    </div>
+  );
+
   return (
-    <Modal close={close} header={<HouseBanner house={props.house} />} isFull>
+    <Modal close={close} header={header} isFull>
       <div className="columns is-multiline">
-        {available_cards.map((card, index) => (
-          <div
-            className="column is-one-quarter-widescreen is-half"
-            onClick={() => {
-              dispatch(house_add_card(props.house, card.card));
-              dispatch(close_modal());
-            }}
-            style={{ cursor: "pointer" }}
-            key={"card-" + index}
-          >
-            <TreacheryCard card={card.card} num={card.num} />
-          </div>
-        ))}
+        {card_pool.map((card, index) => {
+          if (card.num === 0) {
+            return null;
+          }
+          return (
+            <TreacheryCardWrapper
+              card={card.card}
+              num={card.num}
+              house={props.house}
+              key={"card-" + index}
+            />
+          );
+        })}
       </div>
     </Modal>
   );
