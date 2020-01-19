@@ -63,6 +63,7 @@ const HouseBanner: React.FC<{ house: house_name_t }> = props => {
                 }
                 dispatch(house_set_ally(props.house, new_ally));
               }}
+              value={ally ? ally : "No ally"}
             >
               {possibleAllies.map(pos => {
                 const val = pos ? pos : "No ally";
