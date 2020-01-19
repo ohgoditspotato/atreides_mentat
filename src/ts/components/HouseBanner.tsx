@@ -47,7 +47,7 @@ const HouseBanner: React.FC<{ house: house_name_t }> = props => {
   });
 
   return (
-    <div className="columns is-mobile is-vcentered">
+    <div className="columns is-vcentered">
       <HouseNameWithIcon house={props.house} />
       <div className="column is-narrow">
         <p className="header">Allied to</p>
