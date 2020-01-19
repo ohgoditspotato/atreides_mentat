@@ -28,8 +28,39 @@ const ViewCards: React.FC<{
 
   return (
     <div>
-      <div className="columns is-mobile is-vcentered">
-        <div className="column">
+      <div className="columns is-vcentered">
+        <div className="column is-narrow" style={{ order: 1 }}>
+          <div className="columns is-mobile">
+            {props.cards.length > 0 && (
+              <div className="column">
+                <button
+                  className="button is-link is-outlined is-fullwidth"
+                  onClick={() => dispatch(house_toggle_expand_cards(props.house))}
+                >
+                  <span className="icon">
+                    <i className={"fas fa-angle-" + (showCards ? "up" : "down")} />
+                  </span>
+                  <span>View</span>
+                </button>
+              </div>
+            )}
+            <div className="column">
+              <button
+                className="button is-danger is-outlined is-fullwidth"
+                onClick={() => {
+                  if (allowAdd) dispatch(show_add_cards_modal(props.house));
+                }}
+                disabled={!allowAdd}
+              >
+                <span className="icon">
+                  <i className="fas fa-plus" />
+                </span>
+                <span>Add card</span>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div className="column" style={{ order: 0 }}>
           <div className="tags">
             <>
               {props.cards.length === 0 && <span className="tag is-medium">No cards in hand</span>}
@@ -52,40 +83,13 @@ const ViewCards: React.FC<{
                     }
                   }
                   return (
-                    <span className={"tag is-medium is-" + colour} key={text}>
+                    <span className={"tag is-medium is-" + colour} key={text + index.toString()}>
                       {text}
                       {deleteButton}
                     </span>
                   );
                 })}
             </>
-          </div>
-        </div>
-        <div className="column is-narrow">
-          <div className="buttons">
-            {props.cards.length > 0 && (
-              <button
-                className="button is-link is-outlined"
-                onClick={() => dispatch(house_toggle_expand_cards(props.house))}
-              >
-                <span className="icon">
-                  <i className={"fas fa-angle-" + (showCards ? "up" : "down")} />
-                </span>
-                <span>View</span>
-              </button>
-            )}
-            <button
-              className="button is-danger is-outlined"
-              onClick={() => {
-                if (allowAdd) dispatch(show_add_cards_modal(props.house));
-              }}
-              disabled={!allowAdd}
-            >
-              <span className="icon">
-                <i className="fas fa-plus" />
-              </span>
-              <span>Add card</span>
-            </button>
           </div>
         </div>
       </div>
