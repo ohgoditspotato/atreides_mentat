@@ -17,7 +17,7 @@ const HouseTile: React.FC<HouseTileProps> = props => {
   const dispatch = useDispatch();
   const karamaButton = (
     <button
-      className={"button card-header-icon"}
+      className={"button is-outlined is-" + (houseState.karama_used ? "danger" : "success")}
       onClick={() => dispatch(house_toggle_karama(props.house))}
     >
       <span className="icon">
@@ -26,32 +26,35 @@ const HouseTile: React.FC<HouseTileProps> = props => {
     </button>
   );
   return (
-    <div style={{ height: "100%" }}>
-      <div className="columns is-mobile">
-        <div className="column">
-          <HouseBanner house={props.house} />
-        </div>
-      </div>
-      <div className="columns is-centered">
-        <div className="column">
-          <div className="level-top">
-            <EditSpice house={props.house} spice={houseState.spice} />
+    <>
+      <div className="box">
+        <div className="columns is-mobile">
+          <div className="column">
+            <HouseBanner house={props.house} />
           </div>
         </div>
-        <div className="column">
-          <div className="level-top">
-            <AllianceSelect house={props.house} ally={houseState.ally} />
+        <div className="columns is-centered">
+          <div className="column is-narrow">
+            <div className="level-top">
+              <EditSpice house={props.house} spice={houseState.spice} />
+            </div>
+          </div>
+          <div className="column">
+            <div className="level-top">
+              <AllianceSelect house={props.house} ally={houseState.ally} />
+            </div>
+          </div>
+          <div className="column is-narrow">
+            <div className="level-top">
+              <p className="heading">Karama</p>
+              {karamaButton}
+            </div>
           </div>
         </div>
-        <div className="column">
-          <div className="level-top">
-            <p className="heading">Karama</p>
-            {karamaButton}
-          </div>
-        </div>
-      </div>
+        <hr />
       <ViewCards house={props.house} cards={houseState.cards} />
-    </div>
+      </div>
+    </>
   );
 };
 

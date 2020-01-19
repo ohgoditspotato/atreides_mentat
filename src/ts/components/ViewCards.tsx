@@ -27,55 +27,54 @@ const ViewCards: React.FC<{
   const allowAdd = props.cards.length < maxCards(props.house);
 
   return (
-    <div className="box">
+    <div>
       <div className="columns is-mobile is-vcentered">
-        <div
-          className="column"
-          onClick={() => dispatch(house_toggle_expand_cards(props.house))}
-          style={{ cursor: "pointer" }}
-        >
-          <span className={"heading is-size-6" + (showCards ? " is-marginless" : "")}>
-            {`${props.cards.length} Card${props.cards.length === 1 ? "" : "s"}`}
-          </span>
-          {!showCards && (
-            <div className="tags">
+        <div className="column">
+          <div className="tags">
+            <>
+              {props.cards.length === 0 && <span className="tag">No cards in hand</span>}
               {props.cards.map((card, index) => {
+                const deleteButton = (
+                  <button
+                    className="delete is-small"
+                    onClick={() => dispatch(house_remove_card(props.house, index))}
+                  ></button>
+                );
                 const colour = treachery_card_colours[card.kind].bg;
+                let text: string = card.kind;
                 switch (card.kind) {
                   case "Weapon":
                   case "Defense":
                   case "Special": {
-                    return (
-                      <span key={index} className={"tag is-" + colour}>
-                        {card.type}
-                      </span>
-                    );
+                    text = card.type;
+                    break;
                   }
-                  case "Useless": {
-                    return (
-                      <span key={index} className={"tag is-" + colour}>
-                        Useless
-                      </span>
-                    );
-                  }
-                  case "Unknown": {
-                    return (
-                      <span key={index} className={"tag is-" + colour}>
-                        Unknown
-                      </span>
-                    );
-                  }
-                  default:
-                    return null;
                 }
+                return (
+                  <span className={"tag is-" + colour}>
+                    {text}
+                    {deleteButton}
+                  </span>
+                );
               })}
-            </div>
-          )}
+            </>
+          </div>
         </div>
         <div className="column is-narrow">
           <div className="buttons">
             <button
-              className="button"
+              className="button is-link is-outlined"
+              onClick={() => dispatch(house_toggle_expand_cards(props.house))}
+            >
+              <span className="icon">
+                <i className={"fas fa-angle-" + (showCards ? "up" : "down")} />
+              </span>
+              <span>
+                View
+              </span>
+            </button>
+            <button
+              className="button is-danger is-outlined"
               onClick={() => {
                 if (allowAdd) dispatch(show_add_cards_modal(props.house));
               }}
@@ -85,14 +84,6 @@ const ViewCards: React.FC<{
                 <i className="fas fa-plus" />
               </span>
               <span>Add card</span>
-            </button>
-            <button
-              className="button"
-              onClick={() => dispatch(house_toggle_expand_cards(props.house))}
-            >
-              <span className="icon">
-                <i className={"fas fa-arrow-" + (showCards ? "down" : "up")} />
-              </span>
             </button>
           </div>
         </div>
