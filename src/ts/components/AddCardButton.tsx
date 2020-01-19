@@ -4,7 +4,7 @@ import { ReactComponent as PlusSVG } from "@fortawesome/fontawesome-free/svgs/so
 const AddCardButton: React.FC<{ onClick: () => void }> = ({ onClick }) => {
   return (
     <div
-      className="card"
+      className="card add-card-button"
       onClick={onClick}
       style={{ cursor: "pointer", height: "30vh", maxHeight: "230px" }}
     >

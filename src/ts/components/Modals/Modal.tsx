@@ -23,7 +23,12 @@ const Modal: React.FC<PageProps> = props => {
         <section className="modal-card-body">{props.children}</section>
         <footer className="modal-card-foot">
           <div className="columns">
-            {props.buttons && props.buttons.map(button => <div className="column">{button}</div>)}
+            {props.buttons &&
+              props.buttons.map((button, i) => (
+                <div className="column" key={i}>
+                  {button}
+                </div>
+              ))}
             <div className="column">
               <button className="button is-secondary is-fullwidth" onClick={props.close}>
                 Back

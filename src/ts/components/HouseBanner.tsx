@@ -19,7 +19,7 @@ export const icon_map = {
   "No ally": <NoneIcon />,
 };
 
-const HouseBanner: React.FC<{ house: house_name_t | null}> = props => {
+const HouseBanner: React.FC<{ house: house_name_t | null }> = props => {
   let icon;
   if (props.house !== null) {
     icon = icon_map[props.house];

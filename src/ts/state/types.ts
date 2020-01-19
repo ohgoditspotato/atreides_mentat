@@ -19,11 +19,7 @@ export type houses_state_t = {
   [key in house_name_t]: house_state_t;
 };
 
-export type active_page =
-  | "overview"
-  | "add_card"
-  | "reset_game"
-  | "alliance";
+export type active_page = "overview" | "add_card" | "reset_game" | "alliance";
 
 export interface view_state_t {
   active_modal: active_page;

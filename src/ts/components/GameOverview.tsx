@@ -43,13 +43,7 @@ const GameOverview: React.FC = () => {
               }
               return (
                 <div className="column is-full-tablet is-half-desktop" key={name}>
-                  <HouseTile
-                    house={name}
-                    spice={house.spice}
-                    cards={house.cards}
-                    karama_used={house.karama_used}
-                    ally={house.ally}
-                  />
+                  <HouseTile house={name} />
                 </div>
               );
             })}
