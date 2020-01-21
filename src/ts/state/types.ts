@@ -1,5 +1,5 @@
 import { enemy_house_name_t, house_name_t } from "../houses";
-import cardPool from "ts/state/initialCardPool";
+import cardPool from "ts/state/initial_card_pool";
 import { treachery_card_t } from "ts/treachery_card";
 
 export type start_game_spec = {

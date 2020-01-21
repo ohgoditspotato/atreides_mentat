@@ -1,6 +1,6 @@
 import { treachery_card_t } from "ts/treachery_card";
 
-const initialCardPool: ReadonlyArray<{ card: treachery_card_t; num?: number }> = [
+const initial_card_pool: ReadonlyArray<{ card: treachery_card_t; num?: number }> = [
   {
     card: {
       kind: "Weapon",
@@ -102,6 +102,4 @@ const initialCardPool: ReadonlyArray<{ card: treachery_card_t; num?: number }> =
   },
 ] as const;
 
-export default initialCardPool;
-
-export const unknownCardIndex = initialCardPool.length - 1;
+export default initial_card_pool;

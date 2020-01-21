@@ -13,7 +13,7 @@ import {
 import { ENEMY_HOUSE_NAMES, house_name_t } from "ts/houses";
 import { houses_state_t, view_state_t, game_state_t } from "ts/state/types";
 import { list_priorities, treachery_card_t } from "ts/treachery_card";
-import initialCardPool from "ts/state/initialCardPool";
+import initial_card_pool from "ts/state/initial_card_pool";
 
 export const initial_houses_state: houses_state_t = {
   Atreides: {
@@ -47,7 +47,7 @@ export const initial_houses_state: houses_state_t = {
   Harkonnen: {
     active: false,
     ally: null,
-    cards: [{ kind: "Unknown" }, { kind: "Unknown" }, { kind: "Unknown" }],
+    cards: [{ kind: "Unknown" }, { kind: "Unknown" }],
     name: "Harkonnen",
     show_cards: false,
   },
@@ -141,7 +141,7 @@ export const view_state_reducer = createReducer(default_view_state, builder => {
 
 export const default_game_state: game_state_t = {
   initialized: false,
-  treachery_card_pool: initialCardPool,
+  treachery_card_pool: initial_card_pool,
 };
 
 export const game_state_reducer = createReducer(default_game_state, builder => {
