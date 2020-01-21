@@ -16,7 +16,7 @@ const ConfirmResetPage: React.FC = () => {
 
   return (
     <Modal header={header} close={close} buttons={[confirm_button]}>
-      <p className="subtitle"> Are you sure?</p>
+      <p className="subtitle has-text-centered"> Are you sure?</p>
     </Modal>
   );
 };

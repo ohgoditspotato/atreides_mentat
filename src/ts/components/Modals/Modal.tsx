@@ -3,7 +3,7 @@ import * as React from "react";
 export interface PageProps {
   close: () => void;
   header?: JSX.Element | string;
-  buttons?: ReadonlyArray<JSX.Element>;
+  buttons?: ReadonlyArray<JSX.Element> | JSX.Element;
   isFull?: boolean;
 }
 
@@ -22,19 +22,10 @@ const Modal: React.FC<PageProps> = props => {
         </header>
         <section className="modal-card-body">{props.children}</section>
         <footer className="modal-card-foot">
-          <div className="columns">
-            {props.buttons &&
-              props.buttons.map((button, i) => (
-                <div className="column" key={i}>
-                  {button}
-                </div>
-              ))}
-            <div className="column">
-              <button className="button is-secondary is-fullwidth" onClick={props.close}>
-                Back
-              </button>
-            </div>
-          </div>
+          {props.buttons}
+          <button className="button is-secondary is-fullwidth" onClick={props.close}>
+            Back
+          </button>
         </footer>
       </div>
     </div>
