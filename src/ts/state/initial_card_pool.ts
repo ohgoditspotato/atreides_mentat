@@ -1,105 +1,170 @@
 import { treachery_card_t } from "ts/treachery_card";
 
-const initial_card_pool: ReadonlyArray<{ card: treachery_card_t; num?: number }> = [
+const initial_deck: ReadonlyArray<treachery_card_t> = [
   {
-    card: {
-      kind: "Weapon",
-      type: "Poison",
-    },
-    num: 4,
+    id: "Chaumas",
+    kind: "Weapon",
+    type: "Poison",
   },
   {
-    card: {
-      kind: "Weapon",
-      type: "Projectile",
-    },
-    num: 4,
+    id: "Chaumurky",
+    kind: "Weapon",
+    type: "Poison",
   },
   {
-    card: {
-      kind: "Weapon",
-      type: "Lasgun",
-    },
-    num: 1,
-  },
-
-  {
-    card: {
-      kind: "Defense",
-      type: "Shield",
-    },
-    num: 4,
+    id: "Gom Jabbar",
+    kind: "Weapon",
+    type: "Poison",
   },
   {
-    card: {
-      kind: "Defense",
-      type: "Snooper",
-    },
-    num: 4,
-  },
-
-  {
-    card: {
-      kind: "Special",
-      type: "Cheap Hero",
-    },
-    num: 3,
+    id: "Kriminon",
+    kind: "Weapon",
+    type: "Poison",
   },
   {
-    card: {
-      kind: "Special",
-      type: "Karama",
-    },
-    num: 2,
+    id: "Slip-Tip",
+    kind: "Weapon",
+    type: "Projectile",
   },
   {
-    card: {
-      kind: "Special",
-      type: "Truthtrance",
-    },
-    num: 2,
+    id: "Slip-Tip",
+    kind: "Weapon",
+    type: "Projectile",
   },
   {
-    card: {
-      kind: "Special",
-      type: "Family Atomics",
-    },
-    num: 1,
+    id: "Maula Pistol",
+    kind: "Weapon",
+    type: "Projectile",
   },
   {
-    card: {
-      kind: "Special",
-      type: "Hajr",
-    },
-    num: 1,
+    id: "Chrysknife",
+    kind: "Weapon",
+    type: "Projectile",
   },
   {
-    card: {
-      kind: "Special",
-      type: "Tleilaxu Ghola",
-    },
-    num: 1,
-  },
-  {
-    card: {
-      kind: "Special",
-      type: "Weather Control",
-    },
-    num: 1,
+    id: "Lasgun",
+    kind: "Weapon",
+    type: "Lasgun",
   },
 
   {
-    card: {
-      kind: "Useless",
-    },
-    num: 5,
+    id: "shield_1",
+    kind: "Defense",
+    type: "Shield",
+  },
+  {
+    id: "shield_2",
+    kind: "Defense",
+    type: "Shield",
+  },
+  {
+    id: "shield_3",
+    kind: "Defense",
+    type: "Shield",
+  },
+  {
+    id: "shield_4",
+    kind: "Defense",
+    type: "Shield",
   },
 
   {
-    card: {
-      kind: "Unknown",
-    },
+    id: "snooper_1",
+    kind: "Defense",
+    type: "Snooper",
+  },
+  {
+    id: "snooper_2",
+    kind: "Defense",
+    type: "Snooper",
+  },
+  {
+    id: "snooper_3",
+    kind: "Defense",
+    type: "Snooper",
+  },
+  {
+    id: "snooper_4",
+    kind: "Defense",
+    type: "Snooper",
+  },
+
+  {
+    id: "cheap hero 1",
+    kind: "Special",
+    type: "Cheap Hero",
+  },
+  {
+    id: "cheap hero 2",
+    kind: "Special",
+    type: "Cheap Hero",
+  },
+  {
+    id: "cheap hero 3",
+    kind: "Special",
+    type: "Cheap Hero",
+  },
+  {
+    id: "karama 1",
+    kind: "Special",
+    type: "Karama",
+  },
+  {
+    id: "karama 2",
+    kind: "Special",
+    type: "Karama",
+  },
+  {
+    id: "truthtrance 1",
+    kind: "Special",
+    type: "Truthtrance",
+  },
+  {
+    id: "truthtrance 2",
+    kind: "Special",
+    type: "Truthtrance",
+  },
+  {
+    id: "family atomics",
+    kind: "Special",
+    type: "Family Atomics",
+  },
+  {
+    id: "hajr",
+    kind: "Special",
+    type: "Hajr",
+  },
+  {
+    id: "tleilaxu ghola",
+    kind: "Special",
+    type: "Tleilaxu Ghola",
+  },
+  {
+    id: "weather control",
+    kind: "Special",
+    type: "Weather Control",
+  },
+
+  {
+    id: "Baliset",
+    kind: "Useless",
+  },
+  {
+    id: "Jubba Cloak",
+    kind: "Useless",
+  },
+  {
+    id: "Kulon",
+    kind: "Useless",
+  },
+  {
+    id: "La La La",
+    kind: "Useless",
+  },
+  {
+    id: "Trip to Gamont",
+    kind: "Useless",
   },
 ] as const;
 
-export default initial_card_pool;
+export default initial_deck;
