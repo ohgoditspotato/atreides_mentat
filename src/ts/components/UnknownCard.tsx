@@ -92,7 +92,9 @@ const UnknownCard: React.FC<{
         {onDelete ? <button className="delete" onClick={onDelete}></button> : null}
       </header>
       <div className="card-content is-size-7 content">
-        {!small && (
+        {small ? <p className="heading">The future is uncertain</p> : (
+          <>
+          <p className="heading">Your mentat predicts the card might be...</p>
           <div className="columns is-multiline is-mobile">
             {ALL_STAT_TYPES.map(key => {
               if (!counts[key].count) {
@@ -108,6 +110,7 @@ const UnknownCard: React.FC<{
               );
             })}
           </div>
+          </>
         )}
       </div>
     </div>

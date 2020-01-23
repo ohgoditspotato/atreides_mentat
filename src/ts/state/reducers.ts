@@ -178,7 +178,7 @@ export const game_state_reducer = createReducer(initial_game_state, builder => {
   builder.addCase(house_remove_unknown, (state, action) => {
     return push_history(state, history => {
       let house = getHouse(action.payload.house, history.houses);
-      const [unknown_card] = house.unknown_cards.splice(action.payload.unknown_index);
+      const [unknown_card] = house.unknown_cards.splice(action.payload.unknown_index, 1);
       const deck = history.decks[unknown_card.deck_index];
       const [card] = deck.cards.splice(
         deck.cards.findIndex(c => c.id === action.payload.actual_card_id),
