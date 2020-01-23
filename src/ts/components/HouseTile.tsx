@@ -3,14 +3,14 @@ import { useSelector } from "react-redux";
 import { house_name_t } from "ts/houses";
 import HouseBanner from "ts/components/HouseBanner";
 import ViewCards from "ts/components/ViewCards";
-import { root_state } from "ts/state/reducers";
+import { root_state_t } from "ts/state/reducers";
 
 export interface HouseTileProps {
   house: house_name_t;
 }
 
 const HouseTile: React.FC<HouseTileProps> = props => {
-  const houseState = useSelector((state: root_state) => state.houses[props.house]);
+  const house_state = useSelector((state: root_state_t) => state.game.current.houses[props.house]);
   return (
     <>
       <div className="box">
@@ -20,7 +20,7 @@ const HouseTile: React.FC<HouseTileProps> = props => {
           </div>
         </div>
         <hr />
-        <ViewCards house={props.house} cards={houseState.cards} />
+        <ViewCards {...house_state} />
       </div>
     </>
   );

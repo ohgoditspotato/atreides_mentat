@@ -1,6 +1,6 @@
 import { treachery_card_t } from "ts/treachery_card";
 
-const initial_deck: ReadonlyArray<treachery_card_t> = [
+const initial_deck: Array<treachery_card_t> = [
   {
     id: "Chaumas",
     kind: "Weapon",
@@ -27,7 +27,7 @@ const initial_deck: ReadonlyArray<treachery_card_t> = [
     type: "Projectile",
   },
   {
-    id: "Slip-Tip",
+    id: "Stunner",
     kind: "Weapon",
     type: "Projectile",
   },
@@ -165,6 +165,6 @@ const initial_deck: ReadonlyArray<treachery_card_t> = [
     id: "Trip to Gamont",
     kind: "Useless",
   },
-] as const;
+];
 
 export default initial_deck;

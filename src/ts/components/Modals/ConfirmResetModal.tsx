@@ -15,7 +15,7 @@ const ConfirmResetPage: React.FC = () => {
   const header = <h1>Reset the game</h1>;
 
   return (
-    <Modal header={header} close={close} buttons={[confirm_button]}>
+    <Modal header={header} close={close} buttons={confirm_button}>
       <p className="subtitle has-text-centered"> Are you sure?</p>
     </Modal>
   );

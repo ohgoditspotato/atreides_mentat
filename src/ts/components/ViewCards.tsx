@@ -1,14 +1,15 @@
 import * as React from "react";
 import { house_name_t } from "ts/houses";
-import { treachery_card_t } from "ts/treachery_card";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import {
   show_add_cards_modal,
   house_remove_card,
   house_toggle_expand_cards,
+  show_discard_unknown_modal,
 } from "ts/state/actions";
 import TreacheryCard, { treachery_card_colours } from "ts/components/TreacheryCard";
-import { root_state } from "ts/state/reducers";
+import { house_state_t } from "ts/state/types";
+import UnknownCard from "ts/components/UnknownCard";
 
 const maxCards = (house: house_name_t) => {
   if (house === "Harkonnen") {
@@ -18,24 +19,21 @@ const maxCards = (house: house_name_t) => {
   return 4;
 };
 
-const ViewCards: React.FC<{
-  house: house_name_t;
-  cards: ReadonlyArray<treachery_card_t>;
-}> = props => {
+const ViewCards: React.FC<house_state_t> = house => {
   const dispatch = useDispatch();
-  const showCards = useSelector((state: root_state) => state.houses[props.house].show_cards);
-  const allowAdd = props.cards.length < maxCards(props.house);
+  const showCards = house.show_cards;
+  const allowAdd = house.cards.length + house.unknown_cards.length < maxCards(house.name);
 
   return (
     <div>
       <div className="columns is-vcentered">
         <div className="column is-narrow" style={{ order: 1 }}>
           <div className="columns is-mobile">
-            {props.cards.length > 0 && (
+            {(house.cards.length > 0 || house.unknown_cards.length > 0) && (
               <div className="column">
                 <button
                   className="button is-link is-outlined is-fullwidth"
-                  onClick={() => dispatch(house_toggle_expand_cards(props.house))}
+                  onClick={() => dispatch(house_toggle_expand_cards(house.name))}
                 >
                   <span className="icon">
                     <i className={"fas fa-angle-" + (showCards ? "up" : "down")} />
@@ -48,7 +46,7 @@ const ViewCards: React.FC<{
               <button
                 className="button is-danger is-outlined is-fullwidth"
                 onClick={() => {
-                  if (allowAdd) dispatch(show_add_cards_modal(props.house));
+                  if (allowAdd) dispatch(show_add_cards_modal(house.name));
                 }}
                 disabled={!allowAdd}
               >
@@ -63,15 +61,11 @@ const ViewCards: React.FC<{
         <div className="column" style={{ order: 0 }}>
           <div className="tags">
             <>
-              {props.cards.length === 0 && <span className="tag is-medium">No cards in hand</span>}
+              {house.cards.length === 0 && house.unknown_cards.length === 0 && (
+                <span className="tag is-medium">No cards in hand</span>
+              )}
               {!showCards &&
-                props.cards.map((card, index) => {
-                  const deleteButton = (
-                    <button
-                      className="delete is-small"
-                      onClick={() => dispatch(house_remove_card(props.house, index, card))}
-                    ></button>
-                  );
+                house.cards.map((card, index) => {
                   const colour = treachery_card_colours[card.kind].bg;
                   let text: string = card.kind;
                   switch (card.kind) {
@@ -83,8 +77,30 @@ const ViewCards: React.FC<{
                     }
                   }
                   return (
-                    <span className={"tag is-medium is-" + colour} key={text + index.toString()}>
+                    <span className={"tag is-medium is-" + colour} key={card.id}>
                       {text}
+                      <button
+                        className="delete is-small"
+                        onClick={() => dispatch(house_remove_card(house.name, index, card))}
+                      ></button>
+                    </span>
+                  );
+                })}
+              {!showCards &&
+                house.unknown_cards.map((_, index) => {
+                  const deleteButton = (
+                    <button
+                      className="delete is-small"
+                      onClick={() => dispatch(show_discard_unknown_modal(house.name, index))}
+                    ></button>
+                  );
+                  const colour = treachery_card_colours["Unknown"].bg;
+                  return (
+                    <span
+                      className={"tag is-medium is-" + colour}
+                      key={"Unknown" + index.toString()}
+                    >
+                      Unknown
                       {deleteButton}
                     </span>
                   );
@@ -93,18 +109,28 @@ const ViewCards: React.FC<{
           </div>
         </div>
       </div>
-      {props.cards.length !== 0 && showCards && (
+      {(house.cards.length > 0 || house.unknown_cards.length > 0) && showCards && (
         <>
           <hr />
           <div className="columns is-multiline">
-            {props.cards.map((card, index) => (
+            {house.cards.map((card, index) => (
               <div className="column is-half" key={"card-" + index}>
                 <TreacheryCard
                   card={card}
-                  onDelete={() => dispatch(house_remove_card(props.house, index, card))}
+                  onDelete={() => dispatch(house_remove_card(house.name, index, card))}
                 />
               </div>
             ))}
+            {house.unknown_cards.map((unknown_card, index) => {
+              return (
+                <div className="column is-half" key={"unknown-" + index}>
+                  <UnknownCard
+                    deck_index={unknown_card.deck_index}
+                    onDelete={() => dispatch(show_discard_unknown_modal(house.name, index))}
+                  />
+                </div>
+              );
+            })}
           </div>
         </>
       )}
