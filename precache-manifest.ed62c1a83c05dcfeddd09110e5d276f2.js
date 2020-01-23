@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "00c4848f0daf108849382c1286c0ded5",
+    "revision": "793842bf03d0da399344543c2fb5b1c4",
     "url": "/atreides_mentat/index.html"
   },
   {
@@ -8,8 +8,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/atreides_mentat/static/css/2.ba689351.chunk.css"
   },
   {
-    "revision": "b50501efbd68fa78da57",
-    "url": "/atreides_mentat/static/css/main.d3db8214.chunk.css"
+    "revision": "cf685644e9ba8d6d4690",
+    "url": "/atreides_mentat/static/css/main.63229d72.chunk.css"
   },
   {
     "revision": "f4a4dce9dfe43212aba5",
@@ -20,8 +20,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/atreides_mentat/static/js/2.611b4877.chunk.js.LICENSE"
   },
   {
-    "revision": "b50501efbd68fa78da57",
-    "url": "/atreides_mentat/static/js/main.86ef0a9b.chunk.js"
+    "revision": "cf685644e9ba8d6d4690",
+    "url": "/atreides_mentat/static/js/main.a2b89b9d.chunk.js"
   },
   {
     "revision": "31199c8e39e863c08e1d",
