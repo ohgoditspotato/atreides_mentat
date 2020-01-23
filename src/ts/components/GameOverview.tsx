@@ -15,10 +15,11 @@ const GameOverview: React.FC = () => {
   const { houses, view, deck_cards, discarded_cards, cards_left_in_deck, can_undo } = useSelector(
     (state: root_state_t) => {
       let discarded_cards: Array<treachery_card_t> = [];
-      for (let i = 0; i < state.game.current.decks.length; i++) {
-        if (i === state.game.current.draw_deck_index) {
-          continue;
-        }
+      for (
+        let i = state.game.current.draw_deck_index + 1;
+        i < state.game.current.decks.length;
+        i++
+      ) {
         discarded_cards = discarded_cards.concat(state.game.current.decks[i].cards);
       }
       discarded_cards.sort(card_sort);
@@ -111,7 +112,10 @@ const GameOverview: React.FC = () => {
       <section className="section">
         <div className="container">
           <h2 className="title">Cards in deck</h2>
-          <h3 className="subtitle">{cards_left_in_deck} cards remaining before a shuffle</h3>
+          <h3 className="subtitle">
+            {cards_left_in_deck} cards remain before a shuffle. Note that because unknown cards have
+            been drawn, more than a single card type may be shown below
+          </h3>
           <ExpandableCardList cards={deck_cards} />
         </div>
       </section>

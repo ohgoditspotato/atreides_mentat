@@ -126,12 +126,12 @@ export const game_state_reducer = createReducer(initial_game_state, builder => {
   });
 
   builder.addCase(house_add_card, (state, action) => {
-    return push_history(state, next => {
-      let house = getHouse(action.payload.house, next.houses);
+    return push_history(state, history => {
+      let house = getHouse(action.payload.house, history.houses);
       house.cards.push(action.payload.card);
       house.cards.sort(card_sort);
 
-      const deck = next.decks[next.draw_deck_index];
+      const deck = history.decks[history.draw_deck_index];
       deck.cards.splice(
         deck.cards.findIndex(c => c.id === action.payload.card.id),
         1
@@ -139,9 +139,9 @@ export const game_state_reducer = createReducer(initial_game_state, builder => {
 
       if (deck.cards.length - deck.num_unknowns === 0) {
         // We've exhausted this deck. Increment draw deck, and add a new discard deck if necessary
-        next.draw_deck_index += 1;
-        if (next.decks.length === next.draw_deck_index) {
-          next.decks.push({ cards: [], num_unknowns: 0 });
+        history.draw_deck_index += 1;
+        if (history.decks.length - 1 === history.draw_deck_index) {
+          history.decks.push({ cards: [], num_unknowns: 0 });
         }
       }
     });
@@ -168,7 +168,7 @@ export const game_state_reducer = createReducer(initial_game_state, builder => {
       if (deck.cards.length - deck.num_unknowns === 0) {
         // We've exhausted this deck. Increment draw deck, and add a new discard deck if necessary
         history.draw_deck_index += 1;
-        if (history.decks.length === history.draw_deck_index) {
+        if (history.decks.length - 1 === history.draw_deck_index) {
           history.decks.push({ cards: [], num_unknowns: 0 });
         }
       }
