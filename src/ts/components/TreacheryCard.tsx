@@ -19,7 +19,7 @@ export const treachery_card_colours = {
   Unknown: { text: "white", bg: "dark" },
 } as const;
 
-const icons = {
+export const treachery_card_icons = {
   Shield: <ShieldIcon width={32} />,
   Snooper: <SnooperIcon width={32} />,
   Lasgun: <LaserIcon width={32} />,
@@ -32,55 +32,57 @@ const icons = {
 
 const TreacheryCard: React.FC<{
   card: treachery_card_t;
+  onClick?: () => void;
   onDelete?: () => void;
-  num?: number;
-}> = ({ card, onDelete, num }) => {
+}> = ({ card, onClick, onDelete }) => {
   const info = treachery_card_colours[card.kind];
-  let title = "";
+  let title: string;
   let text: JSX.Element | null = null;
   let icon: JSX.Element;
   switch (card.kind) {
-    case "Unknown": {
-      title = "Unknown";
-      icon = icons["Unknown"];
-      text = card_text.Unknown;
-      break;
-    }
     case "Useless": {
-      title = "Useless";
-      icon = icons["Useless"];
+      icon = treachery_card_icons["Useless"];
       text = card_text.Useless;
+      title = card.id;
       break;
     }
     case "Special": {
-      title = "Special - " + card.type;
-      icon = icons["Special"];
+      icon = treachery_card_icons["Special"];
       text = card_text[card.type];
+      title = card.type;
       break;
     }
-    case "Weapon":
-    case "Defense": {
-      title = card.kind + " - " + card.type;
-      icon = icons[card.type];
+    case "Weapon": {
+      icon = treachery_card_icons[card.type];
       text = card_text[card.type];
+      title = card.id;
+      break;
+    }
+    case "Defense": {
+      icon = treachery_card_icons[card.type];
+      text = card_text[card.type];
+      title = card.type;
       break;
     }
   }
+  let className = "card";
+  if (onClick) {
+    className += " is-hoverable";
+  }
+
+  let style: React.CSSProperties = { height: "280px", overflowY: "auto" };
+  if (onClick) {
+    style.cursor = "pointer";
+  }
+
   return (
-    <div className="card" style={{ height: "250px", overflowY: "auto" }}>
+    <div className={className} style={style} onClick={onClick}>
       <header className={"modal-card-head has-background-" + info.bg} style={{ padding: "0 20px" }}>
         <figure className="image is-32x32 level-item">{icon}</figure>
         <div className={"card-header-title has-text-" + info.text}>{title}</div>
         {onDelete ? <button className="delete" onClick={onDelete}></button> : null}
       </header>
-      <div className="card-content is-size-7 content">
-        {num && (
-          <p>
-            <b>{num} remaining</b>
-          </p>
-        )}
-        {text}
-      </div>
+      <div className="card-content is-size-7 content">{text}</div>
     </div>
   );
 };

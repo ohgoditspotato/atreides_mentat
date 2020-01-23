@@ -49,8 +49,29 @@ export default () => {
     <>
       <section className="section">
         <div className="container">
-          <p className="title is-1">New game</p>
-          <p className="subtitle is-5">Select which houses are present in the game</p>
+          <div className="columns is-vcentered">
+            <div className="column">
+              <p className="title is-1">New game</p>
+              <p className="subtitle is-5">Select which houses are present in the game</p>
+            </div>
+            <div className="column is-narrow">
+              <button
+                className="button is-success is-large"
+                disabled={!allow_start}
+                onClick={() => {
+                  if (allow_start) {
+                    dispatch(start_game(state));
+                    dispatch(close_modal());
+                  }
+                }}
+              >
+                <span className="icon">
+                  <i className="fas fa-play"></i>
+                </span>
+                <span>Start game</span>
+              </button>
+            </div>
+          </div>
         </div>
       </section>
       <section className="section">
@@ -68,22 +89,6 @@ export default () => {
               />
             ))}
           </div>
-        </div>
-      </section>
-      <section className="section">
-        <div className="container">
-          <button
-            className="button is-primary is-fullwidth"
-            disabled={!allow_start}
-            onClick={() => {
-              if (allow_start) {
-                dispatch(start_game(state));
-                dispatch(close_modal());
-              }
-            }}
-          >
-            Start game
-          </button>
         </div>
       </section>
     </>

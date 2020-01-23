@@ -31,3 +31,26 @@
   flex-direction: column;
   align-items: center;
 }
+
+.card.is-selected {
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.column.full-tag {
+  padding: 0.25rem;
+  .tag {
+    width: 100%;
+  }
+}
+
+.card.is-hoverable {
+  vertical-align: middle;
+  transform: perspective(1px) translateZ(0);
+  transition-duration: 0.3s;
+  transition-property: box-shadow, transform;
+}
+
+.card.is-hoverable:hover {
+  box-shadow: 0 10px 10px -10px rgba(0, 0, 0, 0.5);
+  transform: scale(1.05);
+}

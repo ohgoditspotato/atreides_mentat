@@ -1,18 +1,22 @@
 export interface weapon_card {
+  id: string;
   kind: "Weapon";
   type: "Projectile" | "Poison" | "Lasgun";
 }
 
 export interface defence_card {
+  id: string;
   kind: "Defense";
   type: "Shield" | "Snooper";
 }
 
 export interface useless_card {
+  id: string;
   kind: "Useless";
 }
 
 export interface special_card {
+  id: string;
   kind: "Special";
   type:
     | "Truthtrance"
@@ -24,25 +28,27 @@ export interface special_card {
     | "Family Atomics";
 }
 
-export interface unknown_card {
-  kind: "Unknown";
+export interface unknown_card_t {
+  deck_index: number;
 }
 
-export type treachery_card_t =
-  | weapon_card
-  | defence_card
-  | useless_card
-  | special_card
-  | unknown_card;
-export type treachery_card_kind = treachery_card_t["kind"];
-export type special_card_type = special_card["type"];
-export type weapon_card_type = weapon_card["type"];
-export type defence_card_type = defence_card["type"];
+export type treachery_card_t = weapon_card | defence_card | useless_card | special_card;
 
-export const list_priorities: { [key in treachery_card_kind]: number } = {
+const list_priorities: { [key in treachery_card_t["kind"]]: number } = {
   Weapon: 0,
   Defense: 1,
   Special: 2,
   Useless: 3,
-  Unknown: 4,
 };
+
+export function card_sort(a: treachery_card_t, b: treachery_card_t): number {
+  if (a.kind !== b.kind) {
+    return list_priorities[a.kind] - list_priorities[b.kind];
+  }
+  let anyA: any = a;
+  let anyB: any = b;
+  if (anyA.type !== anyB.type) {
+    return anyA.type.localeCompare(anyB.type);
+  }
+  return a.id.localeCompare(b.id);
+}

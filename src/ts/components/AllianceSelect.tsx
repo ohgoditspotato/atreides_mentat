@@ -2,13 +2,13 @@ import * as React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { house_name_t, ALL_HOUSE_NAMES } from "ts/houses";
 import { house_set_ally } from "ts/state/actions";
-import { root_state } from "ts/state/reducers";
+import { root_state_t } from "ts/state/reducers";
 
 const AllianceSelect: React.FC<{
   house: house_name_t;
   ally: house_name_t | null;
 }> = props => {
-  const houses_state = useSelector((state: root_state) => state.houses);
+  const houses_state = useSelector((state: root_state_t) => state.game.current.houses);
   const dispatch = useDispatch();
 
   const possible_allies = [

@@ -9,7 +9,7 @@ import { ReactComponent as HarkonnenIcon } from "assets/houses/harkonnen.svg";
 import { ReactComponent as GuildIcon } from "assets/houses/spacing_guild.svg";
 import { ReactComponent as NoneIcon } from "assets/houses/none.svg";
 import { useSelector, useDispatch } from "react-redux";
-import { root_state } from "ts/state/reducers";
+import { root_state_t } from "ts/state/reducers";
 import { house_set_ally } from "ts/state/actions";
 
 export const icon_map = {
@@ -36,12 +36,14 @@ export const HouseNameWithIcon: React.FC<{ house: house_name_t }> = ({ house }) 
 
 const HouseBanner: React.FC<{ house: house_name_t }> = props => {
   const dispatch = useDispatch();
-  const { ally, possibleAllies } = useSelector((state: root_state) => {
+  const { ally, possibleAllies } = useSelector((state: root_state_t) => {
     return {
-      ally: state.houses[props.house].ally,
+      ally: state.game.current.houses[props.house].ally,
       possibleAllies: [
         null,
-        ...ALL_HOUSE_NAMES.filter(name => name !== props.house && state.houses[name].active),
+        ...ALL_HOUSE_NAMES.filter(
+          name => name !== props.house && state.game.current.houses[name].active
+        ),
       ],
     };
   });
