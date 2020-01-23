@@ -18,6 +18,19 @@ const migrations = {
   3: (state: any) => {
     return undefined;
   },
+  4: (state: any) => {
+    return {
+      ...state,
+      game: {
+        ...state.game,
+        history: [],
+        current: {
+          ...state.game.current,
+          decks: [...state.game.current.decks, { cards: [], num_unknowns: 0 }],
+        },
+      },
+    };
+  },
 };
 
 const persistConfig = {
@@ -25,7 +38,7 @@ const persistConfig = {
   storage: storage,
   stateReconciler: autoMergeLevel2,
   migrate: createMigrate(migrations),
-  version: 3,
+  version: 4,
 };
 
 const pReducer = persistReducer<root_state_t>(persistConfig, root_reducer);
