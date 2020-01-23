@@ -78,7 +78,7 @@ const UnknownCard: React.FC<{
     className += " is-hoverable";
   }
   if (small) {
-    className += " small"
+    className += " small";
   }
 
   return (
@@ -87,12 +87,12 @@ const UnknownCard: React.FC<{
         className={"modal-card-head has-background-" + colours.bg}
         style={{ padding: "0 20px" }}
       >
-        <figure className="image is-32x32 level-item">{treachery_card_icons.Unknown}</figure>
+        <figure className="image is-32x32 level-item">{treachery_card_icons.Unknown(32)}</figure>
         <div className={"card-header-title has-text-" + colours.text}>Unknown</div>
         {onDelete ? <button className="delete" onClick={onDelete}></button> : null}
       </header>
       <div className="card-content is-size-7 content">
-        {!small &&
+        {!small && (
           <div className="columns is-multiline is-mobile">
             {ALL_STAT_TYPES.map(key => {
               if (!counts[key].count) {
@@ -103,12 +103,12 @@ const UnknownCard: React.FC<{
                 <div className="column is-half full-tag" key={key}>
                   <span className={"tag is-medium is-" + colour}>
                     {key} {((counts[key].count * 100.0) / deck.cards.length).toFixed(0)}%
-                </span>
+                  </span>
                 </div>
               );
             })}
           </div>
-        }
+        )}
       </div>
     </div>
   );
