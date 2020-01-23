@@ -4,10 +4,20 @@ const BattlePlan = <p>Play as part of your Battle Plan.</p>;
 const WinnerKeeps = <p>You may keep this card if you win this battle</p>;
 const Special = <p className="heading">Special</p>;
 
+export const card_subheading = {
+  Useless: <p className="heading">Useless</p>,
+  Unknown: null,
+  Projectile: <p className="heading">Projectile</p>,
+  Poison: <p className="heading">Poison</p>,
+  Lasgun: <p className="heading">Unique Weapon</p>,
+  Snooper: <p className="heading">Poison defense</p>,
+  Shield: <p className="heading">Projectile defense</p>,
+  Special: Special
+} as const;
+
 const card_text = {
   Useless: (
     <>
-      <p className="heading">Useless</p>
       <p>Play as part of your Battle Plan, in place of a weapon, defense, or both.</p>
       <p>
         This card has no value in play, and you can discard it only by playing it in your Battle
@@ -20,7 +30,6 @@ const card_text = {
   ),
   Projectile: (
     <>
-      <p className="heading">Projectile</p>
       {BattlePlan}
       <p>
         Kills opponent's leader before battle is resolved. Opponent may protect leader with a
@@ -31,7 +40,6 @@ const card_text = {
   ),
   Poison: (
     <>
-      <p className="heading">Poison</p>
       {BattlePlan}
       <p>
         Kills opponent's leader before battle is resolved. Opponent may protect leader with a
@@ -54,7 +62,6 @@ const card_text = {
   ),
   Snooper: (
     <>
-      <p className="heading">Poison defense</p>
       {BattlePlan}
       <p>Protects your leader from a poison weapon in this battle.</p>
       {WinnerKeeps}
@@ -62,7 +69,6 @@ const card_text = {
   ),
   Shield: (
     <>
-      <p className="heading">Projectile defense</p>
       {BattlePlan}
       <p>Protects your leader from a projectile weapon in this battle.</p>
       {WinnerKeeps}
@@ -70,7 +76,6 @@ const card_text = {
   ),
   "Family Atomics": (
     <>
-      {Special}
       <p>
         After the first game turn, play after the storm movement is calculated, but before the storm
         is moved, <b>but only</b> if you have one more forces on the Shield Wall or a territory
@@ -87,7 +92,6 @@ const card_text = {
   ),
   "Weather Control": (
     <>
-      {Special}
       <p>
         After the first game turn, play during the Storm Phase, before the Storm Marker is moved.
       </p>
@@ -99,7 +103,6 @@ const card_text = {
   ),
   Hajr: (
     <>
-      {Special}
       <p>Play during Movement Phase.</p>
       <p>Make an extra on-planet force movement subject to normal movement rules.</p>
       <p>The forces you move may be a group you've already moved this phase or another group.</p>
@@ -107,7 +110,6 @@ const card_text = {
   ),
   "Cheap Hero": (
     <>
-      {Special}
       <p>Play as a leader with zero strength on your Battle Plan and discard after the battle.</p>
       <p>
         You may also play a weapon and a defense. The cheap hero may be played in place of a leader
@@ -117,7 +119,6 @@ const card_text = {
   ),
   Karama: (
     <>
-      {Special}
       <p>
         After factions complete their "At Start" actions and after game set-up, use this card to
         stop a player from using one of their faction advantages when they attempt to use it. Stops
@@ -136,7 +137,6 @@ const card_text = {
   ),
   "Tleilaxu Ghola": (
     <>
-      {Special}
       <p>Play at any time to gain an extra revival.</p>
       <p>
         You may immediately revive 1 of your leaders regardless of how many leaders you have in the
@@ -148,7 +148,6 @@ const card_text = {
   ),
   Truthtrance: (
     <>
-      {Special}
       <p>
         Publicly ask one other player a single yes/no question about the game that must be answered
         publicly. The game pauses until an answer is given.

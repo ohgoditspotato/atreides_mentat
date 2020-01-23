@@ -19,9 +19,10 @@ const UnknownCard: React.FC<{
   deck_index: number;
   onClick?: () => void;
   onDelete?: () => void;
-}> = ({ onClick, onDelete: on_delete, deck_index: deck_id }) => {
+  small?: boolean;
+}> = ({ onClick, onDelete, deck_index, small }) => {
   const deck = useSelector((root_state: root_state_t) => {
-    return root_state.game.current.decks[deck_id];
+    return root_state.game.current.decks[deck_index];
   });
 
   const colours = treachery_card_colours.Unknown;
@@ -72,42 +73,42 @@ const UnknownCard: React.FC<{
     }
   }
 
-  let className = "card";
+  let className = "card treachery-card";
   if (onClick) {
     className += " is-hoverable";
   }
-
-  let style: React.CSSProperties = { height: "280px", overflowY: "auto" };
-  if (onClick) {
-    style.cursor = "pointer";
+  if (small) {
+    className += " small"
   }
 
   return (
-    <div className={className} style={style} onClick={onClick}>
+    <div className={className} onClick={onClick}>
       <header
         className={"modal-card-head has-background-" + colours.bg}
         style={{ padding: "0 20px" }}
       >
         <figure className="image is-32x32 level-item">{treachery_card_icons.Unknown}</figure>
         <div className={"card-header-title has-text-" + colours.text}>Unknown</div>
-        {on_delete ? <button className="delete" onClick={on_delete}></button> : null}
+        {onDelete ? <button className="delete" onClick={onDelete}></button> : null}
       </header>
       <div className="card-content is-size-7 content">
-        <div className="columns is-multiline is-mobile">
-          {ALL_STAT_TYPES.map(key => {
-            if (!counts[key].count) {
-              return null;
-            }
-            const colour = treachery_card_colours[counts[key].kind].bg;
-            return (
-              <div className="column is-half full-tag" key={key}>
-                <span className={"tag is-medium is-" + colour}>
-                  {key} {((counts[key].count * 100.0) / deck.cards.length).toFixed(0)}%
+        {!small &&
+          <div className="columns is-multiline is-mobile">
+            {ALL_STAT_TYPES.map(key => {
+              if (!counts[key].count) {
+                return null;
+              }
+              const colour = treachery_card_colours[counts[key].kind].bg;
+              return (
+                <div className="column is-half full-tag" key={key}>
+                  <span className={"tag is-medium is-" + colour}>
+                    {key} {((counts[key].count * 100.0) / deck.cards.length).toFixed(0)}%
                 </span>
-              </div>
-            );
-          })}
-        </div>
+                </div>
+              );
+            })}
+          </div>
+        }
       </div>
     </div>
   );

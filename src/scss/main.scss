@@ -23,7 +23,7 @@
 }
 
 .modal-card.is-full {
-  width: 95%;
+  width: 80%;
 }
 
 .level-top {
@@ -48,9 +48,19 @@
   transform: perspective(1px) translateZ(0);
   transition-duration: 0.3s;
   transition-property: box-shadow, transform;
+  cursor: pointer;
 }
 
 .card.is-hoverable:hover {
   box-shadow: 0 10px 10px -10px rgba(0, 0, 0, 0.5);
   transform: scale(1.05);
+}
+
+.card.treachery-card {
+  height: 280px;
+  overflow-y: auto;
+}
+
+.card.treachery-card.small {
+  height: 120px;
 }

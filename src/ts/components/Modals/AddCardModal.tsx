@@ -33,6 +33,7 @@ const AddCardPage: React.FC<{ house: house_name_t }> = props => {
               dispatch(house_add_unknown(props.house));
               dispatch(close_modal());
             }}
+            small
           />
         </div>
         {draw_deck.cards.map(card => {
@@ -44,6 +45,7 @@ const AddCardPage: React.FC<{ house: house_name_t }> = props => {
                   dispatch(house_add_card(props.house, card));
                   dispatch(close_modal());
                 }}
+                small
               />
             </div>
           );
