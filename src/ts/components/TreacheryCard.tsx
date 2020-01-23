@@ -20,14 +20,14 @@ export const treachery_card_colours = {
 } as const;
 
 export const treachery_card_icons = {
-  Shield: <ShieldIcon width={32} />,
-  Snooper: <SnooperIcon width={32} />,
-  Lasgun: <LaserIcon width={32} />,
-  Poison: <PoisonDropIcon width={32} />,
-  Projectile: <CrosshairIcon width={32} />,
-  Special: <HaltIcon width={32} />,
-  Useless: <GuitarIcon width={32} />,
-  Unknown: <UnknownIcon width={32} />,
+  Shield: (width?: number) => <ShieldIcon width={width ? width : 32} />,
+  Snooper: (width?: number) => <SnooperIcon width={width ? width : 32} />,
+  Lasgun: (width?: number) => <LaserIcon width={width ? width : 32} />,
+  Poison: (width?: number) => <PoisonDropIcon width={width ? width : 32} />,
+  Projectile: (width?: number) => <CrosshairIcon width={width ? width : 32} />,
+  Special: (width?: number) => <HaltIcon width={width ? width : 32} />,
+  Useless: (width?: number) => <GuitarIcon width={width ? width : 32} />,
+  Unknown: (width?: number) => <UnknownIcon width={width ? width : 32} />,
 } as const;
 
 const TreacheryCard: React.FC<{
@@ -44,28 +44,28 @@ const TreacheryCard: React.FC<{
   switch (card.kind) {
     case "Useless": {
       subheading = card_subheading.Useless;
-      icon = treachery_card_icons["Useless"];
+      icon = treachery_card_icons["Useless"]();
       text = card_text.Useless;
       title = card.id;
       break;
     }
     case "Special": {
       subheading = card_subheading.Special;
-      icon = treachery_card_icons["Special"];
+      icon = treachery_card_icons["Special"]();
       text = card_text[card.type];
       title = card.type;
       break;
     }
     case "Weapon": {
       subheading = card_subheading[card.type];
-      icon = treachery_card_icons[card.type];
+      icon = treachery_card_icons[card.type]();
       text = card_text[card.type];
       title = card.id;
       break;
     }
     case "Defense": {
       subheading = card_subheading[card.type];
-      icon = treachery_card_icons[card.type];
+      icon = treachery_card_icons[card.type]();
       text = card_text[card.type];
       title = card.type;
       break;
@@ -81,13 +81,20 @@ const TreacheryCard: React.FC<{
 
   return (
     <div className={className} onClick={onClick}>
-      <header className={"modal-card-head has-background-" + colour.bg} style={{ padding: "0 20px" }}>
+      <header
+        className={"modal-card-head has-background-" + colour.bg}
+        style={{ padding: "0 20px" }}
+      >
         <figure className="image is-32x32 level-item">{icon}</figure>
         <div className={"card-header-title has-text-" + colour.text}>{title}</div>
         {onDelete ? <button className="delete" onClick={onDelete}></button> : null}
       </header>
-      <div className="card-content is-size-7 content">{subheading}{small ? "" : text}</div>
-    </div>);
+      <div className="card-content is-size-7 content">
+        {subheading}
+        {small ? "" : text}
+      </div>
+    </div>
+  );
 };
 
 export default TreacheryCard;

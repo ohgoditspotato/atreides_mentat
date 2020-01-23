@@ -7,9 +7,13 @@ import {
   house_toggle_expand_cards,
   show_discard_unknown_modal,
 } from "ts/state/actions";
-import TreacheryCard, { treachery_card_colours } from "ts/components/TreacheryCard";
+import TreacheryCard, {
+  treachery_card_colours,
+  treachery_card_icons,
+} from "ts/components/TreacheryCard";
 import { house_state_t } from "ts/state/types";
 import UnknownCard from "ts/components/UnknownCard";
+import TreacheryCardTag from "./TreacheryCardTag";
 
 const maxCards = (house: house_name_t) => {
   if (house === "Harkonnen") {
@@ -65,27 +69,15 @@ const ViewCards: React.FC<house_state_t> = house => {
                 <span className="tag is-medium">No cards in hand</span>
               )}
               {!showCards &&
-                house.cards.map((card, index) => {
-                  const colour = treachery_card_colours[card.kind].bg;
-                  let text: string = card.kind;
-                  switch (card.kind) {
-                    case "Weapon":
-                    case "Defense":
-                    case "Special": {
-                      text = card.type;
-                      break;
-                    }
-                  }
-                  return (
-                    <span className={"tag is-medium is-" + colour} key={card.id}>
-                      {text}
-                      <button
-                        className="delete is-small"
-                        onClick={() => dispatch(house_remove_card(house.name, index, card))}
-                      ></button>
-                    </span>
-                  );
-                })}
+                house.cards.map((card, index) => (
+                  <TreacheryCardTag
+                    card={card}
+                    key={card.id}
+                    onDelete={() => {
+                      dispatch(house_remove_card(house.name, index, card));
+                    }}
+                  />
+                ))}
               {!showCards &&
                 house.unknown_cards.map((_, index) => {
                   const deleteButton = (
@@ -100,6 +92,7 @@ const ViewCards: React.FC<house_state_t> = house => {
                       className={"tag is-medium is-" + colour}
                       key={"Unknown" + index.toString()}
                     >
+                      <figure className="image is-24x24">{treachery_card_icons.Unknown(24)}</figure>
                       Unknown
                       {deleteButton}
                     </span>

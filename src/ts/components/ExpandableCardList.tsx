@@ -2,8 +2,25 @@ import React from "react";
 import { treachery_card_t } from "ts/treachery_card";
 import TreacheryCard, { treachery_card_colours } from "ts/components/TreacheryCard";
 
+type card_summary = {
+  [key in treachery_card_t["kind"]]: number;
+};
+
+const card_kinds = ["Weapon", "Defense", "Special", "Useless"] as const;
+
 const ExpandableCardList: React.FC<{ cards: Array<treachery_card_t> }> = ({ cards }) => {
   const [expand, set_expand] = React.useState(false);
+
+  const summary: card_summary = {
+    Weapon: 0,
+    Defense: 0,
+    Special: 0,
+    Useless: 0,
+  };
+
+  for (let card of cards) {
+    summary[card.kind]++;
+  }
 
   return (
     <div className="box">
@@ -11,20 +28,11 @@ const ExpandableCardList: React.FC<{ cards: Array<treachery_card_t> }> = ({ card
         <div className="column">
           <div className="tags">
             {!expand &&
-              cards.map((card, index) => {
-                const colour = treachery_card_colours[card.kind].bg;
-                let text: string = card.kind;
-                switch (card.kind) {
-                  case "Weapon":
-                  case "Defense":
-                  case "Special": {
-                    text = card.type;
-                    break;
-                  }
-                }
+              card_kinds.map(key => {
+                if (!summary[key]) return null;
                 return (
-                  <span className={"tag is-medium is-" + colour} key={card.id}>
-                    {text}
+                  <span className={"tag is-medium is-" + treachery_card_colours[key].bg} key={key}>
+                    {summary[key]} x {key}
                   </span>
                 );
               })}

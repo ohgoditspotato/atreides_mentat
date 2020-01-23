@@ -64,3 +64,12 @@
 .card.treachery-card.small {
   height: 120px;
 }
+
+.tag.is-grey {
+  background-color: $grey;
+  color: $white;
+}
+
+.tag figure.image {
+  margin-right: 0.5rem;
+}
