@@ -1,19 +1,8 @@
 import React from "react";
-import { treachery_card_t } from "ts/treachery_card";
+import { special_card } from "ts/treachery_card";
 import { useSelector } from "react-redux";
 import { root_state_t } from "ts/state/reducers";
 import { treachery_card_colours, treachery_card_icons } from "ts/components/TreacheryCard";
-
-const ALL_STAT_TYPES = [
-  "Projectile",
-  "Poison",
-  "Lasgun",
-  "Shield",
-  "Snooper",
-  "Special",
-  "Useless",
-] as const;
-type stat_type = typeof ALL_STAT_TYPES[number];
 
 const UnknownCard: React.FC<{
   deck_index: number;
@@ -25,49 +14,48 @@ const UnknownCard: React.FC<{
     return root_state.game.current.decks[deck_index];
   });
 
+  const [show_special_details, set_show_special_details] = React.useState(false);
+
   const colours = treachery_card_colours.Unknown;
-  let counts: { [key in stat_type]: { count: number; kind: treachery_card_t["kind"] } } = {
-    Projectile: {
-      count: 0,
-      kind: "Weapon",
-    },
-    Poison: {
-      count: 0,
-      kind: "Weapon",
-    },
-    Lasgun: {
-      count: 0,
-      kind: "Weapon",
-    },
-    Shield: {
-      count: 0,
-      kind: "Defense",
-    },
-    Snooper: {
-      count: 0,
-      kind: "Defense",
-    },
-    Special: {
-      count: 0,
-      kind: "Special",
-    },
-    Useless: {
-      count: 0,
-      kind: "Useless",
-    },
-  };
+  let projectiles = 0;
+  let poisons = 0;
+  let lasguns = 0;
+  let shields = 0;
+  let snoopers = 0;
+  let useless = 0;
+  let specials: special_card[] = [];
 
   for (let i = 0; i < deck.cards.length; i++) {
     const card = deck.cards[i];
     switch (card.kind) {
-      case "Defense":
-      case "Weapon": {
-        counts[card.type].count++;
+      case "Defense": {
+        if (card.type === "Shield") {
+          shields++;
+        } else {
+          snoopers++;
+        }
         break;
       }
-      case "Special":
+      case "Weapon": {
+        switch (card.type) {
+          case "Lasgun":
+            lasguns++;
+            break;
+          case "Poison":
+            poisons++;
+            break;
+          case "Projectile":
+            projectiles++;
+            break;
+        }
+        break;
+      }
+      case "Special": {
+        specials.push(card);
+        break;
+      }
       case "Useless": {
-        counts[card.kind].count++;
+        useless++;
         break;
       }
     }
@@ -81,6 +69,34 @@ const UnknownCard: React.FC<{
     className += " small";
   }
 
+  const Tag: React.FC<{
+    val: number;
+    label: string;
+    colour_key?: keyof typeof treachery_card_colours;
+  }> = ({ val, label, colour_key }) => {
+    if (!val) return null;
+    if (!colour_key) {
+      colour_key = "Special";
+    }
+    return (
+      <div className="column full-tag">
+        <span className={"tag is-medium is-" + treachery_card_colours[colour_key].bg}>
+          {label} {Math.round((val * 100) / deck.cards.length)}%
+        </span>
+      </div>
+    );
+  };
+
+  function countSpecials(key: special_card["type"]) {
+    let count = 0;
+    specials.forEach(s => {
+      if (s.type === key) {
+        count++;
+      }
+    });
+    return count;
+  }
+
   return (
     <div className={className} onClick={onClick}>
       <header
@@ -92,25 +108,38 @@ const UnknownCard: React.FC<{
         {onDelete ? <button className="delete" onClick={onDelete}></button> : null}
       </header>
       <div className="card-content is-size-7 content">
-        {small ? <p className="heading">The future is uncertain</p> : (
-          <>
-          <p className="heading">Your mentat predicts the card might be...</p>
+        <div className="buttons">
+          <button
+            className="button is-link is-outlined"
+            onClick={() => set_show_special_details(!show_special_details)}
+          >
+            <span className="icon">
+              <i className="fas fa-redo"></i>
+            </span>
+            <span>{show_special_details ? "Show others" : "Show specials"}</span>
+          </button>
+        </div>
+        {!show_special_details && (
           <div className="columns is-multiline is-mobile">
-            {ALL_STAT_TYPES.map(key => {
-              if (!counts[key].count) {
-                return null;
-              }
-              const colour = treachery_card_colours[counts[key].kind].bg;
-              return (
-                <div className="column is-half full-tag" key={key}>
-                  <span className={"tag is-medium is-" + colour}>
-                    {key} {((counts[key].count * 100.0) / deck.cards.length).toFixed(0)}%
-                  </span>
-                </div>
-              );
-            })}
+            <Tag label="Projectile" val={projectiles} colour_key="Weapon" />
+            <Tag label="Poison" val={poisons} colour_key="Weapon" />
+            <Tag label="Lasguns" val={lasguns} colour_key="Weapon" />
+            <Tag label="Shield" val={shields} colour_key="Defense" />
+            <Tag label="Snooper" val={snoopers} colour_key="Defense" />
+            <Tag label="Special" val={specials.length} colour_key="Special" />
+            <Tag label="Useless" val={useless} colour_key="Useless" />
           </div>
-          </>
+        )}
+        {show_special_details && (
+          <div className="columns is-multiline">
+            <Tag label="Cheap Hero" val={countSpecials("Cheap Hero")} />
+            <Tag label="Family Atomics" val={countSpecials("Family Atomics")} />
+            <Tag label="Hajr" val={countSpecials("Hajr")} />
+            <Tag label="Karama" val={countSpecials("Karama")} />
+            <Tag label="Tleilaxu Ghola" val={countSpecials("Tleilaxu Ghola")} />
+            <Tag label="Truthtrance" val={countSpecials("Truthtrance")} />
+            <Tag label="Weather Control" val={countSpecials("Weather Control")} />
+          </div>
         )}
       </div>
     </div>
