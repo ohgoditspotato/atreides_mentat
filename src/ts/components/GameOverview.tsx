@@ -12,7 +12,7 @@ import { treachery_card_t, card_sort } from "ts/treachery_card";
 import ExpandableCardList from "ts/components/ExpandableCardList";
 
 const GameOverview: React.FC = () => {
-  const { houses, view, deck_cards, discarded_cards, cards_left_in_deck, can_undo } = useSelector(
+  const { houses, view, draw_deck, discarded_cards, can_undo } = useSelector(
     (state: root_state_t) => {
       let discarded_cards: Array<treachery_card_t> = [];
       for (
@@ -28,9 +28,8 @@ const GameOverview: React.FC = () => {
       return {
         houses: state.game.current.houses,
         view: state.view,
-        deck_cards: draw_deck.cards,
+        draw_deck,
         discarded_cards,
-        cards_left_in_deck: draw_deck.cards.length - draw_deck.num_unknowns,
         can_undo: state.game.history.length > 0,
       };
     }
@@ -113,10 +112,10 @@ const GameOverview: React.FC = () => {
         <div className="container">
           <h2 className="title">Cards in deck</h2>
           <h3 className="subtitle">
-            {cards_left_in_deck} cards remain before a shuffle. Note that because unknown cards have
-            been drawn, more than a single card type may be shown below
+            {draw_deck.cards.length - draw_deck.num_unknowns} draws before a shuffle.
+            {unknownDeckBlurb(draw_deck.num_unknowns)}
           </h3>
-          <ExpandableCardList cards={deck_cards} />
+          <ExpandableCardList cards={draw_deck.cards} />
         </div>
       </section>
       <section className="section">
@@ -129,5 +128,16 @@ const GameOverview: React.FC = () => {
     </>
   );
 };
+
+function unknownDeckBlurb(num_unknowns: number) {
+  if (num_unknowns === 0) {
+    return null;
+  }
+  let message = "unknown, there are more possible cards shown than there are draws remaining.";
+  if (num_unknowns === 1) {
+    return " As " + num_unknowns + " card is " + message;
+  }
+  return " As " + num_unknowns + " cards are " + message;
+}
 
 export default GameOverview;
