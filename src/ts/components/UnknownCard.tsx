@@ -108,38 +108,44 @@ const UnknownCard: React.FC<{
         {onDelete ? <button className="delete" onClick={onDelete}></button> : null}
       </header>
       <div className="card-content is-size-7 content">
-        <div className="buttons">
-          <button
-            className="button is-link is-outlined"
-            onClick={() => set_show_special_details(!show_special_details)}
-          >
-            <span className="icon">
-              <i className="fas fa-redo"></i>
-            </span>
-            <span>{show_special_details ? "Show others" : "Show specials"}</span>
-          </button>
-        </div>
-        {!show_special_details && (
-          <div className="columns is-multiline is-mobile">
-            <Tag label="Projectile" val={projectiles} colour_key="Weapon" />
-            <Tag label="Poison" val={poisons} colour_key="Weapon" />
-            <Tag label="Lasguns" val={lasguns} colour_key="Weapon" />
-            <Tag label="Shield" val={shields} colour_key="Defense" />
-            <Tag label="Snooper" val={snoopers} colour_key="Defense" />
-            <Tag label="Special" val={specials.length} colour_key="Special" />
-            <Tag label="Useless" val={useless} colour_key="Useless" />
-          </div>
-        )}
-        {show_special_details && (
-          <div className="columns is-multiline">
-            <Tag label="Cheap Hero" val={countSpecials("Cheap Hero")} />
-            <Tag label="Family Atomics" val={countSpecials("Family Atomics")} />
-            <Tag label="Hajr" val={countSpecials("Hajr")} />
-            <Tag label="Karama" val={countSpecials("Karama")} />
-            <Tag label="Tleilaxu Ghola" val={countSpecials("Tleilaxu Ghola")} />
-            <Tag label="Truthtrance" val={countSpecials("Truthtrance")} />
-            <Tag label="Weather Control" val={countSpecials("Weather Control")} />
-          </div>
+        {small ? (
+          <p className="heading">The future is uncertain</p>
+        ) : (
+          <>
+            <div className="buttons">
+              <button
+                className="button is-link is-outlined is-small"
+                onClick={() => set_show_special_details(!show_special_details)}
+              >
+                <span className="icon">
+                  <i className="fas fa-redo"></i>
+                </span>
+                <span>{show_special_details ? "Show others" : "Show specials"}</span>
+              </button>
+            </div>
+            {!show_special_details && (
+              <div className="columns is-multiline is-mobile">
+                <Tag label="Projectile" val={projectiles} colour_key="Weapon" />
+                <Tag label="Poison" val={poisons} colour_key="Weapon" />
+                <Tag label="Lasguns" val={lasguns} colour_key="Weapon" />
+                <Tag label="Shield" val={shields} colour_key="Defense" />
+                <Tag label="Snooper" val={snoopers} colour_key="Defense" />
+                <Tag label="Special" val={specials.length} colour_key="Special" />
+                <Tag label="Useless" val={useless} colour_key="Useless" />
+              </div>
+            )}
+            {show_special_details && (
+              <div className="columns is-multiline">
+                <Tag label="Cheap Hero" val={countSpecials("Cheap Hero")} />
+                <Tag label="Family Atomics" val={countSpecials("Family Atomics")} />
+                <Tag label="Hajr" val={countSpecials("Hajr")} />
+                <Tag label="Karama" val={countSpecials("Karama")} />
+                <Tag label="Tleilaxu Ghola" val={countSpecials("Tleilaxu Ghola")} />
+                <Tag label="Truthtrance" val={countSpecials("Truthtrance")} />
+                <Tag label="Weather Control" val={countSpecials("Weather Control")} />
+              </div>
+            )}
+          </>
         )}
       </div>
     </div>

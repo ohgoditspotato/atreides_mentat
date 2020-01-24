@@ -27,15 +27,14 @@ const ExpandableCardList: React.FC<{ cards: Array<treachery_card_t> }> = ({ card
       <div className="columns is-vcentered">
         <div className="column">
           <div className="tags">
-            {!expand &&
-              card_kinds.map(key => {
-                if (!summary[key]) return null;
-                return (
-                  <span className={"tag is-medium is-" + treachery_card_colours[key].bg} key={key}>
-                    {summary[key]} x {key}
-                  </span>
-                );
-              })}
+            {card_kinds.map(key => {
+              if (!summary[key]) return null;
+              return (
+                <span className={"tag is-medium is-" + treachery_card_colours[key].bg} key={key}>
+                  {summary[key]} x {key}
+                </span>
+              );
+            })}
           </div>
         </div>
         <div className="column is-narrow">

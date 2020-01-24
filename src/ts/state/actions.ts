@@ -36,7 +36,7 @@ export const house_remove_card = createAction(
     return {
       payload: {
         house,
-        index
+        index,
       },
     };
   }

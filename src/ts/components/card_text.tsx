@@ -12,7 +12,7 @@ export const card_subheading = {
   Lasgun: <p className="heading">Unique Weapon</p>,
   Snooper: <p className="heading">Poison defense</p>,
   Shield: <p className="heading">Projectile defense</p>,
-  Special: Special
+  Special: Special,
 } as const;
 
 const card_text = {

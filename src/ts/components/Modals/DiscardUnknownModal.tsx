@@ -35,6 +35,7 @@ const DiscardUnknownModal: React.FC<{ house: house_name_t }> = ({ house }) => {
           return (
             <div className="column is-half is-one-quarter-widescreen" key={"card-" + index}>
               <TreacheryCard
+                small
                 card={possible.card}
                 onClick={() => {
                   const unknown_index = unknown_cards.findIndex(
