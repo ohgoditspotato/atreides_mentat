@@ -32,12 +32,11 @@ export const house_add_card = createAction(
 
 export const house_remove_card = createAction(
   "houses/remove_card",
-  (house: house_name_t, index: number, card: treachery_card_t) => {
+  (house: house_name_t, index: number) => {
     return {
       payload: {
         house,
-        index,
-        card,
+        index
       },
     };
   }

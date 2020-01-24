@@ -74,7 +74,7 @@ const ViewCards: React.FC<house_state_t> = house => {
                     card={card}
                     key={card.id}
                     onDelete={() => {
-                      dispatch(house_remove_card(house.name, index, card));
+                      dispatch(house_remove_card(house.name, index));
                     }}
                   />
                 ))}
@@ -110,7 +110,7 @@ const ViewCards: React.FC<house_state_t> = house => {
               <div className="column is-half" key={"card-" + index}>
                 <TreacheryCard
                   card={card}
-                  onDelete={() => dispatch(house_remove_card(house.name, index, card))}
+                  onDelete={() => dispatch(house_remove_card(house.name, index))}
                 />
               </div>
             ))}
