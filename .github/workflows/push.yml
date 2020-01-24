@@ -13,3 +13,5 @@ jobs:
         npm install
         npm run build
         npm test
+      env:
+        CI: true
