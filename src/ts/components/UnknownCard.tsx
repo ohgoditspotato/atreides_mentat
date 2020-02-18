@@ -8,8 +8,9 @@ const UnknownCard: React.FC<{
   deck_index: number;
   onClick?: () => void;
   onDelete?: () => void;
+  onIdentify?: () => void;
   small?: boolean;
-}> = ({ onClick, onDelete, deck_index, small }) => {
+}> = ({ onClick, onDelete, onIdentify, deck_index, small }) => {
   const deck = useSelector((root_state: root_state_t) => {
     return root_state.game.current.decks[deck_index];
   });
@@ -113,6 +114,12 @@ const UnknownCard: React.FC<{
         ) : (
           <>
             <div className="buttons">
+              <button className="button is-info is-outlined is-small" onClick={onIdentify}>
+                <span className="icon">
+                  <i className="fas fa-info" />
+                </span>
+                <span>Identify</span>
+              </button>
               <button
                 className="button is-link is-outlined is-small"
                 onClick={() => set_show_special_details(!show_special_details)}

@@ -6,17 +6,9 @@ import { treachery_card_t } from "ts/treachery_card";
 export const close_modal = createAction("view/none");
 export const show_add_cards_modal = createAction<house_name_t>("view/add_card");
 export const show_reset_game_modal = createAction("view/reset");
-export const show_discard_unknown_modal = createAction(
-  "view/discard_unknown",
-  (house: house_name_t, unknown_card_index: number) => {
-    return {
-      payload: {
-        house,
-        unknown_card_index,
-      },
-    };
-  }
-);
+export const show_discard_unknown_modal = createAction<house_name_t>("view/discard_unknown");
+
+export const show_assign_unknown_modal = createAction<house_name_t>("view/assign_unknown");
 
 export const house_add_card = createAction(
   "houses/add_card",
@@ -46,6 +38,19 @@ export const house_add_unknown = createAction<house_name_t>("houses/add_unknown"
 
 export const house_remove_unknown = createAction(
   "houses/remove_unknown",
+  (house: house_name_t, unknown_index: number, actual_card_id: string) => {
+    return {
+      payload: {
+        house,
+        unknown_index,
+        actual_card_id,
+      },
+    };
+  }
+);
+
+export const house_assign_unknown = createAction(
+  "house/assign_unknown",
   (house: house_name_t, unknown_index: number, actual_card_id: string) => {
     return {
       payload: {

@@ -13,6 +13,8 @@ import {
   house_remove_unknown,
   show_discard_unknown_modal,
   undo_action,
+  show_assign_unknown_modal,
+  house_assign_unknown,
 } from "ts/state/actions";
 import { ENEMY_HOUSE_NAMES, house_name_t } from "ts/houses";
 import { houses_state_t, view_state_t, game_state_t, game_history_t } from "ts/state/types";
@@ -193,6 +195,23 @@ export const game_state_reducer = createReducer(initial_game_state, builder => {
     });
   });
 
+  builder.addCase(house_assign_unknown, (state, action) => {
+    return push_history(state, history => {
+      let house = getHouse(action.payload.house, history.houses);
+      const [unknown_card] = house.unknown_cards.splice(action.payload.unknown_index, 1);
+      const deck = history.decks[unknown_card.deck_index];
+      const [card] = deck.cards.splice(
+        deck.cards.findIndex(c => c.id === action.payload.actual_card_id),
+        1
+      );
+
+      deck.num_unknowns -= 1;
+      // push this card into the players hand
+      house.cards.push(card);
+      house.cards.sort(card_sort);
+    });
+  });
+
   builder.addCase(house_set_ally, (state, action) => {
     return push_history(state, history => {
       if (action.payload.house === action.payload.ally) {
@@ -259,7 +278,12 @@ export const view_state_reducer = createReducer(default_view_state, builder => {
 
   builder.addCase(show_discard_unknown_modal, (state, action) => {
     state.active_modal = "discard_unknown";
-    state.house_name = action.payload.house;
+    state.house_name = action.payload;
+  });
+
+  builder.addCase(show_assign_unknown_modal, (state, action) => {
+    state.active_modal = "assign_unknown";
+    state.house_name = action.payload;
   });
 });
 
