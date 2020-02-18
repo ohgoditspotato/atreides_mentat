@@ -1,19 +1,19 @@
 {
   "files": {
     "main.css": "/atreides_mentat/static/css/main.c8dcd66b.chunk.css",
-    "main.js": "/atreides_mentat/static/js/main.dbc91d20.chunk.js",
-    "main.js.map": "/atreides_mentat/static/js/main.dbc91d20.chunk.js.map",
+    "main.js": "/atreides_mentat/static/js/main.d643c837.chunk.js",
+    "main.js.map": "/atreides_mentat/static/js/main.d643c837.chunk.js.map",
     "runtime-main.js": "/atreides_mentat/static/js/runtime-main.d88582d5.js",
     "runtime-main.js.map": "/atreides_mentat/static/js/runtime-main.d88582d5.js.map",
     "static/css/2.ba689351.chunk.css": "/atreides_mentat/static/css/2.ba689351.chunk.css",
-    "static/js/2.0e5473c4.chunk.js": "/atreides_mentat/static/js/2.0e5473c4.chunk.js",
-    "static/js/2.0e5473c4.chunk.js.map": "/atreides_mentat/static/js/2.0e5473c4.chunk.js.map",
+    "static/js/2.d636f0ac.chunk.js": "/atreides_mentat/static/js/2.d636f0ac.chunk.js",
+    "static/js/2.d636f0ac.chunk.js.map": "/atreides_mentat/static/js/2.d636f0ac.chunk.js.map",
     "index.html": "/atreides_mentat/index.html",
-    "precache-manifest.8b321127b0591e5a8540782fca8e83a5.js": "/atreides_mentat/precache-manifest.8b321127b0591e5a8540782fca8e83a5.js",
+    "precache-manifest.d1fb9aa66db0c92b95db81f06fda26d7.js": "/atreides_mentat/precache-manifest.d1fb9aa66db0c92b95db81f06fda26d7.js",
     "service-worker.js": "/atreides_mentat/service-worker.js",
     "static/css/2.ba689351.chunk.css.map": "/atreides_mentat/static/css/2.ba689351.chunk.css.map",
     "static/css/main.c8dcd66b.chunk.css.map": "/atreides_mentat/static/css/main.c8dcd66b.chunk.css.map",
-    "static/js/2.0e5473c4.chunk.js.LICENSE": "/atreides_mentat/static/js/2.0e5473c4.chunk.js.LICENSE",
+    "static/js/2.d636f0ac.chunk.js.LICENSE": "/atreides_mentat/static/js/2.d636f0ac.chunk.js.LICENSE",
     "static/media/atreides.f9cd377f.svg": "/atreides_mentat/static/media/atreides.f9cd377f.svg",
     "static/media/bene_gesserit.d38a347a.svg": "/atreides_mentat/static/media/bene_gesserit.d38a347a.svg",
     "static/media/crosshair.80f2f5d4.svg": "/atreides_mentat/static/media/crosshair.80f2f5d4.svg",
@@ -34,8 +34,8 @@
   "entrypoints": [
     "static/js/runtime-main.d88582d5.js",
     "static/css/2.ba689351.chunk.css",
-    "static/js/2.0e5473c4.chunk.js",
+    "static/js/2.d636f0ac.chunk.js",
     "static/css/main.c8dcd66b.chunk.css",
-    "static/js/main.dbc91d20.chunk.js"
+    "static/js/main.d643c837.chunk.js"
   ]
 }
