@@ -1,7 +1,7 @@
 import * as React from "react";
 
 const BattlePlan = <p>Play as part of your Battle Plan.</p>;
-const WinnerKeeps = <p>You may keep this card if you win this battle</p>;
+const WinnerKeeps = <p>You may keep this card if you win this battle.</p>;
 const Special = <p className="heading">Special</p>;
 
 export const card_subheading = {
@@ -21,12 +21,12 @@ const card_text = {
       <p>Play as part of your Battle Plan, in place of a weapon, defense, or both.</p>
       <p>
         This card has no value in play, and you can discard it only by playing it in your Battle
-        Plan
+        Plan.
       </p>
     </>
   ),
   Unknown: (
-    <p>Your mentat has been unable to predict what treachery your opponent has in store for you</p>
+    <p>Your mentat has been unable to predict what treachery your opponent has in store for you.</p>
   ),
   Projectile: (
     <>
@@ -79,7 +79,7 @@ const card_text = {
       <p>
         After the first game turn, play after the storm movement is calculated, but before the storm
         is moved, <b>but only</b> if you have one more forces on the Shield Wall or a territory
-        adjacent to the Shield Wall with no storm between yuor sector and the Wall.
+        adjacent to the Shield Wall with no storm between your sector and the Wall.
       </p>
       <p>
         <b>All</b> forces on the Shield Wall are destroyed.
@@ -96,7 +96,7 @@ const card_text = {
         After the first game turn, play during the Storm Phase, before the Storm Marker is moved.
       </p>
       <p>
-        When you play this card <b>you</b> control the storm this phase and may move it from 0 to 10
+        When you play this card, <b>you</b> control the storm this phase and may move it from 0 to 10
         sectors in a <i>counterclockwise</i> direction.
       </p>
     </>
