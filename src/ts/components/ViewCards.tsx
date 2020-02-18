@@ -6,6 +6,7 @@ import {
   house_remove_card,
   house_toggle_expand_cards,
   show_discard_unknown_modal,
+  show_assign_unknown_modal,
 } from "ts/state/actions";
 import TreacheryCard, {
   treachery_card_colours,
@@ -81,7 +82,7 @@ const ViewCards: React.FC<house_state_t> = house => {
                 const deleteButton = (
                   <button
                     className="delete is-small"
-                    onClick={() => dispatch(show_discard_unknown_modal(house.name, index))}
+                    onClick={() => dispatch(show_discard_unknown_modal(house.name))}
                   ></button>
                 );
                 const colour = treachery_card_colours["Unknown"].bg;
@@ -114,7 +115,8 @@ const ViewCards: React.FC<house_state_t> = house => {
                 <div className="column is-half" key={"unknown-" + index}>
                   <UnknownCard
                     deck_index={unknown_card.deck_index}
-                    onDelete={() => dispatch(show_discard_unknown_modal(house.name, index))}
+                    onDelete={() => dispatch(show_discard_unknown_modal(house.name))}
+                    onIdentify={() => dispatch(show_assign_unknown_modal(house.name))}
                   />
                 </div>
               );

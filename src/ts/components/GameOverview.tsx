@@ -7,6 +7,7 @@ import { house_state_t } from "ts/state/types";
 import AddCardModal from "ts/components/Modals/AddCardModal";
 import ConfirmResetModal from "ts/components/Modals/ConfirmResetModal";
 import HouseTile from "ts/components/HouseTile";
+import AssignUnknownModal from "ts/components/Modals/AssignUnknownModal";
 import DiscardUnknownModal from "ts/components/Modals/DiscardUnknownModal";
 import { treachery_card_t, card_sort } from "ts/treachery_card";
 import ExpandableCardList from "ts/components/ExpandableCardList";
@@ -49,6 +50,10 @@ const GameOverview: React.FC = () => {
     }
     case "discard_unknown": {
       modal = <DiscardUnknownModal house={house.name} />;
+      break;
+    }
+    case "assign_unknown": {
+      modal = <AssignUnknownModal house={house.name} />;
       break;
     }
     default: {
