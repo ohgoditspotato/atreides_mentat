@@ -96,8 +96,8 @@ const card_text = {
         After the first game turn, play during the Storm Phase, before the Storm Marker is moved.
       </p>
       <p>
-        When you play this card, <b>you</b> control the storm this phase and may move it from 0 to 10
-        sectors in a <i>counterclockwise</i> direction.
+        When you play this card, <b>you</b> control the storm this phase and may move it from 0 to
+        10 sectors in a <i>counterclockwise</i> direction.
       </p>
     </>
   ),

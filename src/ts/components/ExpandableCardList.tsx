@@ -8,9 +8,11 @@ type card_summary = {
 
 const card_kinds = ["Weapon", "Defense", "Special", "Useless"] as const;
 
-const ExpandableCardList: React.FC<{ cards: Array<treachery_card_t> }> = ({ cards }) => {
+const ExpandableCardList: React.FC<{
+  cards: Array<treachery_card_t>;
+  onDelete?: (card_id: string) => void;
+}> = ({ cards, onDelete }) => {
   const [expand, set_expand] = React.useState(false);
-
   const summary: card_summary = {
     Weapon: 0,
     Defense: 0,
@@ -55,7 +57,10 @@ const ExpandableCardList: React.FC<{ cards: Array<treachery_card_t> }> = ({ card
           <div className="columns is-multiline">
             {cards.map(card => (
               <div className="column is-half is-one-quarter-desktop" key={card.id}>
-                <TreacheryCard card={card} />
+                <TreacheryCard
+                  card={card}
+                  onDelete={onDelete ? () => onDelete(card.id) : undefined}
+                />
               </div>
             ))}
           </div>
