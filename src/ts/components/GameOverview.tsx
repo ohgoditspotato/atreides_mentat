@@ -2,7 +2,7 @@ import * as React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { root_state_t } from "ts/state/reducers";
 import { house_name_t, ALL_HOUSE_NAMES } from "ts/houses";
-import { show_reset_game_modal, undo_action } from "ts/state/actions";
+import { show_reset_game_modal, undo_action, return_to_deck } from "ts/state/actions";
 import { house_state_t } from "ts/state/types";
 import AddCardModal from "ts/components/Modals/AddCardModal";
 import ConfirmResetModal from "ts/components/Modals/ConfirmResetModal";
@@ -97,19 +97,13 @@ const GameOverview: React.FC = () => {
       <section className="section">
         <div className="container">
           <h2 className="title">Factions</h2>
-          <div className="columns is-multiline">
-            {ALL_HOUSE_NAMES.map(name => {
-              const house = houses[name];
-              if (!house.active) {
-                return null;
-              }
-              return (
-                <div className="column is-full-tablet is-half-widescreen" key={name}>
-                  <HouseTile house={name} />
-                </div>
-              );
-            })}
-          </div>
+          {ALL_HOUSE_NAMES.map(name => {
+            const house = houses[name];
+            if (!house.active) {
+              return null;
+            }
+            return <HouseTile house={name} key={name} />;
+          })}
         </div>
       </section>
       <hr />
@@ -126,7 +120,10 @@ const GameOverview: React.FC = () => {
       <section className="section">
         <div className="container">
           <h2 className="title">Discarded cards</h2>
-          <ExpandableCardList cards={discarded_cards} />
+          <ExpandableCardList
+            cards={discarded_cards}
+            onDelete={(card_id: string) => dispatch(return_to_deck(card_id))}
+          />
         </div>
       </section>
       {modal}

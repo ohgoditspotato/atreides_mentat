@@ -15,6 +15,7 @@ import {
   undo_action,
   show_assign_unknown_modal,
   house_assign_unknown,
+  return_to_deck,
 } from "ts/state/actions";
 import { ENEMY_HOUSE_NAMES, house_name_t } from "ts/houses";
 import { houses_state_t, view_state_t, game_state_t, game_history_t } from "ts/state/types";
@@ -236,6 +237,16 @@ export const game_state_reducer = createReducer(initial_game_state, builder => {
   builder.addCase(house_toggle_expand_cards, (state, action) => {
     let house = getHouse(action.payload.house, state.current.houses);
     house.show_cards = !house.show_cards;
+  });
+
+  builder.addCase(return_to_deck, (state, action) => {
+    return push_history(state, history => {
+      const discard_deck = history.decks[history.decks.length - 1];
+      const card_index = discard_deck.cards.findIndex(c => c.id === action.payload.card_id);
+      const [card] = discard_deck.cards.splice(card_index, 1);
+      history.decks[history.draw_deck_index].cards.push(card);
+      history.decks[history.draw_deck_index].cards.sort(card_sort);
+    });
   });
 
   builder.addCase(reset_game, _ => {
