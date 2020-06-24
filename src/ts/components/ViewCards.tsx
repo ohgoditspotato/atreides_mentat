@@ -1,12 +1,13 @@
 import * as React from "react";
 import { house_name_t } from "ts/houses";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   show_add_cards_modal,
   house_remove_card,
   house_toggle_expand_cards,
   show_discard_unknown_modal,
   show_assign_unknown_modal,
+  house_remove_unknown,
 } from "ts/state/actions";
 import TreacheryCard, {
   treachery_card_colours,
@@ -15,6 +16,7 @@ import TreacheryCard, {
 import { house_state_t } from "ts/state/types";
 import UnknownCard from "ts/components/UnknownCard";
 import TreacheryCardTag from "./TreacheryCardTag";
+import { root_state_t } from "ts/state/reducers";
 
 const maxCards = (house: house_name_t) => {
   if (house === "Harkonnen") {
@@ -28,6 +30,9 @@ const ViewCards: React.FC<house_state_t> = house => {
   const dispatch = useDispatch();
   const showCards = house.show_cards;
   const allowAdd = house.cards.length + house.unknown_cards.length < maxCards(house.name);
+  const { deck_tracking } = useSelector((state: root_state_t) => {
+    return { deck_tracking: state.game.deck_tracking };
+  });
 
   return (
     <div>
@@ -82,7 +87,13 @@ const ViewCards: React.FC<house_state_t> = house => {
                 const deleteButton = (
                   <button
                     className="delete is-small"
-                    onClick={() => dispatch(show_discard_unknown_modal(house.name))}
+                    onClick={() => {
+                      if (deck_tracking) {
+                        dispatch(show_discard_unknown_modal(house.name));
+                      } else {
+                        dispatch(house_remove_unknown(house.name, index, undefined));
+                      }
+                    }}
                   ></button>
                 );
                 const colour = treachery_card_colours["Unknown"].bg;

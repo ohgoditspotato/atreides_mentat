@@ -1,9 +1,10 @@
 import * as React from "react";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { ENEMY_HOUSE_NAMES, enemy_house_name_t } from "ts/houses";
-import { close_modal, start_game } from "ts/state/actions";
+import { close_modal, start_game, toggle_deck_tracking } from "ts/state/actions";
 import { start_game_spec } from "ts/state/types";
 import { HouseNameWithIcon } from "ts/components/HouseBanner";
+import { root_state_t } from "ts/state/reducers";
 
 const HouseSelect: React.FC<{
   house: enemy_house_name_t;
@@ -21,7 +22,7 @@ const HouseSelect: React.FC<{
           <HouseNameWithIcon house={props.house} />
         </div>
         <button className={className}>
-          <div>{props.checked ? "Ready" : "Not in game"}</div>
+          <div>{props.checked ? "In game" : "Not in game"}</div>
         </button>
       </div>
     </div>
@@ -29,6 +30,10 @@ const HouseSelect: React.FC<{
 };
 
 export default () => {
+  const { deck_tracking } = useSelector((state: root_state_t) => {
+    return { deck_tracking: state.game.deck_tracking };
+  });
+
   const [state, setState] = React.useState<start_game_spec>({
     Harkonnen: false,
     Emperor: false,
@@ -49,12 +54,45 @@ export default () => {
     <>
       <section className="section">
         <div className="container">
+          <p className="title is-1">New game</p>
           <div className="columns is-vcentered">
             <div className="column">
-              <p className="title is-1">New game</p>
-              <p className="subtitle is-5">Select which houses are present in the game</p>
+              <button
+                className={"button is-large " + (deck_tracking ? "is-info" : "is-warning")}
+                onClick={() => dispatch(toggle_deck_tracking())}
+              >
+                {deck_tracking ? "Deck tracking ON" : "Deck tracking OFF"}
+              </button>
             </div>
-            <div className="column is-narrow">
+            <p className="column">
+              Deck tracking can be enabled to automatically keep track of which cards remain in the
+              deck, so you can see the odds of your opponent having a particular card. However the
+              tracking mechanism currently does not handle the Harkonnen card swap ability. If this
+              happens - or if you just prefer to play without it - it can be disabled at any time
+              during play. Or you can just turn it off now!
+            </p>
+          </div>
+        </div>
+      </section>
+      <section className="section">
+        <div className="container">
+          <p className="subtitle is-5">Select which houses are present in the game</p>
+          <div className="columns is-multiline">
+            {ENEMY_HOUSE_NAMES.map(name => (
+              <HouseSelect
+                house={name}
+                checked={state[name]}
+                onClick={() => {
+                  const new_checked = !state[name];
+                  setState({ ...state, [name]: new_checked });
+                }}
+                key={name}
+              />
+            ))}
+            <div
+              className="column"
+              style={{ display: "flex", justifyContent: "center", alignItems: "center" }}
+            >
               <button
                 className="button is-success is-large"
                 disabled={!allow_start}
@@ -71,23 +109,6 @@ export default () => {
                 <span>Start game</span>
               </button>
             </div>
-          </div>
-        </div>
-      </section>
-      <section className="section">
-        <div className="container">
-          <div className="columns is-multiline">
-            {ENEMY_HOUSE_NAMES.map(name => (
-              <HouseSelect
-                house={name}
-                checked={state[name]}
-                onClick={() => {
-                  const new_checked = !state[name];
-                  setState({ ...state, [name]: new_checked });
-                }}
-                key={name}
-              />
-            ))}
           </div>
         </div>
       </section>

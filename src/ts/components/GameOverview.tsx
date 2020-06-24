@@ -2,7 +2,12 @@ import * as React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { root_state_t } from "ts/state/reducers";
 import { house_name_t, ALL_HOUSE_NAMES } from "ts/houses";
-import { show_reset_game_modal, undo_action, return_to_deck } from "ts/state/actions";
+import {
+  show_reset_game_modal,
+  undo_action,
+  return_to_deck,
+  show_disable_tracking_modal,
+} from "ts/state/actions";
 import { house_state_t } from "ts/state/types";
 import AddCardModal from "ts/components/Modals/AddCardModal";
 import ConfirmResetModal from "ts/components/Modals/ConfirmResetModal";
@@ -11,9 +16,10 @@ import AssignUnknownModal from "ts/components/Modals/AssignUnknownModal";
 import DiscardUnknownModal from "ts/components/Modals/DiscardUnknownModal";
 import { treachery_card_t, card_sort } from "ts/treachery_card";
 import ExpandableCardList from "ts/components/ExpandableCardList";
+import DisableTrackingModal from "./Modals/DisableTrackingModal";
 
 const GameOverview: React.FC = () => {
-  const { houses, view, draw_deck, discarded_cards, can_undo } = useSelector(
+  const { deck_tracking, houses, view, draw_deck, discarded_cards, can_undo } = useSelector(
     (state: root_state_t) => {
       let discarded_cards: Array<treachery_card_t> = [];
       for (
@@ -27,6 +33,7 @@ const GameOverview: React.FC = () => {
 
       const draw_deck = state.game.current.decks[state.game.current.draw_deck_index];
       return {
+        deck_tracking: state.game.deck_tracking,
         houses: state.game.current.houses,
         view: state.view,
         draw_deck,
@@ -56,6 +63,10 @@ const GameOverview: React.FC = () => {
       modal = <AssignUnknownModal house={house.name} />;
       break;
     }
+    case "disable_tracking": {
+      modal = <DisableTrackingModal />;
+      break;
+    }
     default: {
       modal = null;
       break;
@@ -78,8 +89,16 @@ const GameOverview: React.FC = () => {
                   </span>
                   <span>Undo</span>
                 </button>
+                {deck_tracking && (
+                  <button
+                    className="button is-warning"
+                    onClick={() => dispatch(show_disable_tracking_modal())}
+                  >
+                    <span>Disable deck tracking</span>
+                  </button>
+                )}
                 <button
-                  className="button"
+                  className="button is-danger"
                   onClick={() => {
                     dispatch(show_reset_game_modal());
                   }}
@@ -107,25 +126,29 @@ const GameOverview: React.FC = () => {
         </div>
       </section>
       <hr />
-      <section className="section">
-        <div className="container">
-          <h2 className="title">Cards in deck</h2>
-          <h3 className="subtitle">
-            {draw_deck.cards.length - draw_deck.num_unknowns} draws before a shuffle.
-            {unknownDeckBlurb(draw_deck.num_unknowns)}
-          </h3>
-          <ExpandableCardList cards={draw_deck.cards} />
-        </div>
-      </section>
-      <section className="section">
-        <div className="container">
-          <h2 className="title">Discarded cards</h2>
-          <ExpandableCardList
-            cards={discarded_cards}
-            onDelete={(card_id: string) => dispatch(return_to_deck(card_id))}
-          />
-        </div>
-      </section>
+      {deck_tracking && (
+        <>
+          <section className="section">
+            <div className="container">
+              <h2 className="title">Cards in deck</h2>
+              <h3 className="subtitle">
+                {draw_deck.cards.length - draw_deck.num_unknowns} draws before a shuffle.
+                {unknownDeckBlurb(draw_deck.num_unknowns)}
+              </h3>
+              <ExpandableCardList cards={draw_deck.cards} />
+            </div>
+          </section>
+          <section className="section">
+            <div className="container">
+              <h2 className="title">Discarded cards</h2>
+              <ExpandableCardList
+                cards={discarded_cards}
+                onDelete={(card_id: string) => dispatch(return_to_deck(card_id))}
+              />
+            </div>
+          </section>
+        </>
+      )}
       {modal}
     </>
   );

@@ -11,8 +11,11 @@ const UnknownCard: React.FC<{
   onIdentify?: () => void;
   small?: boolean;
 }> = ({ onClick, onDelete, onIdentify, deck_index, small }) => {
-  const deck = useSelector((root_state: root_state_t) => {
-    return root_state.game.current.decks[deck_index];
+  const { deck, deck_tracking } = useSelector((root_state: root_state_t) => {
+    return {
+      deck: root_state.game.current.decks[deck_index],
+      deck_tracking: root_state.game.deck_tracking,
+    };
   });
 
   const [show_special_details, set_show_special_details] = React.useState(false);
@@ -114,12 +117,14 @@ const UnknownCard: React.FC<{
         ) : (
           <>
             <div className="buttons">
-              <button className="button is-info is-outlined is-small" onClick={onIdentify}>
-                <span className="icon">
-                  <i className="fas fa-info" />
-                </span>
-                <span>Identify</span>
-              </button>
+              {deck_tracking && (
+                <button className="button is-info is-outlined is-small" onClick={onIdentify}>
+                  <span className="icon">
+                    <i className="fas fa-info" />
+                  </span>
+                  <span>Identify</span>
+                </button>
+              )}
               <button
                 className="button is-link is-outlined is-small"
                 onClick={() => set_show_special_details(!show_special_details)}

@@ -16,10 +16,12 @@ import {
   show_assign_unknown_modal,
   house_assign_unknown,
   return_to_deck,
+  toggle_deck_tracking,
+  show_disable_tracking_modal,
 } from "ts/state/actions";
 import { ENEMY_HOUSE_NAMES, house_name_t } from "ts/houses";
 import { houses_state_t, view_state_t, game_state_t, game_history_t } from "ts/state/types";
-import { card_sort } from "ts/treachery_card";
+import { card_sort, treachery_card_t } from "ts/treachery_card";
 import initial_deck from "ts/state/initial_deck";
 
 export const initial_houses_state: houses_state_t = {
@@ -75,6 +77,7 @@ export const initial_houses_state: houses_state_t = {
 
 export const initial_game_state: game_state_t = {
   initialized: false,
+  deck_tracking: true,
   history: [],
   current: {
     decks: [
@@ -133,18 +136,19 @@ export const game_state_reducer = createReducer(initial_game_state, builder => {
       let house = getHouse(action.payload.house, history.houses);
       house.cards.push(action.payload.card);
       house.cards.sort(card_sort);
+      if (state.deck_tracking) {
+        const deck = history.decks[history.draw_deck_index];
+        deck.cards.splice(
+          deck.cards.findIndex(c => c.id === action.payload.card.id),
+          1
+        );
 
-      const deck = history.decks[history.draw_deck_index];
-      deck.cards.splice(
-        deck.cards.findIndex(c => c.id === action.payload.card.id),
-        1
-      );
-
-      if (deck.cards.length - deck.num_unknowns === 0) {
-        // We've exhausted this deck. Increment draw deck, and add a new discard deck if necessary
-        history.draw_deck_index += 1;
-        if (history.decks.length - 1 === history.draw_deck_index) {
-          history.decks.push({ cards: [], num_unknowns: 0 });
+        if (deck.cards.length - deck.num_unknowns === 0) {
+          // We've exhausted this deck. Increment draw deck, and add a new discard deck if necessary
+          history.draw_deck_index += 1;
+          if (history.decks.length - 1 === history.draw_deck_index) {
+            history.decks.push({ cards: [], num_unknowns: 0 });
+          }
         }
       }
     });
@@ -154,9 +158,11 @@ export const game_state_reducer = createReducer(initial_game_state, builder => {
     return push_history(state, history => {
       let house = getHouse(action.payload.house, history.houses);
       const [removed_card] = house.cards.splice(action.payload.index, 1);
-      const discard_deck = history.decks[history.decks.length - 1];
-      discard_deck.cards.push(removed_card);
-      discard_deck.cards.sort(card_sort);
+      if (state.deck_tracking) {
+        const discard_deck = history.decks[history.decks.length - 1];
+        discard_deck.cards.push(removed_card);
+        discard_deck.cards.sort(card_sort);
+      }
     });
   });
 
@@ -165,14 +171,16 @@ export const game_state_reducer = createReducer(initial_game_state, builder => {
       let house = getHouse(action.payload, history.houses);
       house.unknown_cards.push({ deck_index: history.draw_deck_index });
 
-      const deck = history.decks[history.draw_deck_index];
-      deck.num_unknowns += 1;
+      if (state.deck_tracking) {
+        const deck = history.decks[history.draw_deck_index];
+        deck.num_unknowns += 1;
 
-      if (deck.cards.length - deck.num_unknowns === 0) {
-        // We've exhausted this deck. Increment draw deck, and add a new discard deck if necessary
-        history.draw_deck_index += 1;
-        if (history.decks.length - 1 === history.draw_deck_index) {
-          history.decks.push({ cards: [], num_unknowns: 0 });
+        if (deck.cards.length - deck.num_unknowns === 0) {
+          // We've exhausted this deck. Increment draw deck, and add a new discard deck if necessary
+          history.draw_deck_index += 1;
+          if (history.decks.length - 1 === history.draw_deck_index) {
+            history.decks.push({ cards: [], num_unknowns: 0 });
+          }
         }
       }
     });
@@ -182,17 +190,19 @@ export const game_state_reducer = createReducer(initial_game_state, builder => {
     return push_history(state, history => {
       let house = getHouse(action.payload.house, history.houses);
       const [unknown_card] = house.unknown_cards.splice(action.payload.unknown_index, 1);
-      const deck = history.decks[unknown_card.deck_index];
-      const [card] = deck.cards.splice(
-        deck.cards.findIndex(c => c.id === action.payload.actual_card_id),
-        1
-      );
+      if (state.deck_tracking) {
+        const deck = history.decks[unknown_card.deck_index];
+        const [card] = deck.cards.splice(
+          deck.cards.findIndex(c => c.id === action.payload.actual_card_id),
+          1
+        );
 
-      deck.num_unknowns -= 1;
-      // push this card into the current discard pile
-      const discard_deck = history.decks[history.decks.length - 1];
-      discard_deck.cards.push(card);
-      discard_deck.cards.sort(card_sort);
+        deck.num_unknowns -= 1;
+        // push this card into the current discard pile
+        const discard_deck = history.decks[history.decks.length - 1];
+        discard_deck.cards.push(card);
+        discard_deck.cards.sort(card_sort);
+      }
     });
   });
 
@@ -200,16 +210,25 @@ export const game_state_reducer = createReducer(initial_game_state, builder => {
     return push_history(state, history => {
       let house = getHouse(action.payload.house, history.houses);
       const [unknown_card] = house.unknown_cards.splice(action.payload.unknown_index, 1);
-      const deck = history.decks[unknown_card.deck_index];
-      const [card] = deck.cards.splice(
-        deck.cards.findIndex(c => c.id === action.payload.actual_card_id),
-        1
-      );
 
-      deck.num_unknowns -= 1;
-      // push this card into the players hand
-      house.cards.push(card);
-      house.cards.sort(card_sort);
+      if (state.deck_tracking) {
+        const deck = history.decks[unknown_card.deck_index];
+        const [card] = deck.cards.splice(
+          deck.cards.findIndex(c => c.id === action.payload.actual_card_id),
+          1
+        );
+
+        deck.num_unknowns -= 1;
+        // push this card into the players hand
+        house.cards.push(card);
+        house.cards.sort(card_sort);
+      } else {
+        const deck = history.decks[0];
+        house.cards.push(
+          deck.cards.find(c => c.id === action.payload.actual_card_id) as treachery_card_t
+        );
+        house.cards.sort(card_sort);
+      }
     });
   });
 
@@ -241,11 +260,13 @@ export const game_state_reducer = createReducer(initial_game_state, builder => {
 
   builder.addCase(return_to_deck, (state, action) => {
     return push_history(state, history => {
-      const discard_deck = history.decks[history.decks.length - 1];
-      const card_index = discard_deck.cards.findIndex(c => c.id === action.payload.card_id);
-      const [card] = discard_deck.cards.splice(card_index, 1);
-      history.decks[history.draw_deck_index].cards.push(card);
-      history.decks[history.draw_deck_index].cards.sort(card_sort);
+      if (state.deck_tracking) {
+        const discard_deck = history.decks[history.decks.length - 1];
+        const card_index = discard_deck.cards.findIndex(c => c.id === action.payload.card_id);
+        const [card] = discard_deck.cards.splice(card_index, 1);
+        history.decks[history.draw_deck_index].cards.push(card);
+        history.decks[history.draw_deck_index].cards.sort(card_sort);
+      }
     });
   });
 
@@ -258,14 +279,34 @@ export const game_state_reducer = createReducer(initial_game_state, builder => {
     for (let house of ENEMY_HOUSE_NAMES) {
       if (action.payload[house]) {
         history.houses[house].active = true;
-        for (var i = 0; i < history.houses[house].unknown_cards.length; i++) {
-          history.decks[0].num_unknowns += 1;
+        if (state.deck_tracking) {
+          for (var i = 0; i < history.houses[house].unknown_cards.length; i++) {
+            history.decks[0].num_unknowns += 1;
+          }
         }
       }
     }
 
     state.initialized = true;
     state.current.decks[state.current.draw_deck_index].cards.sort(card_sort);
+  });
+
+  builder.addCase(toggle_deck_tracking, state => {
+    if (state.deck_tracking) {
+      return {
+        initialized: state.initialized,
+        deck_tracking: false,
+        current: {
+          houses: state.current.houses,
+          decks: [{ cards: [...initial_deck], num_unknowns: 0 }],
+          draw_deck_index: 0,
+        },
+        history: [],
+      };
+    } else {
+      // Can only enable deck tracking from the start page
+      return initial_game_state;
+    }
   });
 });
 
@@ -295,6 +336,10 @@ export const view_state_reducer = createReducer(default_view_state, builder => {
   builder.addCase(show_assign_unknown_modal, (state, action) => {
     state.active_modal = "assign_unknown";
     state.house_name = action.payload;
+  });
+
+  builder.addCase(show_disable_tracking_modal, state => {
+    state.active_modal = "disable_tracking";
   });
 });
 

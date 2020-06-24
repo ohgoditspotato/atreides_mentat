@@ -24,7 +24,8 @@ export type active_page =
   | "discard_unknown"
   | "assign_unknown"
   | "reset_game"
-  | "alliance";
+  | "alliance"
+  | "disable_tracking";
 
 export interface view_state_t {
   active_modal: active_page;
@@ -44,6 +45,7 @@ export interface game_history_t {
 
 export interface game_state_t {
   initialized: boolean;
+  deck_tracking: boolean;
   history: Array<game_history_t>;
   current: game_history_t;
   // keep a record of every change the player makes, so they can revert any action.
