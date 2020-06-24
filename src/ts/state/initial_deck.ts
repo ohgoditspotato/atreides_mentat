@@ -17,12 +17,12 @@ const initial_deck: Array<treachery_card_t> = [
     type: "Poison",
   },
   {
-    id: "Kriminon",
+    id: "Ellaca Drug",
     kind: "Weapon",
     type: "Poison",
   },
   {
-    id: "Slip-Tip",
+    id: "Slip Tip",
     kind: "Weapon",
     type: "Projectile",
   },
