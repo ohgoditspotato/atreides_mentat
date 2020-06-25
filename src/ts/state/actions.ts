@@ -95,4 +95,4 @@ export const return_to_deck = createAction("game/return_to_deck", (card_id: stri
 export const start_game = createAction<start_game_spec>("game/start");
 export const reset_game = createAction("game/reset");
 export const undo_action = createAction("game/undo");
-export const toggle_deck_tracking = createAction("game/toggle_deck_tracking");
+export const disable_deck_tracking = createAction("game/disable_deck_tracking");

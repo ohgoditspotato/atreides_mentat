@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useDispatch } from "react-redux";
-import { close_modal, toggle_deck_tracking } from "ts/state/actions";
+import { close_modal, disable_deck_tracking } from "ts/state/actions";
 import Modal from "ts/components/Modals/Modal";
 
 const DisableTrackingModal: React.FC = () => {
@@ -17,7 +17,7 @@ const DisableTrackingModal: React.FC = () => {
           className="button is-danger is-fullwidth"
           onClick={() => {
             close();
-            dispatch(toggle_deck_tracking());
+            dispatch(disable_deck_tracking());
           }}
         >
           Disable tracking

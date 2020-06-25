@@ -1,9 +1,14 @@
 import { enemy_house_name_t, house_name_t } from "../houses";
 import { treachery_card_t, unknown_card_t } from "ts/treachery_card";
 
-export type start_game_spec = {
+export type houses_enabled = {
   [key in enemy_house_name_t]: boolean;
 };
+
+export type start_game_spec = {
+  houses: houses_enabled;
+  deck_tracking: boolean;
+}
 
 export interface house_state_t {
   cards: Array<treachery_card_t>;

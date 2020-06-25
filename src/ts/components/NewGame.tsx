@@ -1,10 +1,9 @@
 import * as React from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { ENEMY_HOUSE_NAMES, enemy_house_name_t } from "ts/houses";
-import { close_modal, start_game, toggle_deck_tracking } from "ts/state/actions";
+import { close_modal, start_game } from "ts/state/actions";
 import { start_game_spec } from "ts/state/types";
 import { HouseNameWithIcon } from "ts/components/HouseBanner";
-import { root_state_t } from "ts/state/reducers";
 
 const HouseSelect: React.FC<{
   house: enemy_house_name_t;
@@ -30,21 +29,20 @@ const HouseSelect: React.FC<{
 };
 
 export default () => {
-  const { deck_tracking } = useSelector((state: root_state_t) => {
-    return { deck_tracking: state.game.deck_tracking };
-  });
-
   const [state, setState] = React.useState<start_game_spec>({
-    Harkonnen: false,
-    Emperor: false,
-    "Spacing Guild": false,
-    "Bene Gesserit": false,
-    Fremen: false,
+    houses: {
+      Harkonnen: false,
+      Emperor: false,
+      "Spacing Guild": false,
+      "Bene Gesserit": false,
+      Fremen: false,
+    },
+    deck_tracking: true,
   });
 
   let allow_start = false;
   for (let i of ENEMY_HOUSE_NAMES) {
-    if (state[i]) {
+    if (state.houses[i]) {
       allow_start = true;
       break;
     }
@@ -58,10 +56,10 @@ export default () => {
           <div className="columns is-vcentered">
             <div className="column">
               <button
-                className={"button is-large " + (deck_tracking ? "is-info" : "is-warning")}
-                onClick={() => dispatch(toggle_deck_tracking())}
+                className={"button is-large " + (state.deck_tracking ? "is-info" : "is-warning")}
+                onClick={() => setState({ ...state, deck_tracking: !state.deck_tracking })}
               >
-                {deck_tracking ? "Deck tracking ON" : "Deck tracking OFF"}
+                {state.deck_tracking ? "Deck tracking ON" : "Deck tracking OFF"}
               </button>
             </div>
             <p className="column">
@@ -81,10 +79,10 @@ export default () => {
             {ENEMY_HOUSE_NAMES.map(name => (
               <HouseSelect
                 house={name}
-                checked={state[name]}
+                checked={state.houses[name]}
                 onClick={() => {
-                  const new_checked = !state[name];
-                  setState({ ...state, [name]: new_checked });
+                  const new_checked = !state.houses[name];
+                  setState({ ...state, houses: { ...state.houses, [name]: new_checked } });
                 }}
                 key={name}
               />

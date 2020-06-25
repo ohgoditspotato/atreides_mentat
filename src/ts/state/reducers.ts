@@ -16,7 +16,7 @@ import {
   show_assign_unknown_modal,
   house_assign_unknown,
   return_to_deck,
-  toggle_deck_tracking,
+  disable_deck_tracking,
   show_disable_tracking_modal,
 } from "ts/state/actions";
 import { ENEMY_HOUSE_NAMES, house_name_t } from "ts/houses";
@@ -277,21 +277,20 @@ export const game_state_reducer = createReducer(initial_game_state, builder => {
   builder.addCase(start_game, (state, action) => {
     const history = state.current;
     for (let house of ENEMY_HOUSE_NAMES) {
-      if (action.payload[house]) {
+      if (action.payload.houses[house]) {
         history.houses[house].active = true;
-        if (state.deck_tracking) {
-          for (var i = 0; i < history.houses[house].unknown_cards.length; i++) {
-            history.decks[0].num_unknowns += 1;
-          }
+        if (action.payload.deck_tracking) {
+          history.decks[0].num_unknowns += history.houses[house].unknown_cards.length;
         }
       }
     }
 
     state.initialized = true;
+    state.deck_tracking = action.payload.deck_tracking;
     state.current.decks[state.current.draw_deck_index].cards.sort(card_sort);
   });
 
-  builder.addCase(toggle_deck_tracking, state => {
+  builder.addCase(disable_deck_tracking, state => {
     if (state.deck_tracking) {
       return {
         initialized: state.initialized,
@@ -304,8 +303,7 @@ export const game_state_reducer = createReducer(initial_game_state, builder => {
         history: [],
       };
     } else {
-      // Can only enable deck tracking from the start page
-      return initial_game_state;
+      return state;
     }
   });
 });
