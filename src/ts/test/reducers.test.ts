@@ -19,7 +19,7 @@ describe("common", () => {
       Fremen: true,
       "Spacing Guild": false,
       Emperor: false,
-      Harkonnen: false,
+      Harkonnen: false
     },
     deck_tracking: true,
   };

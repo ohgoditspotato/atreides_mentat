@@ -7,6 +7,8 @@ import { ReactComponent as EmperorIcon } from "assets/houses/emperor.svg";
 import { ReactComponent as FremenIcon } from "assets/houses/fremen.svg";
 import { ReactComponent as HarkonnenIcon } from "assets/houses/harkonnen.svg";
 import { ReactComponent as GuildIcon } from "assets/houses/spacing_guild.svg";
+import { ReactComponent as IxiansIcon } from "assets/houses/ixians.svg";
+import { ReactComponent as TleilaxuIcon } from "assets/houses/tleilaxu.svg";
 import { ReactComponent as NoneIcon } from "assets/houses/none.svg";
 import { useSelector, useDispatch } from "react-redux";
 import { root_state_t } from "ts/state/reducers";
@@ -19,7 +21,9 @@ export const icon_map = {
   Fremen: <FremenIcon />,
   Harkonnen: <HarkonnenIcon />,
   "Spacing Guild": <GuildIcon />,
-  "No ally": <NoneIcon />,
+  "Ixians": <IxiansIcon />,
+  "Tleilaxu": <TleilaxuIcon />,
+  "No ally": <NoneIcon />
 };
 
 export const HouseNameWithIcon: React.FC<{ house: house_name_t }> = ({ house }) => {

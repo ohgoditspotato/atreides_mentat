@@ -6,7 +6,7 @@ type card_summary = {
   [key in treachery_card_t["kind"]]: number;
 };
 
-const card_kinds = ["Weapon", "Defense", "Special", "Useless"] as const;
+const card_kinds = ["Weapon/Defense", "Weapon", "Defense", "Special", "Useless"] as const;
 
 const ExpandableCardList: React.FC<{
   cards: Array<treachery_card_t>;
@@ -14,6 +14,7 @@ const ExpandableCardList: React.FC<{
 }> = ({ cards, onDelete }) => {
   const [expand, set_expand] = React.useState(false);
   const summary: card_summary = {
+    "Weapon/Defense": 0,
     Weapon: 0,
     Defense: 0,
     Special: 0,
