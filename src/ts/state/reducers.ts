@@ -86,7 +86,7 @@ export const initial_houses_state: houses_state_t = {
     active: false,
     ally: null,
     cards: [],
-    name: "Ixians",
+    name: "Tleilaxu",
     show_cards: false,
     unknown_cards: [{ deck_index: 0 }],
   }
@@ -310,7 +310,7 @@ export const game_state_reducer = createReducer(initial_game_state, builder => {
       const deck = history.decks[history.draw_deck_index];
       for (let expansion_card of expansion_deck) {
         deck.cards.push(expansion_card);
-      }  
+      }
     }
 
     state.current.decks[state.current.draw_deck_index].cards.sort(card_sort);
