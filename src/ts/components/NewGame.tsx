@@ -36,8 +36,11 @@ export default () => {
       "Spacing Guild": false,
       "Bene Gesserit": false,
       Fremen: false,
+      Ixians: false,
+      Tleilaxu: false
     },
     deck_tracking: true,
+    include_expansion_cards: false
   });
 
   let allow_start = false;
@@ -70,6 +73,20 @@ export default () => {
               during play. Or you can just turn it off now!
             </p>
           </div>
+          <div className="columns is-vcentered">
+            <div className="column">
+              <button
+                className={"button is-large " + (state.include_expansion_cards ? "is-info" : "is-warning")}
+                onClick={() => setState({ ...state, include_expansion_cards: !state.include_expansion_cards })}
+              >
+                {state.include_expansion_cards ? "Include expansion cards ON" : "Include expansion cards OFF"}
+              </button>
+            </div>
+            <p className="column">
+              Include the expansion treachery cards.
+            </p>
+          </div>
+
         </div>
       </section>
       <section className="section">

@@ -23,6 +23,7 @@ import { ENEMY_HOUSE_NAMES, house_name_t } from "ts/houses";
 import { houses_state_t, view_state_t, game_state_t, game_history_t } from "ts/state/types";
 import { card_sort, treachery_card_t } from "ts/treachery_card";
 import initial_deck from "ts/state/initial_deck";
+import expansion_deck from "ts/state/expansion_deck";
 
 export const initial_houses_state: houses_state_t = {
   Atreides: {
@@ -73,11 +74,28 @@ export const initial_houses_state: houses_state_t = {
     show_cards: false,
     unknown_cards: [{ deck_index: 0 }],
   },
+  Ixians: {
+    active: false,
+    ally: null,
+    cards: [],
+    name: "Ixians",
+    show_cards: false,
+    unknown_cards: [{ deck_index: 0 }],
+  },
+  Tleilaxu: {
+    active: false,
+    ally: null,
+    cards: [],
+    name: "Ixians",
+    show_cards: false,
+    unknown_cards: [{ deck_index: 0 }],
+  }
 };
 
 export const initial_game_state: game_state_t = {
   initialized: false,
   deck_tracking: true,
+  include_expansion_cards: false,
   history: [],
   current: {
     decks: [
@@ -85,8 +103,8 @@ export const initial_game_state: game_state_t = {
       { cards: [], num_unknowns: 0 }, // and initialize a discard deck ready
     ],
     houses: initial_houses_state,
-    draw_deck_index: 0,
-  },
+    draw_deck_index: 0
+  }
 };
 
 function clone_history(snapshot: game_history_t): game_history_t {
@@ -287,6 +305,14 @@ export const game_state_reducer = createReducer(initial_game_state, builder => {
 
     state.initialized = true;
     state.deck_tracking = action.payload.deck_tracking;
+    state.include_expansion_cards = action.payload.include_expansion_cards;
+    if (state.include_expansion_cards) {
+      const deck = history.decks[history.draw_deck_index];
+      for (let expansion_card of expansion_deck) {
+        deck.cards.push(expansion_card);
+      }  
+    }
+
     state.current.decks[state.current.draw_deck_index].cards.sort(card_sort);
   });
 
@@ -295,6 +321,7 @@ export const game_state_reducer = createReducer(initial_game_state, builder => {
       return {
         initialized: state.initialized,
         deck_tracking: false,
+        include_expansion_cards: false,
         current: {
           houses: state.current.houses,
           decks: [{ cards: [...initial_deck], num_unknowns: 0 }],

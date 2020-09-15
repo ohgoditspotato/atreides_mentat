@@ -8,6 +8,7 @@ export type houses_enabled = {
 export type start_game_spec = {
   houses: houses_enabled;
   deck_tracking: boolean;
+  include_expansion_cards: boolean;
 }
 
 export interface house_state_t {
@@ -51,6 +52,7 @@ export interface game_history_t {
 export interface game_state_t {
   initialized: boolean;
   deck_tracking: boolean;
+  include_expansion_cards: boolean;
   history: Array<game_history_t>;
   current: game_history_t;
   // keep a record of every change the player makes, so they can revert any action.

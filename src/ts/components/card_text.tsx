@@ -13,6 +13,12 @@ export const card_subheading = {
   Snooper: <p className="heading">Poison defense</p>,
   Shield: <p className="heading">Projectile defense</p>,
   Special: Special,
+  "Artillery Strike": <p className="heading">Unique Weapon</p>,
+  "Poison Tooth": <p className="heading">Unique Poison Weapon</p>,
+  "Weirding Way": <p className="heading">Unique Projectile Weapon/Defense</p>,
+  "Chemistry": <p className="heading">Unique Poison Weapon/Defense</p>,
+  "Poison Blade": <p className="heading">Projectile & Poison</p>,
+  "Shield Snooper": <p className="heading">Projectile & Poison</p>
 } as const;
 
 const card_text = {
@@ -155,6 +161,76 @@ const card_text = {
       <p>The player must answer "yes" or "no" truthfully.</p>
     </>
   ),
+  "Artillery Strike": (
+    <>
+      {BattlePlan}
+      <p>Kills both leaders (no spice is paid for them).</p>
+      <p>Both players may use Shields to protect their leader against the Artillery Strike.</p>
+      <p>Surviving (shielded) leaders do not count towards the battle total; the side that dialed higher wins the battle.</p>
+    </>
+  ),
+  "Poison Tooth": (
+    <>
+      {BattlePlan}
+      <p>Kills both leaders, and is not stopped by a Snooper</p>
+      <p>After seeing the battle results, you may choose not to use this weapon.</p>
+    </>
+  ),
+  "Weirding Way": (
+    <>
+      {BattlePlan}
+      <p>Counts as a projectile weapon, unless played with another weapon. In that case, it counts as a projectile defense.</p>
+      {WinnerKeeps}
+    </>
+  ),
+  "Chemistry": (
+    <>
+      {BattlePlan}
+      <p>Counts as a poison defense, unless played with another defense. In that case, it counts as a poison weapon.</p>
+      {WinnerKeeps}
+    </>
+  ),
+  "Poison Blade": (
+    <>
+      {BattlePlan}
+      <p>This weapon counts as both projectile and poison.</p>
+      {WinnerKeeps}
+    </>
+  ),
+  "Shield Snooper": (
+    <>
+      {BattlePlan}
+      <p>Counts as both a Shield (projectile defense) and Snooper (poison defense).</p>
+      {WinnerKeeps}
+    </>
+  ),
+  "Amal": (
+    <>
+      <p>
+        At the beginning of any phase, cause all players to discard half of the spice behind their shields, rounded up, to the Spice Bank.
+      </p>
+    </>
+  ),
+  "Thumper": (
+    <>
+      <p>
+        Play at beginning of Spice Blow Phase instead of revealing the next Spice Blow card. Causes a Sandworm to appear.
+      </p>
+      <p>
+        Play proceeds as though Shai-Hulud has been revealed.
+      </p>
+    </>
+  ),
+  "Harvester": (
+    <>
+      <p>
+        Play just after a spice blow comes up.
+      </p>
+      <p>
+        Doubles the spice blow. Place double the amount of spice in the territory.
+      </p>
+    </>
+  )
 } as const;
 
 export default card_text;
