@@ -89,7 +89,7 @@ export const initial_houses_state: houses_state_t = {
     name: "Tleilaxu",
     show_cards: false,
     unknown_cards: [{ deck_index: 0 }],
-  }
+  },
 };
 
 export const initial_game_state: game_state_t = {
@@ -103,8 +103,8 @@ export const initial_game_state: game_state_t = {
       { cards: [], num_unknowns: 0 }, // and initialize a discard deck ready
     ],
     houses: initial_houses_state,
-    draw_deck_index: 0
-  }
+    draw_deck_index: 0,
+  },
 };
 
 function clone_history(snapshot: game_history_t): game_history_t {
@@ -320,11 +320,19 @@ export const game_state_reducer = createReducer(initial_game_state, builder => {
     if (state.deck_tracking) {
       return {
         initialized: state.initialized,
+        include_expansion_cards: state.include_expansion_cards,
         deck_tracking: false,
-        include_expansion_cards: false,
         current: {
           houses: state.current.houses,
-          decks: [{ cards: [...initial_deck], num_unknowns: 0 }],
+          decks: [
+            {
+              cards: [
+                ...initial_deck,
+                ...(state.include_expansion_cards ? expansion_deck : []),
+              ].sort(card_sort),
+              num_unknowns: 0,
+            },
+          ],
           draw_deck_index: 0,
         },
         history: [],
