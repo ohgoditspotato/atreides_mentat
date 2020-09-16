@@ -4,7 +4,6 @@ import { root_reducer, root_state_t, initial_houses_state } from "./reducers";
 import { createMigrate, persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import autoMergeLevel2 from "redux-persist/lib/stateReconciler/autoMergeLevel2";
-import initial_deck from "./initial_deck";
 
 const migrations = {
   0: (state: any) => {
@@ -38,12 +37,9 @@ const migrations = {
       game: {
         ...state.game,
         history: [],
-        deck_tracking: false,
         include_expansion_cards: false,
         current: {
           ...state.game.current,
-          decks: [{ cards: [...initial_deck], num_unknowns: 0 }],
-          draw_deck_index: 0,
           houses: {
             ...state.game.current.houses,
             Ixians: initial_houses_state.Ixians,
