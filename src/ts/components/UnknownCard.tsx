@@ -29,7 +29,7 @@ const UnknownCard: React.FC<{
   for (let i = 0; i < deck.cards.length; i++) {
     const card = deck.cards[i];
     var key;
-    if (card.kind == "Useless" || card.kind == "Special") {
+    if (card.kind === "Useless" || card.kind === "Special") {
       key = card.kind;
     } else {
       key = card.type;
@@ -129,17 +129,5 @@ const UnknownCard: React.FC<{
     </div>
   );
 };
-
-/**
-  Object.keys(cardCounter).map(key => {
-    return ;
-  });
-<Tag label="Poison" val={poisons} colour_key="Weapon" />
-<Tag label="Lasguns" val={lasguns} colour_key="Weapon" />
-<Tag label="Shield" val={shields} colour_key="Defense" />
-<Tag label="Snooper" val={snoopers} colour_key="Defense" />
-<Tag label="Special" val={specials.length} colour_key="Special" />
-<Tag label="Useless" val={useless} colour_key="Useless" />
-**/
 
 export default UnknownCard;
