@@ -21,8 +21,8 @@ export const icon_map = {
   Fremen: <FremenIcon />,
   Harkonnen: <HarkonnenIcon />,
   "Spacing Guild": <GuildIcon />,
-  Ixians: <img src={ixianPng} />,
-  Tleilaxu: <img src={tleilaxuPng} />,
+  Ixians: <img src={ixianPng} alt="ixian icon" />,
+  Tleilaxu: <img src={tleilaxuPng} alt="tleilaxu icon" />,
   "No ally": <NoneIcon />,
 };
 
