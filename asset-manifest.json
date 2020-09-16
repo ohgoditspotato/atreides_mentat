@@ -1,19 +1,19 @@
 {
   "files": {
     "main.css": "/atreides_mentat/static/css/main.6f5686ae.chunk.css",
-    "main.js": "/atreides_mentat/static/js/main.50afca64.chunk.js",
-    "main.js.map": "/atreides_mentat/static/js/main.50afca64.chunk.js.map",
+    "main.js": "/atreides_mentat/static/js/main.90f92e2a.chunk.js",
+    "main.js.map": "/atreides_mentat/static/js/main.90f92e2a.chunk.js.map",
     "runtime-main.js": "/atreides_mentat/static/js/runtime-main.d88582d5.js",
     "runtime-main.js.map": "/atreides_mentat/static/js/runtime-main.d88582d5.js.map",
     "static/css/2.936eacdf.chunk.css": "/atreides_mentat/static/css/2.936eacdf.chunk.css",
-    "static/js/2.77527212.chunk.js": "/atreides_mentat/static/js/2.77527212.chunk.js",
-    "static/js/2.77527212.chunk.js.map": "/atreides_mentat/static/js/2.77527212.chunk.js.map",
+    "static/js/2.851f35aa.chunk.js": "/atreides_mentat/static/js/2.851f35aa.chunk.js",
+    "static/js/2.851f35aa.chunk.js.map": "/atreides_mentat/static/js/2.851f35aa.chunk.js.map",
     "index.html": "/atreides_mentat/index.html",
-    "precache-manifest.9d03bfd73153e0b9b249cfaa838c23c2.js": "/atreides_mentat/precache-manifest.9d03bfd73153e0b9b249cfaa838c23c2.js",
+    "precache-manifest.437e4877d83330d97332f7a687151602.js": "/atreides_mentat/precache-manifest.437e4877d83330d97332f7a687151602.js",
     "service-worker.js": "/atreides_mentat/service-worker.js",
     "static/css/2.936eacdf.chunk.css.map": "/atreides_mentat/static/css/2.936eacdf.chunk.css.map",
     "static/css/main.6f5686ae.chunk.css.map": "/atreides_mentat/static/css/main.6f5686ae.chunk.css.map",
-    "static/js/2.77527212.chunk.js.LICENSE": "/atreides_mentat/static/js/2.77527212.chunk.js.LICENSE",
+    "static/js/2.851f35aa.chunk.js.LICENSE": "/atreides_mentat/static/js/2.851f35aa.chunk.js.LICENSE",
     "static/media/artillery.9f23568c.svg": "/atreides_mentat/static/media/artillery.9f23568c.svg",
     "static/media/atreides.f9cd377f.svg": "/atreides_mentat/static/media/atreides.f9cd377f.svg",
     "static/media/bene_gesserit.d38a347a.svg": "/atreides_mentat/static/media/bene_gesserit.d38a347a.svg",
@@ -37,8 +37,8 @@
   "entrypoints": [
     "static/js/runtime-main.d88582d5.js",
     "static/css/2.936eacdf.chunk.css",
-    "static/js/2.77527212.chunk.js",
+    "static/js/2.851f35aa.chunk.js",
     "static/css/main.6f5686ae.chunk.css",
-    "static/js/main.50afca64.chunk.js"
+    "static/js/main.90f92e2a.chunk.js"
   ]
 }
