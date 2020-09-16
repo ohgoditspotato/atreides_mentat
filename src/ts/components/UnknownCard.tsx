@@ -21,48 +21,22 @@ const UnknownCard: React.FC<{
   const [show_special_details, set_show_special_details] = React.useState(false);
 
   const colours = treachery_card_colours.Unknown;
-  let projectiles = 0;
-  let poisons = 0;
-  let lasguns = 0;
-  let shields = 0;
-  let snoopers = 0;
-  let useless = 0;
-  let specials: special_card[] = [];
+  interface CardCounter {
+   [key: string]: Array<any>;
+  };
+  let cardCounter:CardCounter = {};
 
   for (let i = 0; i < deck.cards.length; i++) {
     const card = deck.cards[i];
-    switch (card.kind) {
-      case "Defense": {
-        if (card.type === "Shield") {
-          shields++;
-        } else {
-          snoopers++;
-        }
-        break;
-      }
-      case "Weapon": {
-        switch (card.type) {
-          case "Lasgun":
-            lasguns++;
-            break;
-          case "Poison":
-            poisons++;
-            break;
-          case "Projectile":
-            projectiles++;
-            break;
-        }
-        break;
-      }
-      case "Special": {
-        specials.push(card);
-        break;
-      }
-      case "Useless": {
-        useless++;
-        break;
-      }
+    var key;
+    if (card.kind == "Useless" || card.kind == "Special") {
+      key = card.kind;
+    } else {
+      key = card.type;
     }
+    let tempCards = cardCounter[key] ? cardCounter[key] : [];
+    tempCards.push(card);
+    cardCounter[key] = tempCards;
   }
 
   let className = "card treachery-card";
@@ -93,7 +67,7 @@ const UnknownCard: React.FC<{
 
   function countSpecials(key: special_card["type"]) {
     let count = 0;
-    specials.forEach(s => {
+    cardCounter["Special"].forEach(s => {
       if (s.type === key) {
         count++;
       }
@@ -137,24 +111,16 @@ const UnknownCard: React.FC<{
             </div>
             {!show_special_details && (
               <div className="columns is-multiline is-mobile">
-                <Tag label="Projectile" val={projectiles} colour_key="Weapon" />
-                <Tag label="Poison" val={poisons} colour_key="Weapon" />
-                <Tag label="Lasguns" val={lasguns} colour_key="Weapon" />
-                <Tag label="Shield" val={shields} colour_key="Defense" />
-                <Tag label="Snooper" val={snoopers} colour_key="Defense" />
-                <Tag label="Special" val={specials.length} colour_key="Special" />
-                <Tag label="Useless" val={useless} colour_key="Useless" />
+                {Object.keys(cardCounter).map(key => {
+                  return <Tag label={key} val={cardCounter[key].length} colour_key={cardCounter[key][0].kind} />;
+                })}
               </div>
             )}
             {show_special_details && (
               <div className="columns is-multiline">
-                <Tag label="Cheap Hero" val={countSpecials("Cheap Hero")} />
-                <Tag label="Family Atomics" val={countSpecials("Family Atomics")} />
-                <Tag label="Hajr" val={countSpecials("Hajr")} />
-                <Tag label="Karama" val={countSpecials("Karama")} />
-                <Tag label="Tleilaxu Ghola" val={countSpecials("Tleilaxu Ghola")} />
-                <Tag label="Truthtrance" val={countSpecials("Truthtrance")} />
-                <Tag label="Weather Control" val={countSpecials("Weather Control")} />
+                {cardCounter["Special"].map(card => {
+                  return <Tag label={card.type} val={countSpecials(card.type)} />;
+                })}
               </div>
             )}
           </>
@@ -163,5 +129,17 @@ const UnknownCard: React.FC<{
     </div>
   );
 };
+
+/**
+  Object.keys(cardCounter).map(key => {
+    return ;
+  });
+<Tag label="Poison" val={poisons} colour_key="Weapon" />
+<Tag label="Lasguns" val={lasguns} colour_key="Weapon" />
+<Tag label="Shield" val={shields} colour_key="Defense" />
+<Tag label="Snooper" val={snoopers} colour_key="Defense" />
+<Tag label="Special" val={specials.length} colour_key="Special" />
+<Tag label="Useless" val={useless} colour_key="Useless" />
+**/
 
 export default UnknownCard;
