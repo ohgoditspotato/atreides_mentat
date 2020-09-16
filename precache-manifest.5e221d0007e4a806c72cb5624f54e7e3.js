@@ -1,27 +1,27 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "6b3ea0b0eaea27d592b398dfeca80dd2",
+    "revision": "867febcd58e2d8c67aef8dfb22002bbf",
     "url": "/atreides_mentat/index.html"
   },
   {
-    "revision": "6a6f52dd4185ee6f1f81",
+    "revision": "438fb6d61aae33086aee",
     "url": "/atreides_mentat/static/css/2.936eacdf.chunk.css"
   },
   {
-    "revision": "f4a1d15edd3edf18ba2c",
+    "revision": "1c4eba4d14438d36a85a",
     "url": "/atreides_mentat/static/css/main.6f5686ae.chunk.css"
   },
   {
-    "revision": "6a6f52dd4185ee6f1f81",
-    "url": "/atreides_mentat/static/js/2.851f35aa.chunk.js"
+    "revision": "438fb6d61aae33086aee",
+    "url": "/atreides_mentat/static/js/2.faffba93.chunk.js"
   },
   {
     "revision": "748d5fd8a7e7493724665d4098123404",
-    "url": "/atreides_mentat/static/js/2.851f35aa.chunk.js.LICENSE"
+    "url": "/atreides_mentat/static/js/2.faffba93.chunk.js.LICENSE"
   },
   {
-    "revision": "f4a1d15edd3edf18ba2c",
-    "url": "/atreides_mentat/static/js/main.17acdad7.chunk.js"
+    "revision": "1c4eba4d14438d36a85a",
+    "url": "/atreides_mentat/static/js/main.cad64430.chunk.js"
   },
   {
     "revision": "31199c8e39e863c08e1d",
@@ -124,8 +124,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/atreides_mentat/static/media/harkonnen.e54146b9.svg"
   },
   {
-    "revision": "c76a0a69e174d2facb9b78562e230033",
-    "url": "/atreides_mentat/static/media/ixians.c76a0a69.svg"
+    "revision": "f91bc878edd3b858193ebfe56a88124f",
+    "url": "/atreides_mentat/static/media/ixians.f91bc878.png"
   },
   {
     "revision": "dbb9acedfc05f5fd73b0d947c78a6c2a",
@@ -152,8 +152,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/atreides_mentat/static/media/spacing_guild.c6998cb1.svg"
   },
   {
-    "revision": "02b4455b3755fa2a92a3579d159aabc2",
-    "url": "/atreides_mentat/static/media/tleilaxu.02b4455b.svg"
+    "revision": "30f452eedffd8b5ccc504cd02855f650",
+    "url": "/atreides_mentat/static/media/tleilaxu.30f452ee.png"
   },
   {
     "revision": "5b33f698977cd654ae8d330239f7868b",
