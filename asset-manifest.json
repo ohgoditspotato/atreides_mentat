@@ -1,25 +1,25 @@
 {
   "files": {
     "main.css": "/atreides_mentat/static/css/main.6f5686ae.chunk.css",
-    "main.js": "/atreides_mentat/static/js/main.cad64430.chunk.js",
-    "main.js.map": "/atreides_mentat/static/js/main.cad64430.chunk.js.map",
+    "main.js": "/atreides_mentat/static/js/main.6c23bd99.chunk.js",
+    "main.js.map": "/atreides_mentat/static/js/main.6c23bd99.chunk.js.map",
     "runtime-main.js": "/atreides_mentat/static/js/runtime-main.d88582d5.js",
     "runtime-main.js.map": "/atreides_mentat/static/js/runtime-main.d88582d5.js.map",
-    "static/css/2.936eacdf.chunk.css": "/atreides_mentat/static/css/2.936eacdf.chunk.css",
-    "static/js/2.faffba93.chunk.js": "/atreides_mentat/static/js/2.faffba93.chunk.js",
-    "static/js/2.faffba93.chunk.js.map": "/atreides_mentat/static/js/2.faffba93.chunk.js.map",
+    "static/css/2.1024be3e.chunk.css": "/atreides_mentat/static/css/2.1024be3e.chunk.css",
+    "static/js/2.ad3d18dd.chunk.js": "/atreides_mentat/static/js/2.ad3d18dd.chunk.js",
+    "static/js/2.ad3d18dd.chunk.js.map": "/atreides_mentat/static/js/2.ad3d18dd.chunk.js.map",
     "index.html": "/atreides_mentat/index.html",
-    "precache-manifest.5e221d0007e4a806c72cb5624f54e7e3.js": "/atreides_mentat/precache-manifest.5e221d0007e4a806c72cb5624f54e7e3.js",
+    "precache-manifest.9f6816ebb02e7c45b594fde2b0f2369e.js": "/atreides_mentat/precache-manifest.9f6816ebb02e7c45b594fde2b0f2369e.js",
     "service-worker.js": "/atreides_mentat/service-worker.js",
-    "static/css/2.936eacdf.chunk.css.map": "/atreides_mentat/static/css/2.936eacdf.chunk.css.map",
+    "static/css/2.1024be3e.chunk.css.map": "/atreides_mentat/static/css/2.1024be3e.chunk.css.map",
     "static/css/main.6f5686ae.chunk.css.map": "/atreides_mentat/static/css/main.6f5686ae.chunk.css.map",
-    "static/js/2.faffba93.chunk.js.LICENSE": "/atreides_mentat/static/js/2.faffba93.chunk.js.LICENSE",
+    "static/js/2.ad3d18dd.chunk.js.LICENSE": "/atreides_mentat/static/js/2.ad3d18dd.chunk.js.LICENSE",
     "static/media/artillery.9f23568c.svg": "/atreides_mentat/static/media/artillery.9f23568c.svg",
     "static/media/atreides.f9cd377f.svg": "/atreides_mentat/static/media/atreides.f9cd377f.svg",
     "static/media/bene_gesserit.d38a347a.svg": "/atreides_mentat/static/media/bene_gesserit.d38a347a.svg",
     "static/media/crosshair.80f2f5d4.svg": "/atreides_mentat/static/media/crosshair.80f2f5d4.svg",
     "static/media/emperor.5cf38ead.svg": "/atreides_mentat/static/media/emperor.5cf38ead.svg",
-    "static/media/all.css": "/atreides_mentat/static/media/fa-solid-900.f3a7d3b5.woff",
+    "static/media/all.css": "/atreides_mentat/static/media/fa-solid-900.ee09ad75.woff",
     "static/media/fremen.f74e13c6.svg": "/atreides_mentat/static/media/fremen.f74e13c6.svg",
     "static/media/guitar.b453651e.svg": "/atreides_mentat/static/media/guitar.b453651e.svg",
     "static/media/halt.89bbde0f.svg": "/atreides_mentat/static/media/halt.89bbde0f.svg",
@@ -36,9 +36,9 @@
   },
   "entrypoints": [
     "static/js/runtime-main.d88582d5.js",
-    "static/css/2.936eacdf.chunk.css",
-    "static/js/2.faffba93.chunk.js",
+    "static/css/2.1024be3e.chunk.css",
+    "static/js/2.ad3d18dd.chunk.js",
     "static/css/main.6f5686ae.chunk.css",
-    "static/js/main.cad64430.chunk.js"
+    "static/js/main.6c23bd99.chunk.js"
   ]
 }
