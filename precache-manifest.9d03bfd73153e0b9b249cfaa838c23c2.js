@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "7a01ceba1d2ab0bcbc19bc5057fea045",
+    "revision": "d0ca23ca6b2977452ba616eb54a432d7",
     "url": "/atreides_mentat/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/atreides_mentat/static/css/2.936eacdf.chunk.css"
   },
   {
-    "revision": "233940434db8594aa2e9",
+    "revision": "c5b53492c27b9f3c65f0",
     "url": "/atreides_mentat/static/css/main.6f5686ae.chunk.css"
   },
   {
@@ -20,12 +20,16 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/atreides_mentat/static/js/2.77527212.chunk.js.LICENSE"
   },
   {
-    "revision": "233940434db8594aa2e9",
-    "url": "/atreides_mentat/static/js/main.054aabab.chunk.js"
+    "revision": "c5b53492c27b9f3c65f0",
+    "url": "/atreides_mentat/static/js/main.50afca64.chunk.js"
   },
   {
     "revision": "31199c8e39e863c08e1d",
     "url": "/atreides_mentat/static/js/runtime-main.d88582d5.js"
+  },
+  {
+    "revision": "9f23568cd59a8fcd1479d8f4af61907e",
+    "url": "/atreides_mentat/static/media/artillery.9f23568c.svg"
   },
   {
     "revision": "f9cd377fbee36bedf3b9125dacc5694a",
@@ -120,6 +124,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/atreides_mentat/static/media/harkonnen.e54146b9.svg"
   },
   {
+    "revision": "c76a0a69e174d2facb9b78562e230033",
+    "url": "/atreides_mentat/static/media/ixians.c76a0a69.svg"
+  },
+  {
     "revision": "dbb9acedfc05f5fd73b0d947c78a6c2a",
     "url": "/atreides_mentat/static/media/laser.dbb9aced.svg"
   },
@@ -142,6 +150,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "c6998cb1b1a0ce3a5a7e65068811f8bb",
     "url": "/atreides_mentat/static/media/spacing_guild.c6998cb1.svg"
+  },
+  {
+    "revision": "02b4455b3755fa2a92a3579d159aabc2",
+    "url": "/atreides_mentat/static/media/tleilaxu.02b4455b.svg"
   },
   {
     "revision": "5b33f698977cd654ae8d330239f7868b",

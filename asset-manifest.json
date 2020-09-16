@@ -1,19 +1,20 @@
 {
   "files": {
     "main.css": "/atreides_mentat/static/css/main.6f5686ae.chunk.css",
-    "main.js": "/atreides_mentat/static/js/main.054aabab.chunk.js",
-    "main.js.map": "/atreides_mentat/static/js/main.054aabab.chunk.js.map",
+    "main.js": "/atreides_mentat/static/js/main.50afca64.chunk.js",
+    "main.js.map": "/atreides_mentat/static/js/main.50afca64.chunk.js.map",
     "runtime-main.js": "/atreides_mentat/static/js/runtime-main.d88582d5.js",
     "runtime-main.js.map": "/atreides_mentat/static/js/runtime-main.d88582d5.js.map",
     "static/css/2.936eacdf.chunk.css": "/atreides_mentat/static/css/2.936eacdf.chunk.css",
     "static/js/2.77527212.chunk.js": "/atreides_mentat/static/js/2.77527212.chunk.js",
     "static/js/2.77527212.chunk.js.map": "/atreides_mentat/static/js/2.77527212.chunk.js.map",
     "index.html": "/atreides_mentat/index.html",
-    "precache-manifest.6774357ccff73ac72b0de615539c66f2.js": "/atreides_mentat/precache-manifest.6774357ccff73ac72b0de615539c66f2.js",
+    "precache-manifest.9d03bfd73153e0b9b249cfaa838c23c2.js": "/atreides_mentat/precache-manifest.9d03bfd73153e0b9b249cfaa838c23c2.js",
     "service-worker.js": "/atreides_mentat/service-worker.js",
     "static/css/2.936eacdf.chunk.css.map": "/atreides_mentat/static/css/2.936eacdf.chunk.css.map",
     "static/css/main.6f5686ae.chunk.css.map": "/atreides_mentat/static/css/main.6f5686ae.chunk.css.map",
     "static/js/2.77527212.chunk.js.LICENSE": "/atreides_mentat/static/js/2.77527212.chunk.js.LICENSE",
+    "static/media/artillery.9f23568c.svg": "/atreides_mentat/static/media/artillery.9f23568c.svg",
     "static/media/atreides.f9cd377f.svg": "/atreides_mentat/static/media/atreides.f9cd377f.svg",
     "static/media/bene_gesserit.d38a347a.svg": "/atreides_mentat/static/media/bene_gesserit.d38a347a.svg",
     "static/media/crosshair.80f2f5d4.svg": "/atreides_mentat/static/media/crosshair.80f2f5d4.svg",
@@ -23,12 +24,14 @@
     "static/media/guitar.b453651e.svg": "/atreides_mentat/static/media/guitar.b453651e.svg",
     "static/media/halt.89bbde0f.svg": "/atreides_mentat/static/media/halt.89bbde0f.svg",
     "static/media/harkonnen.e54146b9.svg": "/atreides_mentat/static/media/harkonnen.e54146b9.svg",
+    "static/media/ixians.c76a0a69.svg": "/atreides_mentat/static/media/ixians.c76a0a69.svg",
     "static/media/laser.dbb9aced.svg": "/atreides_mentat/static/media/laser.dbb9aced.svg",
     "static/media/none.fc0d050f.svg": "/atreides_mentat/static/media/none.fc0d050f.svg",
     "static/media/poison_drop.f3fedaf9.svg": "/atreides_mentat/static/media/poison_drop.f3fedaf9.svg",
     "static/media/shield.fd3000ca.svg": "/atreides_mentat/static/media/shield.fd3000ca.svg",
     "static/media/snooper.8a343db6.svg": "/atreides_mentat/static/media/snooper.8a343db6.svg",
     "static/media/spacing_guild.c6998cb1.svg": "/atreides_mentat/static/media/spacing_guild.c6998cb1.svg",
+    "static/media/tleilaxu.02b4455b.svg": "/atreides_mentat/static/media/tleilaxu.02b4455b.svg",
     "static/media/unknown.5b33f698.svg": "/atreides_mentat/static/media/unknown.5b33f698.svg"
   },
   "entrypoints": [
@@ -36,6 +39,6 @@
     "static/css/2.936eacdf.chunk.css",
     "static/js/2.77527212.chunk.js",
     "static/css/main.6f5686ae.chunk.css",
-    "static/js/main.054aabab.chunk.js"
+    "static/js/main.50afca64.chunk.js"
   ]
 }
