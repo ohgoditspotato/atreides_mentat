@@ -1,14 +1,16 @@
 {
   "files": {
     "main.css": "/atreides_mentat/static/css/main.867084fb.chunk.css",
-    "main.js": "/atreides_mentat/static/js/main.60b84600.chunk.js",
-    "main.js.map": "/atreides_mentat/static/js/main.60b84600.chunk.js.map",
+    "main.js": "/atreides_mentat/static/js/main.338b02b0.chunk.js",
+    "main.js.map": "/atreides_mentat/static/js/main.338b02b0.chunk.js.map",
     "runtime-main.js": "/atreides_mentat/static/js/runtime-main.038dcdc5.js",
     "runtime-main.js.map": "/atreides_mentat/static/js/runtime-main.038dcdc5.js.map",
     "static/css/2.a4cbc8b1.chunk.css": "/atreides_mentat/static/css/2.a4cbc8b1.chunk.css",
     "static/js/2.d527d6f6.chunk.js": "/atreides_mentat/static/js/2.d527d6f6.chunk.js",
     "static/js/2.d527d6f6.chunk.js.map": "/atreides_mentat/static/js/2.d527d6f6.chunk.js.map",
     "index.html": "/atreides_mentat/index.html",
+    "service-worker.js": "/atreides_mentat/service-worker.js",
+    "service-worker.js.map": "/atreides_mentat/service-worker.js.map",
     "static/css/2.a4cbc8b1.chunk.css.map": "/atreides_mentat/static/css/2.a4cbc8b1.chunk.css.map",
     "static/css/main.867084fb.chunk.css.map": "/atreides_mentat/static/css/main.867084fb.chunk.css.map",
     "static/js/2.d527d6f6.chunk.js.LICENSE.txt": "/atreides_mentat/static/js/2.d527d6f6.chunk.js.LICENSE.txt",
@@ -36,6 +38,6 @@
     "static/css/2.a4cbc8b1.chunk.css",
     "static/js/2.d527d6f6.chunk.js",
     "static/css/main.867084fb.chunk.css",
-    "static/js/main.60b84600.chunk.js"
+    "static/js/main.338b02b0.chunk.js"
   ]
 }
