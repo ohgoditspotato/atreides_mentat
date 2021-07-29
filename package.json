@@ -1,7 +1,8 @@
 {
-  "name": "atreides_mentat_update",
-  "version": "0.1.0",
-  "private": true,
+  "name": "atreides_mentat",
+  "version": "1.0.0",
+  "private": false,
+  "homepage": "https://ohgoditspotato.github.io/atreides_mentat/",
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.15.3",
     "@reduxjs/toolkit": "^1.6.1",
