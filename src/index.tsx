@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import GameContainer from "ts/components/GameContainer";
 import { Provider } from "react-redux";
-import * as serviceWorker from "./serviceWorker";
+import * as serviceWorker from "./serviceWorkerRegistration";
 import { PersistGate } from "redux-persist/lib/integration/react";
 import { store, persistor } from "ts/state/store";
 
