@@ -6,11 +6,9 @@ import {
   house_add_unknown,
   house_remove_card,
   house_remove_unknown,
-  house_set_ally,
 } from "ts/state/actions";
 import { start_game_spec } from "ts/state/types";
 import initial_deck from "ts/state/initial_deck";
-import { house_name_t } from "ts/houses";
 
 describe("common", () => {
   const spec: start_game_spec = {
@@ -19,25 +17,13 @@ describe("common", () => {
       Fremen: true,
       "Spacing Guild": false,
       Emperor: false,
-      Harkonnen: false
+      Harkonnen: false,
+      Ixians: false,
+      Tleilaxu: false
     },
     deck_tracking: true,
+    include_expansion_cards: false
   };
-  test("set-ally", () => {
-    let state = game_state_reducer(
-      initial_game_state,
-      start_game({ ...spec, houses: { ...spec.houses, Harkonnen: true } })
-    );
-    state = game_state_reducer(state, house_set_ally("Atreides", "Fremen"));
-    expect(state.current.houses.Atreides.ally).toEqual<house_name_t>("Fremen");
-    expect(state.current.houses.Fremen.ally).toEqual<house_name_t>("Atreides");
-    expect(state.current.houses.Harkonnen.ally).toEqual(null);
-
-    state = game_state_reducer(state, house_set_ally("Harkonnen", "Atreides"));
-    expect(state.current.houses.Atreides.ally).toEqual<house_name_t>("Harkonnen");
-    expect(state.current.houses.Harkonnen.ally).toEqual<house_name_t>("Atreides");
-    expect(state.current.houses.Fremen.ally).toEqual(null);
-  });
 
   test("reset-game", () => {
     const state = game_state_reducer(initial_game_state, start_game(spec));
@@ -57,8 +43,11 @@ describe("deck_tracking_on", () => {
       "Spacing Guild": false,
       Emperor: false,
       Harkonnen: false,
+      Ixians: false,
+      Tleilaxu: false
     },
     deck_tracking: true,
+    include_expansion_cards: false,
   };
   test("init-game", () => {
     const state = game_state_reducer(initial_game_state, start_game(spec));
@@ -156,8 +145,11 @@ describe("deck tracking off", () => {
       "Spacing Guild": false,
       Emperor: false,
       Harkonnen: false,
+      Ixians: false,
+      Tleilaxu: false,
     },
     deck_tracking: false,
+    include_expansion_cards: false,
   };
   test("init-game", () => {
     const state = game_state_reducer(initial_game_state, start_game(spec));

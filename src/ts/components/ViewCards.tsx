@@ -69,44 +69,47 @@ const ViewCards: React.FC<house_state_t> = house => {
           </div>
         </div>
         <div className="column" style={{ order: 0 }}>
-          <div className="tags">
-            <>
-              {house.cards.length === 0 && house.unknown_cards.length === 0 && (
-                <span className="tag is-medium">No cards in hand</span>
-              )}
-              {house.cards.map((card, index) => (
-                <TreacheryCardTag
-                  card={card}
-                  key={card.id}
-                  onDelete={() => {
-                    dispatch(house_remove_card(house.name, index));
-                  }}
-                />
-              ))}
-              {house.unknown_cards.map((_, index) => {
-                const deleteButton = (
-                  <button
-                    className="delete is-small"
-                    onClick={() => {
-                      if (deck_tracking) {
-                        dispatch(show_discard_unknown_modal(house.name));
-                      } else {
-                        dispatch(house_remove_unknown(house.name, index, undefined));
-                      }
+          {!showCards && (
+
+            <div className="tags">
+              <>
+                {house.cards.length === 0 && house.unknown_cards.length === 0 && (
+                  <span className="tag is-medium">No cards in hand</span>
+                )}
+                {house.cards.map((card, index) => (
+                  <TreacheryCardTag
+                    card={card}
+                    key={card.id}
+                    onDelete={() => {
+                      dispatch(house_remove_card(house.name, index));
                     }}
-                  ></button>
-                );
-                const colour = treachery_card_colours["Unknown"].bg;
-                return (
-                  <span className={"tag is-medium is-" + colour} key={"Unknown" + index.toString()}>
-                    <figure className="image is-24x24">{treachery_card_icons.Unknown(24)}</figure>
-                    Unknown
-                    {deleteButton}
-                  </span>
-                );
-              })}
-            </>
-          </div>
+                  />
+                ))}
+                {house.unknown_cards.map((_, index) => {
+                  const deleteButton = (
+                    <button
+                      className="delete is-small"
+                      onClick={() => {
+                        if (deck_tracking) {
+                          dispatch(show_discard_unknown_modal(house.name));
+                        } else {
+                          dispatch(house_remove_unknown(house.name, index, undefined));
+                        }
+                      }}
+                    ></button>
+                  );
+                  const colour = treachery_card_colours["Unknown"].bg;
+                  return (
+                    <span className={"tag is-medium is-" + colour} key={"Unknown" + index.toString()}>
+                      <figure className="image is-24x24">{treachery_card_icons.Unknown(24)}</figure>
+                      Unknown
+                      {deleteButton}
+                    </span>
+                  );
+                })}
+              </>
+            </div>
+          )}
         </div>
       </div>
       {(house.cards.length > 0 || house.unknown_cards.length > 0) && showCards && (

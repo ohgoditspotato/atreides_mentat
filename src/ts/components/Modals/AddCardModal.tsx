@@ -14,7 +14,7 @@ const AddCardPage: React.FC<{ house: house_name_t }> = props => {
     return [
       state.game.current.decks[state.game.current.draw_deck_index],
       state.game.current.draw_deck_index,
-    ];
+    ] as const;
   });
 
   const close = () => dispatch(close_modal());

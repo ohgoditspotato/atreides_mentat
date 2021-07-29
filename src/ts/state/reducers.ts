@@ -7,7 +7,6 @@ import {
   reset_game,
   show_reset_game_modal,
   close_modal,
-  house_set_ally,
   house_toggle_expand_cards,
   house_add_unknown,
   house_remove_unknown,
@@ -28,7 +27,6 @@ import expansion_deck from "ts/state/expansion_deck";
 export const initial_houses_state: houses_state_t = {
   Atreides: {
     active: true,
-    ally: null,
     cards: [],
     name: "Atreides",
     show_cards: false,
@@ -36,7 +34,6 @@ export const initial_houses_state: houses_state_t = {
   },
   "Bene Gesserit": {
     active: false,
-    ally: null,
     cards: [],
     name: "Bene Gesserit",
     show_cards: false,
@@ -44,7 +41,6 @@ export const initial_houses_state: houses_state_t = {
   },
   Emperor: {
     active: false,
-    ally: null,
     cards: [],
     name: "Emperor",
     show_cards: false,
@@ -52,7 +48,6 @@ export const initial_houses_state: houses_state_t = {
   },
   Fremen: {
     active: false,
-    ally: null,
     cards: [],
     name: "Fremen",
     show_cards: false,
@@ -60,7 +55,6 @@ export const initial_houses_state: houses_state_t = {
   },
   Harkonnen: {
     active: false,
-    ally: null,
     cards: [],
     name: "Harkonnen",
     show_cards: false,
@@ -68,7 +62,6 @@ export const initial_houses_state: houses_state_t = {
   },
   "Spacing Guild": {
     active: false,
-    ally: null,
     cards: [],
     name: "Spacing Guild",
     show_cards: false,
@@ -76,7 +69,6 @@ export const initial_houses_state: houses_state_t = {
   },
   Ixians: {
     active: false,
-    ally: null,
     cards: [],
     name: "Ixians",
     show_cards: false,
@@ -84,7 +76,6 @@ export const initial_houses_state: houses_state_t = {
   },
   Tleilaxu: {
     active: false,
-    ally: null,
     cards: [],
     name: "Tleilaxu",
     show_cards: false,
@@ -246,27 +237,6 @@ export const game_state_reducer = createReducer(initial_game_state, builder => {
           deck.cards.find(c => c.id === action.payload.actual_card_id) as treachery_card_t
         );
         house.cards.sort(card_sort);
-      }
-    });
-  });
-
-  builder.addCase(house_set_ally, (state, action) => {
-    return push_history(state, history => {
-      if (action.payload.house === action.payload.ally) {
-        throw new Error("Cannot ally to self!");
-      }
-
-      let house = getHouse(action.payload.house, history.houses);
-      if (house.ally && house.ally !== action.payload.ally) {
-        history.houses[house.ally].ally = null;
-      }
-      house.ally = action.payload.ally;
-      if (house.ally) {
-        const old_ally = history.houses[house.ally].ally;
-        history.houses[house.ally].ally = house.name;
-        if (old_ally) {
-          history.houses[old_ally].ally = null;
-        }
       }
     });
   });

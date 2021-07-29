@@ -28,7 +28,7 @@ const HouseSelect: React.FC<{
   );
 };
 
-export default () => {
+const NewGame =  () => {
   const [state, setState] = React.useState<start_game_spec>({
     houses: {
       Harkonnen: false,
@@ -130,3 +130,5 @@ export default () => {
     </>
   );
 };
+
+export default NewGame;

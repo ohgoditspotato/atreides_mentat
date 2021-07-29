@@ -12,7 +12,7 @@ const DiscardUnknownModal: React.FC<{ house: house_name_t }> = ({ house }) => {
   const [unknown_cards, decks] = useSelector((root_state: root_state_t) => {
     const unknown_cards = root_state.game.current.houses[house].unknown_cards;
     const decks = root_state.game.current.decks;
-    return [unknown_cards, decks];
+    return [unknown_cards, decks] as const;
   });
 
   // get a list of the possible decks this player has unknown cards in

@@ -15,7 +15,6 @@ export interface house_state_t {
   cards: Array<treachery_card_t>;
   unknown_cards: Array<unknown_card_t>;
   name: house_name_t;
-  ally: house_name_t | null;
   active: boolean;
   show_cards: boolean;
 }

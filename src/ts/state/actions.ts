@@ -62,18 +62,6 @@ export const house_assign_unknown = createAction(
   }
 );
 
-export const house_set_ally = createAction(
-  "houses/set_ally",
-  (house: house_name_t, ally: house_name_t | null) => {
-    return {
-      payload: {
-        house,
-        ally,
-      },
-    };
-  }
-);
-
 export const house_toggle_expand_cards = createAction(
   "houses/toggle_expand_cards",
   (house: house_name_t) => {
